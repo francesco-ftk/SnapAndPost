@@ -1,4 +1,4 @@
-var mymap = L.map('mapid').setView([43.773, 11.255], 13);
+var mymap = L.map('mapid').setView([43.773, 11.255], 16);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -20,6 +20,6 @@ var circle = L.circle([43.773, 11.255], {
 }).addTo(mymap);
 
 var markers = L.markerClusterGroup();
-markers.addLayer(L.marker([44.773, 11.255])); <!-- Cordinate da passare con pagine wikipedia -->
-markers.addLayer(L.marker([44.773, 11.256]));
+markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
+markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg' width='200px'>").openPopup());
 mymap.addLayer(markers);
