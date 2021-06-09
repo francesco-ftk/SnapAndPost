@@ -1,4 +1,4 @@
-var mymap = L.map('mapid').fitWorld(); //.setView([43.773, 11.255], 16);
+var mymap = L.map('mapid');//.setView([43.773, 11.255], 16);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -23,7 +23,9 @@ var markers = L.markerClusterGroup();
 markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
 markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg' width='200px'>").openPopup());
 mymap.addLayer(markers);
-/**/
+
+mymap.locate({setView: true});
+
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
     L.marker(e.latlng).addTo(mymap)
@@ -31,15 +33,9 @@ function onLocationFound(e) {
     L.circle(e.latlng, radius).addTo(mymap);
 }
 
-mymap.on('locationfound', onLocationFound);
-
 function onLocationError(e) {
     alert(e.message);
 }
 
+mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
-
-mymap.locate({setView: true, watch: true, maxZoom: 16});  // watch: true => aggiorna posizione
-//mymap.stopLocate();
-
-//mymap.locate({setView: true, maxZoom: 16});
