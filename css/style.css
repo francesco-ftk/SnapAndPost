@@ -1,8 +1,22 @@
+/* START Stile Pagina */
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* END Stile Pagina */
+
 /* START Stile Mappa */
 
-#mapid {
+/*#mapid {
     height: 600px;
     width: 800px;
+}*/
+
+html, body, #mapid {
+    height: 100%;
+    width: 100vw;
 }
 
 /* END Stile Mappa */
