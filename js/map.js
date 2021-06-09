@@ -10,21 +10,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoiYmFuem8iLCJhIjoiY2twODZkZXFjMDV5ODJ5b2dtc3lyYm5qMyJ9.c-pRfXAUsbjdQJ7FpUjZuQ'
 }).addTo(mymap);
 
-var marker = L.marker([43.773, 11.255]).addTo(mymap); <!-- Cordinate da passare con geolocalizzazione -->
-
-var circle = L.circle([43.773, 11.255], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 100
-}).addTo(mymap);
-
-var markers = L.markerClusterGroup();
-markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
-markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg' width='200px'>").openPopup());
-mymap.addLayer(markers);
-
-mymap.locate({setView: true});
+mymap.locate({setView: true, watch: true});
 
 function onLocationFound(e) {
     var radius = e.accuracy / 2;
@@ -39,3 +25,17 @@ function onLocationError(e) {
 
 mymap.on('locationfound', onLocationFound);
 mymap.on('locationerror', onLocationError);
+
+var marker = L.marker([43.773, 11.255]).addTo(mymap); <!-- Cordinate da passare con geolocalizzazione -->
+
+var circle = L.circle([43.773, 11.255], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 100
+}).addTo(mymap);
+
+var markers = L.markerClusterGroup();
+markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
+markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg' width='200px'>").openPopup());
+mymap.addLayer(markers);
