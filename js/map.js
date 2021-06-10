@@ -35,7 +35,7 @@ function showPosition(position) {
 
     var markers = L.markerClusterGroup();
     markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
-    markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='https://via.placeholder.com/100.png/09f/fff'>").openPopup());
+    markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='Immagini/duomo.jpg' width='250px'>").openPopup());
     mymap.addLayer(markers);
 }
 
