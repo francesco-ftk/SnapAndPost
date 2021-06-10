@@ -35,10 +35,8 @@ function showPosition(position) {
 
     var markers = L.markerClusterGroup();
     markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
-    markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg' width='200px'>").openPopup());
+    markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='https://via.placeholder.com/100.png/09f/fff'>").openPopup());
     mymap.addLayer(markers);
-
-
 }
 
 /*var mymap = L.map('mapid');//.setView([43.773, 11.255], 16);
