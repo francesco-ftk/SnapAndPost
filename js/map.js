@@ -17,11 +17,18 @@ function showPosition(position) {
         accessToken: 'pk.eyJ1IjoiYmFuem8iLCJhIjoiY2twODZkZXFjMDV5ODJ5b2dtc3lyYm5qMyJ9.c-pRfXAUsbjdQJ7FpUjZuQ'
     }).addTo(mymap);
 
+    /*var circleMarker = L.circleMarker([position.coords.latitude, position.coords.longitude], {
+        color: 'blu',
+        fillColor: '#000dff',
+        fillOpacity: 1,
+        radius: 10
+    }).addTo(mymap);*/
+
     var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
 
     var circle = L.circle([position.coords.latitude, position.coords.longitude], {
         color: 'red',
-        fillColor: '#f03',
+        fillColor: '#de3737',
         fillOpacity: 0.5,
         radius: 100
     }).addTo(mymap);
@@ -30,6 +37,8 @@ function showPosition(position) {
     markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
     markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg' width='200px'>").openPopup());
     mymap.addLayer(markers);
+
+
 }
 
 /*var mymap = L.map('mapid');//.setView([43.773, 11.255], 16);
