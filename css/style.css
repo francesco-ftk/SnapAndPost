@@ -9,14 +9,16 @@
 
 /* START Stile Mappa */
 
-/*#mapid {
+#mapid {
     height: 600px;
     width: 800px;
-}*/
+}
 
+/*
 html, body, #mapid {
     height: 100vh;
     width: 100vw;
 }
+*/
 
 /* END Stile Mappa */
