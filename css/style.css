@@ -11,15 +11,17 @@
 
 /* ---- START Regole Navbar ---- */
 
-.navbar{
-    display: flex;
-    align-items: center;
-    height: 10vh;
-    position: relative;
+.fixedTop {
+    position: fixed;
     top: 0px;
     right: 0px;
     left: 0px;
     background: rgb(0, 0, 0);
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
 }
 
 .container{
