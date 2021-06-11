@@ -22,9 +22,34 @@
     <link rel="stylesheet" href="css/MarkerCluster.css">
     <link rel="stylesheet" href="css/MarkerCluster.Default.css">
     <script src="js/leaflet.markercluster-src.js" type="text/javascript"></script>
+    <script src="js/Dropdown.js"></script>
 </head>
 <body>
-    <div id="mapid"></div>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="siteName">
+                NomeWebApp
+            </h1>
+            <div class="dropdown-button click" onclick="openDown()">
+                <span class="click"></span>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+    <ul id="dropdown" class="dropdown">
+        <li><a href="#"> Home </a></li>
+        <div class="divider"></div>
+        <li><a href="#"> Foto </a></li>
+        <div class="divider"></div>
+        <li><a href="#"> Menu </a></li>
+        <div class="divider"></div>
+        <li><a href="#"> Contatti </a></li>
+    </ul>
+
+    <div class="main">
+        <div id="mapid"></div>
+    </div>
     <script src="js/map.js" type="text/javascript"></script>
 </body>
 </html>
