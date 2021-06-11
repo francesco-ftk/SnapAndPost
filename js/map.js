@@ -5,7 +5,7 @@ if (navigator.geolocation) {
 }
 
 function showPosition(position) {
-    var mymap = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 16);
+    var mymap = L.map('mapid', { zoomControl:false }).setView([position.coords.latitude, position.coords.longitude], 16);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -38,7 +38,7 @@ function showPosition(position) {
     markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='Immagini/duomo.jpg' width='250px'>").openPopup());
     mymap.addLayer(markers);
 
-    mymap.scrollWheelZoom.disable();
+    L.control.zoom({position: 'bottomleft'}).addTo(mymap);
 }
 
 /*var mymap = L.map('mapid');//.setView([43.773, 11.255], 16);
