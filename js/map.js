@@ -38,7 +38,7 @@ function showPosition(position) {
     markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='Immagini/duomo.jpg' width='250px'>").openPopup());
     mymap.addLayer(markers);
 
-    L.control.zoom({position: 'bottomleft'}).addTo(mymap);
+    /*L.control.zoom({position: 'bottomleft'}).addTo(mymap);*/
 }
 
 /*var mymap = L.map('mapid');//.setView([43.773, 11.255], 16);
