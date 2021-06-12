@@ -150,18 +150,6 @@
     height: 100vh;
 }
 
-/*
-.footer{
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    width: 100%;
-    background: black;
-    height: 1vh;
-}
-*/
-
 .leaflet-top .leaflet-control {
     margin-top: 90px;
 }
