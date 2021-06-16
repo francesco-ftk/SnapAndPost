@@ -24,7 +24,13 @@ function showPosition(position) {
         radius: 10
     }).addTo(mymap);*/
 
-    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+    var myIcon = L.icon({
+        iconUrl: 'Immagini/marker.png',
+        iconSize: [50, 50],
+        iconAnchor: [26,45]
+    });
+
+    var marker = L.marker([position.coords.latitude, position.coords.longitude], {icon: myIcon}).addTo(mymap);
 
     var circle = L.circle([position.coords.latitude, position.coords.longitude], {
         color: 'red',
