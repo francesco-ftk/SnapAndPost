@@ -45,6 +45,33 @@ function showPosition(position) {
     mymap.addLayer(markers);
 
     /*L.control.zoom({position: 'bottomleft'}).addTo(mymap);*/
+
+/*SEARCH NEARBY PAGES*/
+    var url = "https://en.wikipedia.org/w/api.php";
+
+    var params = {
+        action: "query",
+        list: "geosearch",
+        gscoord: position.coords.latitude + '|' + position.coords.longitude,
+        gsradius: "100",
+        gslimit: "100",
+        format: "json"
+    };
+
+    url = url + "?origin=*";
+    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+    var markers = L.markerClusterGroup();
+    fetch(url)
+        .then(function(response){return response.json();})
+        .then(function(response) {
+            var pages = response.query.geosearch;
+            for (var place in pages) {
+                //console.log(pages[place].title);
+                markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup(pages[place].title + ", " + pages[place].dist).openPopup());
+            }
+            mymap.addLayer(markers);
+        })
+        .catch(function(error){console.log(error);});
 }
 
 /*var mymap = L.map('mapid');//.setView([43.773, 11.255], 16);
