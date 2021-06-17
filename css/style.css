@@ -81,3 +81,59 @@
 
 /* ---- END Stile Mappa ---- */
 
+/* ---- START Stile Fotocamera ---- */
+
+.panel{
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    right: 0px;
+}
+
+.panelPhoto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #c1bbbb;
+}
+
+.panelControls{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 120px;
+    background-color: #6a6868;
+}
+
+#snap{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.rollBack {
+    width: 60px;
+    height: 60px;
+    border-radius: 10%;
+    background-color: #ff0311;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    font-size: 20px;
+    align-content: center;
+    color: black;
+}
+
+#canvas{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+/* ---- END Stile Fotocamera ---- */
+
