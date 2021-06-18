@@ -24,13 +24,13 @@
             display: 'block'
         });
 
-        openCamera();
+        apriCamera();
 
     }
 
 })(jQuery);
 
-function openCamera(){
+function apriCamera(){
     // Grab elements, create settings, etc.
     var video = document.getElementById('video');
 

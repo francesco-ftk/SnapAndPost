@@ -83,57 +83,111 @@
 
 /* ---- START Stile Fotocamera ---- */
 
-.panel{
+#panel{
     display: none;
     position: absolute;
-    top: 80px;
+    top: 0px;
     left: 0px;
     right: 0px;
+    height: 100%;
 }
 
-.panelPhoto{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#panelPhoto{
     position: relative;
     background-color: #c1bbbb;
+    height: 100%;
+}
+
+#webcam{
+    display: none;
+    width: 100%;
+    height: 90%;
+}
+
+#canvas{
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 64%;
+    left: 18%;
 }
 
 .panelControls{
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    height: 120px;
+    /*justify-content: center;*/
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: #6a6868;
 }
 
-#snap{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: white;
+.container1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0px 20px;
+    position: relative;
+    height: 100px;
 }
 
-.rollBack {
-    width: 60px;
-    height: 60px;
+#snap{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: white;
+    border-style: none;
+}
+
+#rollBack {
+    height: 50px;
+    width: 50px;
     border-radius: 10%;
     background-color: #ff0311;
     position: absolute;
     right: 20px;
-    top: 30px;
     font-size: 20px;
     align-content: center;
     color: black;
+    border-style: none;
 }
 
-#canvas{
-    position: absolute;
-    top: 0px;
-    left: 0px;
+@media screen and (max-width: 1250px){
+
+    #canvas{
+        width: 80%;
+        left: 10%;
+    }
+
 }
 
+@media screen and (max-width: 850px){
+
+    #canvas{
+        width: 100%;
+        top: 3%;
+        left: 0;
+    }
+
+}
+
+@media screen and (max-width: 640px){
+
+    #canvas{
+        top: 7%;
+    }
+
+}
+
+@media screen and (max-width: 450px){
+
+    #canvas{
+        top: 19%;
+    }
+
+}
 
 /* ---- END Stile Fotocamera ---- */
 
