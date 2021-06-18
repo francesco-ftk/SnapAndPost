@@ -11,7 +11,7 @@ function openCamera(){
 
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
 
-    webcam.flip();
+    //webcam.flip();
     webcam.start();
 
     panel.style.display= 'block';
