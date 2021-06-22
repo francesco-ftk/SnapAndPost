@@ -1,6 +1,6 @@
 class Webcam {
     constructor(e, t = "user", s = null, i = null) {
-        this._webcamElement = e, this._webcamElement.width = this._webcamElement.width || 640, this._webcamElement.height = this._webcamElement.height || .75 * this._webcamElement.width, this._facingMode = t, this._webcamList = [], this._streamList = [], this._selectedDeviceId = "", this._canvasElement = s, this._snapSoundElement = i
+        this._webcamElement = e, this._webcamElement.width = this._webcamElement.width || 640, this._webcamElement.height = this._webcamElement.height /*|| .75 * this._webcamElement.width*/, this._facingMode = t, this._webcamList = [], this._streamList = [], this._selectedDeviceId = "", this._canvasElement = s, this._snapSoundElement = i
     }
 
     get facingMode() {

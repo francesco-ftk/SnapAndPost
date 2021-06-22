@@ -5,16 +5,23 @@ function openCamera(){
 
     var webcamElement = document.getElementById('webcam');
     var canvasElement = document.getElementById('canvas');
+    var panelControls = document.getElementById('ciao');
     var panelPhoto = document.getElementById('panelPhoto');
 
     //panelPhoto.height = window.innerHeight-100;
 
     webcamElement.style.display= 'block';
 
-    //if (screen.width < screen.height)
-    webcamElement.width = screen.width;  // vario altezza e larghezza del canvas con javascript
-    //webcamElement.height = screen.width*.75;
-    canvasElement.width = webcamElement.width;  // vario altezza e larghezza del canvas con javascript
+    if (screen.width > screen.height) {
+        //webcamElement.width = screen.width;  // vario altezza e larghezza del canvas con javascript
+        webcamElement.height = screen.height - panelControls.offsetHeight;
+        canvasElement.height = webcamElement.height;  // vario altezza e larghezza del canvas con javascript
+    } else {
+        webcamElement.width = window.innerWidth//screen.width;  // vario altezza e larghezza del canvas con javascript
+        webcamElement.height = window.innerHeight-panelControls.offsetHeight//screen.height - panelControls.offsetHeight;
+        canvasElement.height = webcamElement.width*.75;
+        canvasElement.width = webcamElement.width;  // vario altezza e larghezza del canvas con javascript
+    }
 
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
 
@@ -25,7 +32,11 @@ function openCamera(){
 
     document.getElementById("snap").addEventListener("click", function() {
         webcamElement.style.display= 'none';
-        canvasElement.height = webcamElement.height;
+        /*if (screen.width > screen.height) {
+            canvasElement.width = webcamElement.width;
+        } else {
+            canvasElement.height = webcamElement.width*.75;
+        }*/
         canvasElement.style.display= 'block';
 
         var picture = webcam.snap();
@@ -37,6 +48,10 @@ function openCamera(){
         webcamElement.style.display= 'none';
         canvasElement.style.display= 'none';
         panel.style.display= 'none';
+    });
+
+    document.getElementById("rollBack2").addEventListener("click", function() {
+        webcam.flip();
     });
 }
 

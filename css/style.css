@@ -98,13 +98,12 @@
     justify-content: center;
     position: fixed;
     background-color: #c1bbbb;
-    height: 85%;
+    height: 90%;
     width:100%;
 }
 
 #webcam{
     display: none;
-    margin: auto 0;
     /*width: 100%;
     height: 90%;*/
 }
@@ -126,7 +125,7 @@
     left: 0;
     right: 0;
     background-color: #6a6868;
-    min-height: 15%;
+    min-height: 10%;
 }
 
 .container1{
@@ -154,6 +153,19 @@
     background-color: #ff0311;
     position: absolute;
     right: 20px;
+    font-size: 20px;
+    align-content: center;
+    color: black;
+    border-style: none;
+}
+
+#rollBack2 {
+    height: 50px;
+    width: 50px;
+    border-radius: 10%;
+    background-color: #0f0;
+    position: absolute;
+    left: 20px;
     font-size: 20px;
     align-content: center;
     color: black;
