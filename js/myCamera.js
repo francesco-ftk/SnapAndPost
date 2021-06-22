@@ -21,13 +21,12 @@ function openCamera(){
         canvasElement.width = webcamElement.width*.98;
         canvasElement.height = webcamElement.height;
     }*/
+    webcamElement.style.display= 'block';
 
     webcamElement.width = window.innerWidth;
     webcamElement.height = window.innerHeight*.9;
     canvasElement.width = webcamElement.width*.98;
     canvasElement.height = webcamElement.height;
-
-    webcamElement.style.display= 'block';
 
     var webcam = new Webcam(webcamElement, 'user', canvasElement);
 
