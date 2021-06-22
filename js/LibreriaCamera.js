@@ -96,7 +96,7 @@ class Webcam {
 
     snap() {
         if (null != this._canvasElement) {
-            null != this._snapSoundElement && this._snapSoundElement.play(), this._canvasElement.height = this._webcamElement.scrollHeight, this._canvasElement.width = this._webcamElement.scrollWidth;
+            null != this._snapSoundElement && this._snapSoundElement.play();
             let e = this._canvasElement.getContext("2d");
             return "user" == this._facingMode && (e.translate(this._canvasElement.width, 0), e.scale(-1, 1)), e.clearRect(0, 0, this._canvasElement.width, this._canvasElement.height), e.drawImage(this._webcamElement, 0, 0, this._canvasElement.width, this._canvasElement.height), this._canvasElement.toDataURL("image/png")
         }
