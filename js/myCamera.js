@@ -13,8 +13,10 @@ function openCamera(){
     //canvasElement.height = canvasElement.width*.75;
 
     //var controlsHeight = document.getElementById("panelControls").offsetHeight;
-    webcamElement.width = window.innerWidth;  // vario altezza e larghezza del canvas con javascript
-    webcamElement.height = window.innerWidth*.75;
+    /*webcamElement.width = window.innerWidth;  // vario altezza e larghezza del canvas con javascript
+    webcamElement.height = window.innerWidth*.75;*/
+    webcamElement.width = screen.width;  // vario altezza e larghezza del canvas con javascript
+    webcamElement.height = screen.width*.75;
     canvasElement.width = webcamElement.width;  // vario altezza e larghezza del canvas con javascript
     //canvasElement.height = webcamElement.height;
 
@@ -40,6 +42,7 @@ function openCamera(){
     document.getElementById("rollBack").addEventListener("click", function() {
         webcam.stop();
         webcamElement.style.display= 'none';
+        canvasElement.style.display= 'none';
         panel.style.display= 'none';
     });
 }
