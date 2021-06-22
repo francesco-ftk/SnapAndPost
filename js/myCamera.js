@@ -16,15 +16,15 @@ function openCamera(){
         webcamElement.width = window.innerWidth;
         webcamElement.height = window.innerHeight*.9;
         canvasElement.width = webcamElement.width*.675; // 0.9*0.75 = 0.675
-        canvasElement.height = webcamElement.height;
+        canvasElement.height = webcamElement.height*.95;
     } else {
-        webcamElement.width = window.innerWidth*.98;
+        webcamElement.width = window.innerWidth;
         webcamElement.height = window.innerHeight*.9;
-        canvasElement.width = webcamElement.width;
-        canvasElement.height = webcamElement.height*.9; //width*.75;
+        canvasElement.width = webcamElement.width*.98;
+        canvasElement.height = webcamElement.height; //width*.75;
     }
 
-    var webcam = new Webcam(webcamElement, 'enviroment', canvasElement);
+    var webcam = new Webcam(webcamElement, 'user', canvasElement);
 
     webcam.start();
 
