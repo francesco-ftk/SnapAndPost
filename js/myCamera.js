@@ -17,15 +17,14 @@ function openCamera(){
         webcamElement.height = window.innerHeight - panelControls.offsetHeight;
         canvasElement.height = webcamElement.height;  // vario altezza e larghezza del canvas con javascript
     } else {
-        webcamElement.width = window.innerWidth//screen.width;  // vario altezza e larghezza del canvas con javascript
-        webcamElement.height = window.innerWidth*.75//screen.height - panelControls.offsetHeight;
-        canvasElement.height = webcamElement.width*.75;
-        canvasElement.width = webcamElement.width;  // vario altezza e larghezza del canvas con javascript
+        webcamElement.width = window.innerWidth;
+        webcamElement.height = window.innerHeight*.9;
+        canvasElement.width = webcamElement.width;
+        canvasElement.height = webcamElement.height;//width*.75;
     }
 
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
 
-    //webcam.flip();
     webcam.start();
 
     panel.style.display= 'block';
