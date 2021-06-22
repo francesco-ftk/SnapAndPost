@@ -10,18 +10,11 @@ function openCamera(){
     //panelPhoto.height = window.innerHeight-100;
 
     webcamElement.style.display= 'block';
-    //canvasElement.height = canvasElement.width*.75;
 
-    //var controlsHeight = document.getElementById("panelControls").offsetHeight;
-    /*webcamElement.width = window.innerWidth;  // vario altezza e larghezza del canvas con javascript
-    webcamElement.height = window.innerWidth*.75;*/
+    //if (screen.width < screen.height)
     webcamElement.width = screen.width;  // vario altezza e larghezza del canvas con javascript
-    webcamElement.height = screen.width*.75;
+    //webcamElement.height = screen.width*.75;
     canvasElement.width = webcamElement.width;  // vario altezza e larghezza del canvas con javascript
-    //canvasElement.height = webcamElement.height;
-
-    /*webcamElement.height = window.innerHeight*.9;
-    webcamElement.width = window.innerWidth;*/
 
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
 
