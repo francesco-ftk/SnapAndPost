@@ -10,7 +10,7 @@ function openCamera(){
 
     //panelPhoto.height = window.innerHeight-100;
 
-    if (screen.width > screen.height) {
+    /*if (screen.width > screen.height) {
     webcamElement.width = 640;
     webcamElement.height = 480;
     canvasElement.width = webcamElement.width;
@@ -20,7 +20,12 @@ function openCamera(){
         webcamElement.height = window.innerHeight*.9;
         canvasElement.width = webcamElement.width*.98;
         canvasElement.height = webcamElement.height;
-    }
+    }*/
+
+    webcamElement.width = window.innerWidth;
+    webcamElement.height = window.innerHeight*.9;
+    canvasElement.width = webcamElement.width*.98;
+    canvasElement.height = webcamElement.height;
 
     webcamElement.style.display= 'block';
 
