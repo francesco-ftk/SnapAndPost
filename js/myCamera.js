@@ -16,8 +16,7 @@ function openCamera(){
     canvasElement.width = webcamElement.width;
     canvasElement.height = webcamElement.height; //width*.75;
 
-    /*if(window.innerWidth>window.innerHeight) {
-        if(window.innerHeight)
+    /*if(window.innerHeight ) {
     }*/
 
     /*if (screen.width > screen.height) {
