@@ -93,6 +93,9 @@
 }
 
 #panelPhoto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     background-color: #c1bbbb;
     height: 100%;
@@ -100,16 +103,16 @@
 
 #webcam{
     display: none;
-    width: 100%;
-    height: 90%;
+    /*width: 100%;
+    height: 90%;*/
 }
 
 #canvas{
     display: none;
-    position: absolute;
-    top: 0;
-    width: 64%;
-    left: 18%;
+    /*position: absolute;
+    top: 0;*/
+    /*width: 64%;
+    left: 18%;*/
 }
 
 .panelControls{
@@ -154,7 +157,7 @@
     border-style: none;
 }
 
-@media screen and (max-width: 1250px){
+/*@media screen and (max-width: 1250px){
 
     #canvas{
         width: 80%;
@@ -187,7 +190,7 @@
         top: 19%;
     }
 
-}
+}*/
 
 /* ---- END Stile Fotocamera ---- */
 

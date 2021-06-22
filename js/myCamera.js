@@ -7,7 +7,9 @@ function openCamera(){
     var canvasElement = document.getElementById('canvas');
 
     webcamElement.style.display= 'block';
-    canvasElement.height = canvasElement.width*.75;
+    //canvasElement.height = canvasElement.width*.75;
+    webcamElement.height = screen.height;
+    webcamElement.width = screen.width;
 
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
 
@@ -17,10 +19,10 @@ function openCamera(){
     panel.style.display= 'block';
 
     document.getElementById("snap").addEventListener("click", function() {
+        webcamElement.style.display= 'none';
         canvasElement.style.display= 'block';
         var picture = webcam.snap();
         webcam.stop();
-        webcamElement.style.display= 'none';
     });
 
     document.getElementById("rollBack").addEventListener("click", function() {
