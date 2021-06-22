@@ -10,27 +10,18 @@ function openCamera(){
 
     //panelPhoto.height = window.innerHeight-100;
 
+    if (screen.width > screen.height) {
     webcamElement.style.display= 'block';
     webcamElement.width = 640;
     webcamElement.height = 480;
     canvasElement.width = webcamElement.width;
-    canvasElement.height = webcamElement.height; //width*.75;
-
-    /*if(window.innerWidth>window.innerHeight) {
-        if(window.innerHeight)
-    }*/
-
-    /*if (screen.width > screen.height) {
-        webcamElement.width = window.innerWidth;
-        webcamElement.height = window.innerHeight*.9;
-        canvasElement.width = webcamElement.width*.675; // 0.9*0.75 = 0.675
-        canvasElement.height = webcamElement.height*.95;
+    canvasElement.height = webcamElement.height;
     } else {
         webcamElement.width = window.innerWidth;
         webcamElement.height = window.innerHeight*.9;
         canvasElement.width = webcamElement.width*.98;
-        canvasElement.height = webcamElement.height; //width*.75;
-    }*/
+        canvasElement.height = webcamElement.height;
+    }
 
     var webcam = new Webcam(webcamElement, 'user', canvasElement);
 
