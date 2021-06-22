@@ -14,11 +14,11 @@ function openCamera(){
 
     if (screen.width > screen.height) {
         //webcamElement.width = screen.width;  // vario altezza e larghezza del canvas con javascript
-        webcamElement.height = screen.height - panelControls.offsetHeight;
+        webcamElement.height = window.innerHeight - panelControls.offsetHeight;
         canvasElement.height = webcamElement.height;  // vario altezza e larghezza del canvas con javascript
     } else {
         webcamElement.width = window.innerWidth//screen.width;  // vario altezza e larghezza del canvas con javascript
-        webcamElement.height = window.innerHeight-panelControls.offsetHeight//screen.height - panelControls.offsetHeight;
+        webcamElement.height = window.innerHeight*.9//screen.height - panelControls.offsetHeight;
         canvasElement.height = webcamElement.width*.75;
         canvasElement.width = webcamElement.width;  // vario altezza e larghezza del canvas con javascript
     }

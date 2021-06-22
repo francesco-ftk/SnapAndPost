@@ -125,7 +125,7 @@
     left: 0;
     right: 0;
     background-color: #6a6868;
-    min-height: 10%;
+    height: 10%;
 }
 
 .container1{
@@ -135,7 +135,7 @@
     width: 100%;
     margin: 0px 20px;
     position: relative;
-    height: 100px;
+    /*height: 100px;*/
 }
 
 #snap{
@@ -163,7 +163,7 @@
     height: 50px;
     width: 50px;
     border-radius: 10%;
-    background-color: #0f0;
+    background-color: #00f;
     position: absolute;
     left: 20px;
     font-size: 20px;
