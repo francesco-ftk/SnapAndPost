@@ -104,8 +104,8 @@
 
 #video{
     display: none;
-    width:640px;
-    height:480px;
+    width:320px;
+    height:240px;
 
     /*width:320px;
     height:240px;*/
@@ -129,7 +129,7 @@
 .container1{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     margin: 0px 20px;
     position: relative;
@@ -149,8 +149,6 @@
     width: 50px;
     border-radius: 10%;
     background-color: #ff0311;
-    position: absolute;
-    right: 20px;
     font-size: 20px;
     align-content: center;
     color: black;
@@ -162,12 +160,15 @@
     width: 50px;
     border-radius: 10%;
     background-color: #d903ff;
-    position: absolute;
-    left: 20px;
     font-size: 20px;
     align-content: center;
     color: black;
     border-style: none;
+}
+
+.container2 {
+    display: flex;
+    align-items: center;
 }
 
 /*@media screen and (max-width: 1250px){
@@ -220,8 +221,7 @@
 
 #controls {
     display: none;
-    position: absolute;
-    left: 20px;
+    order: -1;
 }
 
 #controls p{
@@ -240,6 +240,19 @@
 
 #buttonWhite { background-color: white;}
 #bottoneCancella { background-color: black; color: white; width: auto; font-size: 20px; text-align: center; height: 25px;}
+
+#confirm {
+    height: 50px;
+    width: 50px;
+    border-radius: 10%;
+    background-color: #03ff10;
+    font-size: 20px;
+    align-content: center;
+    color: black;
+    border-style: none;
+    display: none;
+    margin-left: 6px;
+}
 
 
 /* ---- END Stile Editor ---- */
