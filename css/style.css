@@ -102,8 +102,10 @@
     width:100%;
 }
 
-#webcam{
+#video{
     display: none;
+    width:320px;
+    height:240px;
 }
 
 #canvas{
@@ -113,7 +115,6 @@
 .panelControls{
     display: flex;
     align-items: center;
-    /*justify-content: center;*/
     position: fixed;
     bottom: 0;
     left: 0;
@@ -132,7 +133,7 @@
     height: 100px;
 }
 
-#snap{
+#startbutton{
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -157,7 +158,7 @@
     height: 50px;
     width: 50px;
     border-radius: 10%;
-    background-color: #033aff;
+    background-color: #fffb03;
     position: absolute;
     left: 20px;
     font-size: 20px;
