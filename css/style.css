@@ -157,7 +157,7 @@
     border-style: none;
 }
 
-#rollBack2 {
+#switchCamera {
     height: 50px;
     width: 50px;
     border-radius: 10%;
@@ -206,4 +206,41 @@
 }*/
 
 /* ---- END Stile Fotocamera ---- */
+
+/* ---- START Stile Editor ---- */
+
+.bottone {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #000;
+    float: left;
+    margin-right: 3px;
+    padding: 3px;
+}
+
+#controls {
+    display: none;
+    position: absolute;
+    left: 20px;
+}
+
+#controls p{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.clearer {clear: both;}
+
+#buttonGreen { background-color: green;}
+#buttonBlue { background-color: blue;}
+#buttonRed { background-color: red;}
+#buttonYellow { background-color: yellow;}
+#buttonBlack { background-color: black;}
+#buttonOrange { background-color: orange;}
+
+#buttonWhite { background-color: white;}
+#bottoneCancella { background-color: black; color: white; width: auto; font-size: 20px; text-align: center; height: 25px;}
+
+
+/* ---- END Stile Editor ---- */
 

@@ -119,6 +119,7 @@ function takepicture() {
         context.drawImage(video, 0, 0, width, height);
         video.style.display = 'none';
         canvas.style.display = 'block';
+        openEditor();
 
         // Inserisce frame catturato in canvas e photo
 
