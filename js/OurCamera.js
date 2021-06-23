@@ -1,4 +1,4 @@
-var width = 640;    // We will scale the photo width to this
+var width = 320;    // We will scale the photo width to this
 var height = 0;     // This will be computed based on the input stream
 
 // |streaming| indicates whether or not we're currently streaming
@@ -14,6 +14,11 @@ var canvas = null;
 //var photo = null;
 var startbutton = null;
 var panel = null;
+var switchCamera= null;
+var confirm= null;
+var controls= null;
+
+
 
 
 
@@ -21,14 +26,21 @@ function openCamera() {
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be
     // calculated based on the aspect ratio of the input stream.
-
+    controls= document.getElementById('controls');
+    controls.style.display= 'none';
+    startbutton= document.getElementById('startbutton');
+    switchCamera= document.getElementById('switchCamera');
+    confirm= document.getElementById('confirm');
+    confirm.style.display= 'none';
+    startbutton.style.display= 'block';
+    switchCamera.style.display= 'block';
     panel= document.getElementById('panel');
     panel.style.display= 'block';
     video = document.getElementById('video');
     video.style.display= 'block';
     canvas = document.getElementById('canvas');
+    canvas.style.display= 'none';
     // photo = document.getElementById('photo');
-    startbutton = document.getElementById('startbutton');
 
     /*var tmp = findVideo();*/
 
@@ -135,12 +147,16 @@ function closeCamera(){
     var panel= document.getElementById('panel');
     var canvas = document.getElementById('canvas');
     var video = document.getElementById('video');
-    video.srcObject.getTracks().forEach(function(track) {
-        track.stop();
-    });
-    canvas.style.display= 'none';
-    video.style.display= 'none';
-    panel.style.display= 'none';
+    if(video.style.display==='block'){
+        video.srcObject.getTracks().forEach(function(track) {
+            track.stop();
+        });
+        canvas.style.display= 'none';
+        video.style.display= 'none';
+        panel.style.display= 'none';
+    } else {
+        openCamera();
+    }
 }
 
 /*

@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="css/MarkerCluster.Default.css">
     <script src="js/leaflet.markercluster-src.js" type="text/javascript"></script>
     <script src="js/OurCamera.js" type="text/javascript"></script>
-    <script src="js/drawingMobile.js" type="text/javascript"></script>
+    <!--<script src="js/drawingMobile.js" type="text/javascript"></script>-->
+    <script src="js/drawingDesktop.js" type="text/javascript"></script>
 </head>
 <body>
 <nav class="navbar">
@@ -44,14 +45,17 @@
 <div id="panel">
         <div id="panelPhoto">
             <video id="video">Video stream not available.</video>
-            <canvas id="canvas"></canvas>
+            <canvas id="canvas" tabindex="0"></canvas>
         </div>
 
     <div id="ciao" class="panelControls">
         <div class="container1">
-            <button id="startbutton"></button>
-            <button id="rollBack"  onclick="closeCamera()"> X </button>
             <button id="switchCamera"  onclick=""> C </button>
+            <button id="startbutton"></button>
+            <div class="container2">
+                <button id="rollBack"  onclick="closeCamera()"> X </button>
+                <button id="confirm" onclick=""> V </button>
+            </div>
 
             <div id="controls">
                 <p>Scegli il colore</p>

@@ -6,6 +6,7 @@ var drawingTouchList = [];
 var controls= null;
 var startbutton= null;
 var switchCamera= null;
+var confirm1= null;
 
 function openEditor(){
     startbutton= document.getElementById('startbutton');
@@ -14,6 +15,8 @@ function openEditor(){
     switchCamera.style.display= 'none';
     controls= document.getElementById('controls');
     controls.style.display= 'block';
+    confirm1= document.getElementById('confirm');
+    confirm1.style.display= 'block';
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
     /*
