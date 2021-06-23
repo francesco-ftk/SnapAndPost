@@ -1,4 +1,4 @@
-var width = 320;    // We will scale the photo width to this
+var width = window.innerWidth;  // We will scale the photo width to this
 var height = 0;     // This will be computed based on the input stream
 
 // |streaming| indicates whether or not we're currently streaming
@@ -11,16 +11,11 @@ var streaming = false;
 
 var video = null;
 var canvas = null;
-//var photo = null;
 var startbutton = null;
 var panel = null;
 var switchCamera= null;
 var confirm= null;
 var controls= null;
-
-
-
-
 
 function openCamera() {
     // The width and height of the captured photo. We will set the
@@ -28,19 +23,27 @@ function openCamera() {
     // calculated based on the aspect ratio of the input stream.
     controls= document.getElementById('controls');
     controls.style.display= 'none';
+
     startbutton= document.getElementById('startbutton');
+    startbutton.style.display= 'block';
+
     switchCamera= document.getElementById('switchCamera');
+    switchCamera.style.display= 'block';
+
     confirm= document.getElementById('confirm');
     confirm.style.display= 'none';
-    startbutton.style.display= 'block';
-    switchCamera.style.display= 'block';
+
     panel= document.getElementById('panel');
     panel.style.display= 'block';
+
     video = document.getElementById('video');
     video.style.display= 'block';
+    height = video.videoHeight / (video.videoWidth/width);
+    video.setAttribute('width', width);
+    video.setAttribute('height', height);
+
     canvas = document.getElementById('canvas');
     canvas.style.display= 'none';
-    // photo = document.getElementById('photo');
 
     /*var tmp = findVideo();*/
 

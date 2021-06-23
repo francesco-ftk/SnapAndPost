@@ -19,12 +19,6 @@ function openEditor(){
     confirm1.style.display= 'block';
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
-    /*
-    var controlsHeight = document.getElementById('controls').offsetHeight;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - controlsHeight - 20;
-    console.log(canvas.height);
-    */
 
     [].forEach.call(
         document.querySelectorAll('.bottone'),
