@@ -104,8 +104,11 @@
 
 #video{
     display: none;
-    width:320px;
-    height:240px;
+    width:640px;
+    height:480px;
+
+    /*width:320px;
+    height:240px;*/
 }
 
 #canvas{
@@ -158,7 +161,7 @@
     height: 50px;
     width: 50px;
     border-radius: 10%;
-    background-color: #fffb03;
+    background-color: #d903ff;
     position: absolute;
     left: 20px;
     font-size: 20px;
