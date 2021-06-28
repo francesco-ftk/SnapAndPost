@@ -20,7 +20,7 @@
     }
 
     function saveImage() {
-        $path = 'C:\\Users\\betta\\Desktop\\[43.773, 11.255]'; // C:\\Users\\betta\\Desktop\\[43.773, 11.255]
+        $path = 'C:\\Users\\Acer\\Desktop\\[43.773, 11.255]'; // C:\\Users\\betta\\Desktop\\[43.773, 11.255]
 		mkdir($path, 0777); //../manageDB/112.67
 }
 
