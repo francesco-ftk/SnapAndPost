@@ -25,6 +25,10 @@
     <script src="js/OurCamera.js" type="text/javascript"></script>
     <script src="js/drawingMobile.js" type="text/javascript"></script>
     <!--<script src="js/drawingDesktop.js" type="text/javascript"></script>-->
+
+    <!-- JQUERY -->
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/jquery.my-plugin.js" type="text/javascript"></script>
 </head>
 <body>
 <nav class="navbar">
@@ -54,7 +58,7 @@
             <button id="startbutton"></button>
             <div class="container2">
                 <button id="rollBack"  onclick="closeCamera()"> X </button>
-                <button id="confirm" onclick=""> V </button>
+                <button id="confirm" onclick="$(this).confirm()"> V </button>
             </div>
 
             <div id="controls">

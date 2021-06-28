@@ -204,3 +204,6 @@ function findVideo(){
 }
 */
 
+function saveImage() {
+
+}
