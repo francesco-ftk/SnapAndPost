@@ -5,11 +5,12 @@ $password_db = "";
 $dbname = "my_snapandpost";
 
 // Create connection
-/*$conn = new mysqli($servername, $username_db, $password_db, $dbname);
+$conn = new mysqli($servername, $username_db, $password_db, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} else {
-    echo 'Connessione avvenuta';
-}*/
+}else {
+    echo "<script> console.log('Connessione avvenuta');</script>";
+}
 ?>

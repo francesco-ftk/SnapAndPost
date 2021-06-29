@@ -33,6 +33,11 @@ function setMap(position) {
     }).addTo(mymap);
 
     var markers = L.markerClusterGroup();
+    var coordinates= $(this).coordinates();
+    for(var i=0; i<coordinates.length; i++){
+        markers.addLayer(L.marker(coordinates[i]));
+    }
+
     markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
     markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='Immagini/duomo.jpg' width='250px'>").openPopup());
     mymap.addLayer(markers);
