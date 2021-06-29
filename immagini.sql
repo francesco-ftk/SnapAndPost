@@ -4,11 +4,11 @@ DROP TABLE IF EXISTS immagini CASCADE;
 
 CREATE TABLE immagini (
   id int(11) NOT NULL auto_increment,
-  latitudine float NOT NULL,
-  longitudine float NOT NULL,
+  latitudine double NOT NULL,
+  longitudine double NOT NULL,
   immagine BLOB NOT NULL,
   PRIMARY KEY(id)
- )
+ )ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 /*
 . ' `nome` varchar(50) NOT NULL default "",'

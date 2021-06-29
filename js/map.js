@@ -32,15 +32,13 @@ function setMap(position) {
         radius: 100
     }).addTo(mymap);
 
-    var markers = L.markerClusterGroup();
-    var coordinates= $(this).coordinates();
-    for(var i=0; i<coordinates.length; i++){
-        markers.addLayer(L.marker(coordinates[i]));
-    }
-
+    //var markers = L.markerClusterGroup();
+    //$(this).getMarkers(mymap);
+    /*
     markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
     markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='Immagini/duomo.jpg' width='250px'>").openPopup());
     mymap.addLayer(markers);
+    */
 
     /*L.control.zoom({position: 'bottomleft'}).addTo(mymap);*/
 
@@ -71,6 +69,7 @@ function setMap(position) {
         })
         .catch(function(error){console.log(error);});
 }
+
 
 /*
 
