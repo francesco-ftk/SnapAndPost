@@ -10,6 +10,7 @@
             url: "../php/actions.php",
             type: "POST",
             data: {"action" : request_type},
+            //success: create_popup(data),
             dataType: "json",
         });
 
