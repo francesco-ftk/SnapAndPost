@@ -32,13 +32,11 @@ function setMap(position) {
         radius: 100
     }).addTo(mymap);
 
-    //var markers = L.markerClusterGroup();
-    //$(this).getMarkers(mymap);
-    /*
+    var markers = L.markerClusterGroup();
     markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
     markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='Immagini/duomo.jpg' width='250px'>").openPopup());
     mymap.addLayer(markers);
-    */
+
 
     /*L.control.zoom({position: 'bottomleft'}).addTo(mymap);*/
 

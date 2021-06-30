@@ -2,6 +2,8 @@
 
     $.fn.createMap = function(options){
 
+        var mymap = null;
+
         console.log("JQUERY: " + $);
 
         var defaults = {
@@ -12,15 +14,14 @@
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
+            queryCoordinates();
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
 
-        coordinates();
-
         function setMap(position) {
             console.log("setMap called")
-            var mymap = L.map('mapid', { zoomControl:true }).setView([position.coords.latitude, position.coords.longitude], 16);
+            mymap = L.map('mapid', { zoomControl:true }).setView([position.coords.latitude, position.coords.longitude], 16);
         
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -38,7 +39,7 @@
                 iconAnchor: [26,45]
             });
         
-            var marker = L.marker([position.coords.latitude, position.coords.longitude], {icon: myIcon}).addTo(mymap);
+            var marker = L.marker([position.coords.latitude, position.coords.longitude], {icon: myIcon}).addTo(mymap);  //
         
             var circle = L.circle([position.coords.latitude, position.coords.longitude], {
                 color: 'red',
@@ -46,13 +47,6 @@
                 fillOpacity: 0.5,
                 radius: 100
             }).addTo(mymap);
-        
-            //var markers = L.markerClusterGroup();
-            /*
-            markers.addLayer(L.marker([43.773, 11.258])); <!-- Cordinate da passare con pagine wikipedia -->
-            markers.addLayer(L.marker([43.773, 11.257]).bindPopup("<img src='Immagini/duomo.jpg' width='250px'>").openPopup());
-            mymap.addLayer(markers);
-            */
         
             /*SEARCH NEARBY PAGES*/
             var url = "https://en.wikipedia.org/w/api.php";
@@ -75,15 +69,15 @@
                     var pages = response.query.geosearch;
                     for (var place in pages) {
                         //console.log(pages[place].title);
-                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup(pages[place].title + ", " + pages[place].dist).openPopup());
+                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<p> pages[place].title + ' - ' + pages[place].dist + 'm'</p>").openPopup());
                     }
                     mymap.addLayer(markers);
                 })
                 .catch(function(error){console.log(error);});
         }
 
-        function coordinates(){
-            console.log("coordinates")
+        function queryCoordinates(){
+            console.log("queryCoordinates")
             request_type = "load";
 				
             var request = $.ajax({
@@ -94,7 +88,7 @@
             });
  
             request.done(function(data) {
-                handleLoad(data);
+                addMonumentsMarker(data);
             });
  
             request.fail(
@@ -104,35 +98,26 @@
 
         }
 
-        function handleLoad(data) {
-            console.log("handleLoad");
-            var todos = data["todos"];
-
-            if (todos.length > 0) {
-                $(todos).each(function(index, object) {
-                    console.log("lat: " + object['text']);
-                });
-                
-
-            /*
-            console.log("createPopup called");
+        function addMonumentsMarker(data) {
+            console.log("addMonumentsMarker");
             var coordinates = data["coordinates"];
+
             if (coordinates.length > 0) {
-                console.log("yes coordinates");
-                /*
-                var markers = L.markerClusterGroup();
-                $(coordinates).each(function (index, object) {
-                    markers.addLayer(L.marker([object['lat'], object['lon']]));
+                $(coordinates).each(function(index, object) {
+                    //console.log("lat: " + object['lat']);
+                    var markers = L.markerClusterGroup();
+                    $(coordinates).each(function (index, object) {
+                        markers.addLayer(L.marker([object['lat'], object['lon']]));
+                    });
+                    mymap.addLayer(markers);
+                    console.log("funziona tutto");
                 });
-                obj.addLayer(markers);
-                console.log("funziona tutto");
-            */
             }      
 
         }
 
         /*
-          function confirm() {
+        function confirm() {
         var request_type = "save";
         var request = $.ajax({
             url: "php/actions.php",

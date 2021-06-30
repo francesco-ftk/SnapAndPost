@@ -27,24 +27,25 @@ switch($action) {
 }
 
 function getCoordinates() {
-    $query_string = 'SELECT latitudine FROM immagini'; 
+    $query_string = 'SELECT latitudine, longitudine FROM immagini GROUP BY latitudine, longitudine';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
 
     // esegui la query
     $result = $mysqli->query($query_string); 
 
-    $todos = array();	
+    $coordinates = array();
 
     // cicla sul risultato
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
     
-        $todo_text = $row['latitudine'];
+        $lat = $row['latitudine'];
+        $lon = $row['longitudine'];
 
-        $todo = array('text' =>$todo_text);
-        array_push($todos, $todo);
+        $coordinate = array('lat' =>$lat, 'lon' =>$lon);
+        array_push($coordinates, $coordinate);
     }
 
-    $response = array('todos' => $todos, 'type' => 'load');
+    $response = array('coordinates' => $coordinates, 'type' => 'load');
 
     // encodo l'array in JSON
     echo json_encode($response);	
