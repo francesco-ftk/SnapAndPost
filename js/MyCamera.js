@@ -17,7 +17,8 @@ var switchCamera= null;
 var confirm= null;
 var controls= null;
 
-function openCamera() {
+function openCamera(lat,lon) {
+    console.log("lat: " + lat + " lon: " + lon);
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be
     // calculated based on the aspect ratio of the input stream.

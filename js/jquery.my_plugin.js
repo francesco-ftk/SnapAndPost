@@ -1,3 +1,5 @@
+var markers = null;
+
 (function($){
 
     $.fn.createMap = function(options){
@@ -55,23 +57,24 @@
                 action: "query",
                 list: "geosearch",
                 gscoord: position.coords.latitude + '|' + position.coords.longitude,
-                gsradius: "100",
+                gsradius: "10000", // 100
                 gslimit: "100",
                 format: "json"
             };
         
             url = url + "?origin=*";
             Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
-            var markers = L.markerClusterGroup();
+            markers = L.markerClusterGroup();
             fetch(url)
                 .then(function(response){return response.json();})
                 .then(function(response) {
                     var pages = response.query.geosearch;
                     for (var place in pages) {
                         //console.log(pages[place].title);
-                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<p> pages[place].title + ' - ' + pages[place].dist + 'm'</p>").openPopup());
+                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='buttonCamera' onclick='check()'>" + "</div>" + "<p>" + pages[place].title + pages[place].lat + pages[place].lon + " - " + pages[place].dist + "m" + "</p>").openPopup());
                     }
                     mymap.addLayer(markers);
+
                 })
                 .catch(function(error){console.log(error);});
         }
@@ -130,5 +133,16 @@
     }
 
 })(jQuery);
+
+
+function check(){
+    var Array= markers.getLayers();
+    for(var i=0; i<Array.length; i++){
+        if(Array[i].isPopupOpen()){
+            var x= Array[i].getLatLng();
+            openCamera(x.lat, x.lng);
+        }
+    }
+}
 
 
