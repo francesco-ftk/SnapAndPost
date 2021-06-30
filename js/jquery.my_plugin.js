@@ -57,7 +57,7 @@ var markers = null;
                 action: "query",
                 list: "geosearch",
                 gscoord: position.coords.latitude + '|' + position.coords.longitude,
-                gsradius: "10000", // 100
+                gsradius: "100", // fino a 10000
                 gslimit: "100",
                 format: "json"
             };
@@ -71,7 +71,7 @@ var markers = null;
                     var pages = response.query.geosearch;
                     for (var place in pages) {
                         //console.log(pages[place].title);
-                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='buttonCamera' onclick='check()'>" + "</div>" + "<p>" + pages[place].title + pages[place].lat + pages[place].lon + " - " + pages[place].dist + "m" + "</p>").openPopup());
+                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>"+"<div class='buttonCamera' onclick='check()'>" + "</div>" + "<p>" + pages[place].title + "</p>"+"</div>").openPopup());  //" " + pages[place].lat + " " + pages[place].lon + +  " - " + pages[place].dist + "m" +
                     }
                     mymap.addLayer(markers);
 
