@@ -57,7 +57,7 @@ var markers = null;
                 action: "query",
                 list: "geosearch",
                 gscoord: position.coords.latitude + '|' + position.coords.longitude,
-                gsradius: "100", // fino a 10000
+                gsradius: "10000", // 100
                 gslimit: "100",
                 format: "json"
             };
