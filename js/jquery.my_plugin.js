@@ -18,8 +18,8 @@ var popups = [];
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
             queryCoordinates();
-            var confirmButton = document.getElementById("confirm");
-            confirmButton.addEventListener('click', sendImage());
+            var $confirmButton = $('#confirm');
+            $confirmButton.on('click', function(event){sendImage();});
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -125,14 +125,16 @@ var popups = [];
 
         function sendImage(){
             var params = getParams();
-            console.log("saveImage")
+            console.log("saveImage");
             request_type = "save";
-
+            //var $canvas = $('#canvas');
+            //var edited = params.canvas.toDataURL('image/png');
+            //window.location.href = edited;
             var request = $.ajax({
                 url: options.serverURL,
                 type: "POST",
                 data: {"action" : request_type, "lat" : params.lat, "lng" : params.lng, "title" : params.title, "img": params.img},
-                //dataType: "json",
+                dataType: "json",
             });
 
             request.done(function() {

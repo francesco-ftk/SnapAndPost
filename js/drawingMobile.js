@@ -3,10 +3,10 @@ var context = null;
 var coloreSelezionato = "black";
 var larghezzaLinea = 3;
 var drawingTouchList = [];
-var controls= null;
-var startbutton= null;
-var switchCamera= null;
-var confirm1= null;
+var controls = null;
+var startbutton = null;
+var switchCamera = null;
+var confirm1 = null;
 
 
 function openEditor() {
@@ -20,6 +20,7 @@ function openEditor() {
     confirm1.style.display = 'block';
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
+    //var params = getParams();
 
     [].forEach.call(
         document.querySelectorAll('.bottone'),

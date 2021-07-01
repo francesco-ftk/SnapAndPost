@@ -56,42 +56,37 @@ function getCoordinates() {
 
 
     function saveImage() {
-        
-        /*$query_string = 'INSERT INTO immagini(latitudine, longitudine, immagine) VALUES(?,?,?)';
-        $query=$conn->prepare($query_string);
-        // associa ai "?" i veri parametri
-        $query->bind_param("ddb",$lat,$lon,$immagine);
-        $query->execute();
 
-        $path = 'C:\\Users\\Acer\\Desktop\\[43.773, 11.255]'; // C:\\Users\\betta\\Desktop\\[43.773, 11.255]
-		mkdir($path, 0777); //../manageDB/112.67*/
         $lat = $_POST['lat'];
         $lng = $_POST['lng'];
         $img = $_POST['img'];
         $title = $_POST['title'];
-        $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES('.$lat.', '.$lng.', '.$img.', '.$title.')';
+
+        /*list($type, $img) = explode(';', $img);
+        list(, $img)      = explode(',', $img);
+        $img = base64_decode($img);
+
+
+        file_put_contents('../immagini/image.png', $img);*/
+
+        $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES(?,?,?,?)';  //('.$lat.', '.$lng.', '.$img.', '.$title.')';
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+        $query = $mysqli->prepare($query_string);
+        $query->bind_param("ddbs", $lat, $lng, $img, $title);
+        $query->execute();
 
-        // esegui la query
-        $result = $mysqli->query($query_string);
+        $id = $mysqli->insert_id;
 
-        /*$coordinates = array();
-
-        // cicla sul risultato
-        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-
-            $lat = $row['latitudine'];
-            $lon = $row['longitudine'];
-            $nome = $row['nome'];
-
-            $coordinate = array('lat' =>$lat, 'lon' =>$lon, 'nome' =>$nome);
-            array_push($coordinates, $coordinate);
-        }
-
-        $response = array('coordinates' => $coordinates, 'type' => 'load');
-
-        // encodo l'array in JSON
-        echo json_encode($response);*/
+        $query = $mysqli->prepare('SELECT * FROM immagini WHERE id=?');
+        $query->bind_param("i", $id);
+        $query->execute();
+        $result = $query->get_result();
+        $row = $result->fetch_assoc();
+        $line = array('lat' =>$row['latitudine'], 'lon' =>$row['longitudine'], 'nome' =>$row['nome'], 'img'=> $row['immagine']);
+        $lines = array();
+        array_push($lines, $line);
+        $response = array('lines' => $lines, 'type' => 'save');
+        echo json_encode($response);
 
     }
 
