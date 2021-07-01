@@ -18,6 +18,8 @@ var popups = [];
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
             queryCoordinates();
+            var confirmButton = document.getElementById("confirm");
+            confirmButton.addEventListener('click', sendImage());
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -73,7 +75,7 @@ var popups = [];
                     for (var place in pages) {
                         //console.log(pages[place].title);
                         popups.push({"lat": pages[place].lat, "lng": pages[place].lon, "title": pages[place].title});
-                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>"+"<div class='buttonCamera' onclick='check()'>" + "</div>" + "<p>" + pages[place].title + "</p>"+"</div>").openPopup());  //" " + pages[place].lat + " " + pages[place].lon + +  " - " + pages[place].dist + "m" +
+                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>"+"<div class='buttonPopup camera' onclick='check()'>" + "</div>" + "<p>" + pages[place].title + "</p>"+"</div>").openPopup());  //" " + pages[place].lat + " " + pages[place].lon + +  " - " + pages[place].dist + "m" +
                     }
                     mymap.addLayer(markers);
 
@@ -112,7 +114,7 @@ var popups = [];
                     //console.log("lat: " + object['lat']);
                     var markers = L.markerClusterGroup();
                     $(coordinates).each(function (index, object) {
-                        markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonGallery' onclick=''>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
+                        markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonPopup gallery' onclick=''>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
                     });
                     mymap.addLayer(markers);
                     console.log("funziona tutto");
@@ -121,16 +123,28 @@ var popups = [];
 
         }
 
-        /*
-        function confirm() {
-        var request_type = "save";
-        var request = $.ajax({
-            url: "php/actions.php",
-            type: "POST",
-            data: {"action": request_type},
-        });
+        function sendImage(){
+            var params = getParams();
+            console.log("saveImage")
+            request_type = "save";
+
+            var request = $.ajax({
+                url: options.serverURL,
+                type: "POST",
+                data: {"action" : request_type, "lat" : params.lat, "lng" : params.lng, "title" : params.title, "img": params.img},
+                //dataType: "json",
+            });
+
+            request.done(function() {
+                console.log("immagine salvata");
+            });
+
+            request.fail(
+                function(jqXHR, textStatus) {
+                    alert( "Request failed: " + textStatus );
+                });
+
         }
-        */
 
     }
 

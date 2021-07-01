@@ -17,7 +17,16 @@ var switchCamera= null;
 var confirm= null;
 var controls= null;
 
-function openCamera(lat,lon,title) {
+var lat;
+var lng;
+var title;
+var img;
+
+function openCamera(latitudine, longitudine, nome) {
+    lat = latitudine;
+    lng = longitudine;
+    title = nome;
+
     console.log("lat: " + lat + " lon: " + lon + " title: " + title);
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be
@@ -135,12 +144,11 @@ function takepicture() {
         context.drawImage(video, 0, 0, width, height);
         video.style.display = 'none';
         canvas.style.display = 'block';
+        img = canvas.toDataURL('image/png');
         openEditor();
 
         // Inserisce frame catturato in canvas e photo
-
-        /*var data = canvas.toDataURL('image/png');
-        photo.setAttribute('src', data);*/
+        //photo.setAttribute('src', img);
     } else {
         clearphoto();
     }
@@ -159,10 +167,13 @@ function closeCamera(){
         video.style.display= 'none';
         panel.style.display= 'none';
     } else {
-        openCamera();
+        openCamera(lat, lng, title);
     }
 }
 
+function getParams() {
+    return {"lat": lat, "lng": lng, "title": title, "img": img};
+}
 /*
 function findVideo(){
 
@@ -204,7 +215,7 @@ function findVideo(){
     return constraints;
 }
 */
-
+/*
 function saveImage() {
 
-}
+}*/

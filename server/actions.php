@@ -15,10 +15,10 @@ switch($action) {
         getCoordinates();
     break;
 
-    /*
     case "save" : 
         saveImage();
     break;
+    /*
     case "get" :
         //echo($action);
         getImages();
@@ -53,25 +53,52 @@ function getCoordinates() {
 
 }
 
-/*
+
 
     function saveImage() {
         
-        $query_string = 'INSERT INTO immagini(latitudine, longitudine, immagine) VALUES(?,?,?)';
+        /*$query_string = 'INSERT INTO immagini(latitudine, longitudine, immagine) VALUES(?,?,?)';
         $query=$conn->prepare($query_string);
         // associa ai "?" i veri parametri
         $query->bind_param("ddb",$lat,$lon,$immagine);
         $query->execute();
 
         $path = 'C:\\Users\\Acer\\Desktop\\[43.773, 11.255]'; // C:\\Users\\betta\\Desktop\\[43.773, 11.255]
-		mkdir($path, 0777); //../manageDB/112.67
-        
+		mkdir($path, 0777); //../manageDB/112.67*/
+        $lat = $_POST['lat'];
+        $lng = $_POST['lng'];
+        $img = $_POST['img'];
+        $title = $_POST['title'];
+        $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES('.$lat.', '.$lng.', '.$img.', '.$title.')';
+        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        // esegui la query
+        $result = $mysqli->query($query_string);
+
+        /*$coordinates = array();
+
+        // cicla sul risultato
+        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+
+            $lat = $row['latitudine'];
+            $lon = $row['longitudine'];
+            $nome = $row['nome'];
+
+            $coordinate = array('lat' =>$lat, 'lon' =>$lon, 'nome' =>$nome);
+            array_push($coordinates, $coordinate);
+        }
+
+        $response = array('coordinates' => $coordinates, 'type' => 'load');
+
+        // encodo l'array in JSON
+        echo json_encode($response);*/
+
     }
 
     function getImages() {
         echo "<script>console.log('ciao');</script>";
     }
-*/
+
 
 ?>
 

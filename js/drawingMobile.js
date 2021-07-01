@@ -8,26 +8,27 @@ var startbutton= null;
 var switchCamera= null;
 var confirm1= null;
 
-function openEditor(){
-    startbutton= document.getElementById('startbutton');
-    startbutton.style.display= 'none';
-    switchCamera= document.getElementById('switchCamera');
-    switchCamera.style.display= 'none';
-    controls= document.getElementById('controls');
-    controls.style.display= 'block';
-    confirm1= document.getElementById('confirm');
-    confirm1.style.display= 'block';
+
+function openEditor() {
+    startbutton = document.getElementById('startbutton');
+    startbutton.style.display = 'none';
+    switchCamera = document.getElementById('switchCamera');
+    switchCamera.style.display = 'none';
+    controls = document.getElementById('controls');
+    controls.style.display = 'block';
+    confirm1 = document.getElementById('confirm');
+    confirm1.style.display = 'block';
     canvas = document.getElementById('canvas');
     context = canvas.getContext('2d');
 
     [].forEach.call(
         document.querySelectorAll('.bottone'),
-        function(el){
-            el.addEventListener('click', function(){
+        function (el) {
+            el.addEventListener('click', function () {
                 var id = this.id;
                 console.log(el);
                 var colore = id.match(/[A-Z][a-z]+/g);
-                if (id == 'bottoneCancella'){
+                if (id === 'bottoneCancella') {
                     cancella();
                 } else {
                     selezionaColore({colore: colore[0].toLocaleLowerCase()});
@@ -36,36 +37,36 @@ function openEditor(){
         }
     );
 
-    canvas.addEventListener('touchmove', function(e){
+    canvas.addEventListener('touchmove', function (e) {
         calcolaCoordinate(e);
     });
 
-    canvas.addEventListener('touchstart', function(e){
+    canvas.addEventListener('touchstart', function (e) {
         calcolaCoordinate(e);
     });
 
-    canvas.addEventListener('touchend', function(e){
+    canvas.addEventListener('touchend', function (e) {
         calcolaCoordinate(e);
     });
 
 }
 
 
-function selezionaColore(obj){
+function selezionaColore(obj) {
     coloreSelezionato = obj.colore;
 }
 
-function calcolaCoordinate(e){
+function calcolaCoordinate(e) {
     console.log(e);
 
-    switch(e.type) {
+    switch (e.type) {
         case 'touchmove':
             var touches = e.changedTouches
             console.log("mousemove");
-            for (var i=0; i<touches.length; i++){
+            for (var i = 0; i < touches.length; i++) {
                 var instance;
-                for (var j=0; j<drawingTouchList.length; j++){
-                    if(drawingTouchList[j].identifier == touches[i].identifier){
+                for (var j = 0; j < drawingTouchList.length; j++) {
+                    if (drawingTouchList[j].identifier == touches[i].identifier) {
                         instance = drawingTouchList[j];
                         instance.updateCurrentPosition(touches[i].pageX, touches[i].pageY);
                         instance.disegna();
@@ -79,7 +80,7 @@ function calcolaCoordinate(e){
             break;
         case 'touchstart':
             var touches = e.changedTouches
-            for (var i=0; i<touches.length; i++){
+            for (var i = 0; i < touches.length; i++) {
 //                console.log("mousedown");
 //
 //                console.log("mouseout");
@@ -96,9 +97,9 @@ function calcolaCoordinate(e){
             break;
         case 'touchend':
             var touches = e.changedTouches
-            for (var x=0; x<touches.length; x++){
-                for (var y=0; y<drawingTouchList.length; y++){
-                    if(drawingTouchList[y].identifier == touches[x].identifier){
+            for (var x = 0; x < touches.length; x++) {
+                for (var y = 0; y < drawingTouchList.length; y++) {
+                    if (drawingTouchList[y].identifier == touches[x].identifier) {
                         drawingTouchList.splice(x, 1);
                         console.log("remove")
                     }
@@ -114,7 +115,7 @@ function calcolaCoordinate(e){
     }
 }
 
-function disegna(puntoInizioDisegnoX, puntoInizioDisegnoY, posizioneCorrenteMouseX, posizioneCorrenteMouseY){
+function disegna(puntoInizioDisegnoX, puntoInizioDisegnoY, posizioneCorrenteMouseX, posizioneCorrenteMouseY) {
     console.log('disegna');
     context.beginPath();
     context.moveTo(puntoInizioDisegnoX, puntoInizioDisegnoY);
@@ -126,9 +127,9 @@ function disegna(puntoInizioDisegnoX, puntoInizioDisegnoY, posizioneCorrenteMous
 
 }
 
-function cancella(){
+function cancella() {
     var finestraConferma = confirm('Vuoi davvero cancellare?');
-    if(finestraConferma){
+    if (finestraConferma) {
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
 }
@@ -141,16 +142,16 @@ function DrawingTouch(identifier, puntoInizioDisegnoX, puntoInizioDisegnoY) {
     this.posizioneCorrenteTouchY = puntoInizioDisegnoY;
 }
 
-DrawingTouch.prototype.setPreviousPosition = function(x, y){
+DrawingTouch.prototype.setPreviousPosition = function (x, y) {
     this.puntoInizioDisegnoX = x;
     this.puntoInizioDisegnoY = y;
 }
 
-DrawingTouch.prototype.updateCurrentPosition = function(x, y){
+DrawingTouch.prototype.updateCurrentPosition = function (x, y) {
     this.posizioneCorrenteTouchX = x;
     this.posizioneCorrenteTouchY = y;
 }
 
-DrawingTouch.prototype.disegna = function(){
+DrawingTouch.prototype.disegna = function () {
     disegna(this.puntoInizioDisegnoX, this.puntoInizioDisegnoY, this.posizioneCorrenteTouchX, this.posizioneCorrenteTouchY);
 }
