@@ -15,7 +15,7 @@ switch($action) {
         getCoordinates();
     break;
 
-    case "save" : 
+    case "save" :
         saveImage();
     break;
     /*
@@ -53,47 +53,44 @@ function getCoordinates() {
 
 }
 
+function saveImage() {
 
+    $lat = $_POST['lat'];
+    $lng = $_POST['lng'];
+    $img = $_POST['img'];
+    $title = $_POST['title'];
 
-    function saveImage() {
+    $img = str_replace('data:image/png;base64,', '', $img);
+    $img = str_replace(' ', '+', $img);
+    $data = base64_decode($img);
+    file_put_contents('/tmp/image.png', $data);
 
-        $lat = $_POST['lat'];
-        $lng = $_POST['lng'];
-        $img = $_POST['img'];
-        $title = $_POST['title'];
+    $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES(?,?,?,?)';
+    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+    $query = $mysqli->prepare($query_string);
+    $query->bind_param("ddbs", $lat, $lng, $data, $title);
+    $query->execute();
 
-        /*list($type, $img) = explode(';', $img);
-        list(, $img)      = explode(',', $img);
-        $img = base64_decode($img);
+    $id = $mysqli->insert_id;
 
+    $query = $mysqli->prepare('SELECT * FROM immagini WHERE id=?');
+    $query->bind_param("i", $id);
+    $query->execute();
+    $result = $query->get_result();
+    $row = $result->fetch_assoc();
+    $line = array('lat' =>$row['latitudine'], 'lon' =>$row['longitudine'], 'nome' =>$row['nome'], 'img'=> $row['immagine']);
+    $lines = array();
+    array_push($lines, $line);
+    $response = array('lines' => $lines, 'type' => 'save');
+    echo json_encode($response);
 
-        file_put_contents('../immagini/image.png', $img);*/
+}
 
-        $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES(?,?,?,?)';  //('.$lat.', '.$lng.', '.$img.', '.$title.')';
-        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
-        $query = $mysqli->prepare($query_string);
-        $query->bind_param("ddbs", $lat, $lng, $img, $title);
-        $query->execute();
-
-        $id = $mysqli->insert_id;
-
-        $query = $mysqli->prepare('SELECT * FROM immagini WHERE id=?');
-        $query->bind_param("i", $id);
-        $query->execute();
-        $result = $query->get_result();
-        $row = $result->fetch_assoc();
-        $line = array('lat' =>$row['latitudine'], 'lon' =>$row['longitudine'], 'nome' =>$row['nome'], 'img'=> $row['immagine']);
-        $lines = array();
-        array_push($lines, $line);
-        $response = array('lines' => $lines, 'type' => 'save');
-        echo json_encode($response);
-
-    }
-
-    function getImages() {
-        echo "<script>console.log('ciao');</script>";
-    }
-
+/*
+function getImages() {
+    echo "<script>console.log('ciao');</script>";
+}
+*/
 
 ?>
 
