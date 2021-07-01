@@ -12,7 +12,7 @@ $query_string = "";
 switch($action) {
     
     case "load" : 
-        getCoordinates();;
+        getCoordinates();
     break;
 
     /*
@@ -27,7 +27,7 @@ switch($action) {
 }
 
 function getCoordinates() {
-    $query_string = 'SELECT latitudine, longitudine FROM immagini GROUP BY latitudine, longitudine';
+    $query_string = 'SELECT latitudine, longitudine, nome FROM immagini GROUP BY latitudine, longitudine, nome';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE); 
 
     // esegui la query
@@ -40,8 +40,9 @@ function getCoordinates() {
     
         $lat = $row['latitudine'];
         $lon = $row['longitudine'];
+        $nome = $row['nome'];
 
-        $coordinate = array('lat' =>$lat, 'lon' =>$lon);
+        $coordinate = array('lat' =>$lat, 'lon' =>$lon, 'nome' =>$nome);
         array_push($coordinates, $coordinate);
     }
 

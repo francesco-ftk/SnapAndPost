@@ -1,4 +1,5 @@
 var markers = null;
+var popups = [];
 
 (function($){
 
@@ -71,6 +72,7 @@ var markers = null;
                     var pages = response.query.geosearch;
                     for (var place in pages) {
                         //console.log(pages[place].title);
+                        popups.push({"lat": pages[place].lat, "lng": pages[place].lon, "title": pages[place].title});
                         markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>"+"<div class='buttonCamera' onclick='check()'>" + "</div>" + "<p>" + pages[place].title + "</p>"+"</div>").openPopup());  //" " + pages[place].lat + " " + pages[place].lon + +  " - " + pages[place].dist + "m" +
                     }
                     mymap.addLayer(markers);
@@ -110,7 +112,7 @@ var markers = null;
                     //console.log("lat: " + object['lat']);
                     var markers = L.markerClusterGroup();
                     $(coordinates).each(function (index, object) {
-                        markers.addLayer(L.marker([object['lat'], object['lon']]));
+                        markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonGallery' onclick=''>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
                     });
                     mymap.addLayer(markers);
                     console.log("funziona tutto");
@@ -140,7 +142,13 @@ function check(){
     for(var i=0; i<Array.length; i++){
         if(Array[i].isPopupOpen()){
             var x= Array[i].getLatLng();
-            openCamera(x.lat, x.lng);
+            for(var j=0; j<popups.length; j++) {
+                if(x.lat === popups[j].lat && x.lng === popups[j].lng) {
+                    var title=popups[j].title;
+                    break;
+                }
+            }
+            openCamera(x.lat, x.lng, title);
         }
     }
 }
