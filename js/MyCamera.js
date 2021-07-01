@@ -177,6 +177,7 @@ function getParams() {
     img = canvas.toDataURL('image/png');
     return {"lat": lat, "lng": lng, "title": title, "img": img};
 }
+
 /*
 function findVideo(){
 

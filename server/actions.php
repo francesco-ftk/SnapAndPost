@@ -57,8 +57,18 @@ function saveImage() {
 
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
+    // base64 image code
     $img = $_POST['img'];
     $title = $_POST['title'];
+    $img = str_replace('data:image/png;base64,', '', $img);
+    $img = str_replace(' ', '+', $img);
+// create an image file
+    $fp = fopen("./image/tmp.png", "w+");
+// write the data in image file
+    fwrite($fp, base64_decode($img));
+// close an open file pointer
+    fclose($fp);
+
 
     /*$img = str_replace('data:image/png;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
@@ -68,7 +78,7 @@ function saveImage() {
     $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES(?,?,?,?)';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $query = $mysqli->prepare($query_string);
-    $query->bind_param("ddbs", $lat, $lng, $img, $title);
+    $query->bind_param("ddbs", $lat, $lng, $fp, $title);
     $query->execute();
 
     $id = $mysqli->insert_id;
