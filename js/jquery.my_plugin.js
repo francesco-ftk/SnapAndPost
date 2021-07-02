@@ -18,8 +18,8 @@ var popups = [];
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
             queryCoordinates();
-            var $confirmButton = $('#confirm');
-            $confirmButton.on('click', function(event){sendImage();});
+            //var $confirmButton = $('#confirm');
+            //$confirmButton.on('click', function(event){sendImage();});
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -136,16 +136,9 @@ var popups = [];
                 data: {"action" : request_type, "lat" : params.lat, "lng" : params.lng, "title" : params.title, "img": params.img},
                 //dataType: "json",
             });
-/*
-            request.done(function() {
-                console.log("immagine salvata");
-            });
 
-            request.fail(
-                function(jqXHR, textStatus) {
-                    alert( "Request failed: " + textStatus );
-                });
-*/
+            backToHome();
+
         }
 
     }

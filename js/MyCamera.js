@@ -17,6 +17,7 @@ var switchCamera= null;
 var confirm= null;
 var controls= null;
 
+var count = 0;
 var lat;
 var lng;
 var title;
@@ -30,17 +31,21 @@ function openCamera(latitudine, longitudine, nome) {
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be
     // calculated based on the aspect ratio of the input stream.
+
+    canvas = document.getElementById('canvas');
+    canvas.style.display= 'none';
+
     controls= document.getElementById('controls');
     controls.style.display= 'none';
+
+    confirm= document.getElementById('confirm');
+    confirm.style.display= 'none';
 
     startbutton= document.getElementById('startbutton');
     startbutton.style.display= 'block';
 
     switchCamera= document.getElementById('switchCamera');
     switchCamera.style.display= 'block';
-
-    confirm= document.getElementById('confirm');
-    confirm.style.display= 'none';
 
     panel= document.getElementById('panel');
     panel.style.display= 'block';
@@ -50,11 +55,6 @@ function openCamera(latitudine, longitudine, nome) {
     height = video.videoHeight / (video.videoWidth/width);
     video.setAttribute('width', width);
     video.setAttribute('height', height);
-
-    canvas = document.getElementById('canvas');
-    canvas.style.display= 'none';
-
-    /*var tmp = findVideo();*/
 
     var constraints = {
         audio: false,
@@ -107,7 +107,10 @@ function openCamera(latitudine, longitudine, nome) {
     }, false);
 
     startbutton.addEventListener('click', function(ev){
-        takepicture();
+        if (count===0){
+            takepicture();
+            count++;
+        }
         ev.preventDefault();
     }, false);
 
@@ -143,14 +146,11 @@ function takepicture() {
         context.drawImage(video, 0, 0, width, height);
         video.style.display = 'none';
         canvas.style.display = 'block';
+        //img = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
+        openEditor(canvas);
         video.srcObject.getTracks().forEach(function(track) {
             track.stop();
         });
-        //img = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
-        openEditor();
-
-        // Inserisce frame catturato in canvas e photo
-        //photo.setAttribute('src', img);
     } else {
         clearphoto();
     }
@@ -169,6 +169,7 @@ function closeCamera(){
         video.style.display= 'none';
         panel.style.display= 'none';
     } else {
+        count = 0;
         openCamera(lat, lng, title);
     }
 }
@@ -176,6 +177,11 @@ function closeCamera(){
 function getParams() {
     img = canvas.toDataURL('image/png');
     return {"lat": lat, "lng": lng, "title": title, "img": img};
+}
+
+function backToHome(){
+    panel.style.display= 'none';
+    count = 0;
 }
 
 /*

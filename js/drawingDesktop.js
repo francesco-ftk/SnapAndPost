@@ -12,7 +12,7 @@ var startbutton= null;
 var switchCamera= null;
 var confirm1= null;
 
-function openEditor(){
+function openEditor(canvas){
     startbutton= document.getElementById('startbutton');
     startbutton.style.display= 'none';
     switchCamera= document.getElementById('switchCamera');
@@ -21,9 +21,7 @@ function openEditor(){
     controls.style.display= 'block';
     confirm1= document.getElementById('confirm');
     confirm1.style.display= 'block';
-    canvas= document.getElementById("canvas");
     context=canvas.getContext('2d');
-    //var params = getParams();
 
     /*var controlsHeight = document.getElementById("controls").offsetHeight;
     canvas.width = window.innerWidth;  // vario altezza e larghezza del canvas con javascript
