@@ -60,7 +60,6 @@ function saveImage() {
     $img = $_POST['img'];
     $title = $_POST['title'];
 
-
     $img = str_replace('data:image/png;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
 
@@ -77,21 +76,27 @@ function saveImage() {
     $null = NULL;
     $query->bind_param("ddbs", $lat, $lng, $null, $title);
     $query->send_long_data(2, file_get_contents('../Immagini/tmp.png'));
-    $query->execute();
-/*
-    $id = $mysqli->insert_id;
+    if(!$query->execute()){
+        $line = array('controllo' => 'not ok');
+        $lines = array();
+        array_push($lines, $line);
+        $response = array('lines' => $lines, 'type' => 'save');
+        echo json_encode($response);
+    }
+    else{
+        $id = $mysqli->insert_id;
 
-    $query = $mysqli->prepare('SELECT * FROM immagini WHERE id=?');
-    $query->bind_param("i", $id);
-    $query->execute();
-    $result = $query->get_result();
-    $row = $result->fetch_assoc();
-    $line = array('lat' =>$row['latitudine'], 'lon' =>$row['longitudine'], 'nome' =>$row['nome'], 'img'=> $row['immagine']);
-    $lines = array();
-    array_push($lines, $line);
-    $response = array('lines' => $lines, 'type' => 'save');
-    echo json_encode($response);
-*/
+        $query = $mysqli->prepare('SELECT nome FROM immagini WHERE id=?');
+        $query->bind_param("i", $id);
+        $query->execute();
+        $result = $query->get_result();
+        $row = $result->fetch_assoc();
+        $line = array('nome' =>$row['nome']);
+        $lines = array();
+        array_push($lines, $line);
+        $response = array('lines' => $lines, 'type' => 'save');
+        echo json_encode($response);
+    }
 }
 
 /*

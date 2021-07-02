@@ -179,10 +179,12 @@ function getParams() {
     return {"lat": lat, "lng": lng, "title": title, "img": img};
 }
 
+
 function backToHome(){
     panel.style.display= 'none';
     count = 0;
 }
+
 
 /*
 function findVideo(){

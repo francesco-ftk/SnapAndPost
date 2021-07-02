@@ -17,9 +17,9 @@ var popups = [];
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
-            queryCoordinates();
-            //var $confirmButton = $('#confirm');
-            //$confirmButton.on('click', function(event){sendImage();});
+            //queryCoordinates();
+            var $confirmButton = $('#confirm');
+            $confirmButton.on('click', function(event){sendImage();});
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -110,15 +110,11 @@ var popups = [];
             var coordinates = data["coordinates"];
 
             if (coordinates.length > 0) {
-                $(coordinates).each(function(index, object) {
-                    //console.log("lat: " + object['lat']);
-                    var markers = L.markerClusterGroup();
-                    $(coordinates).each(function (index, object) {
-                        markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonPopup gallery' onclick=''>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
-                    });
-                    mymap.addLayer(markers);
-                    console.log("funziona tutto");
+                $(coordinates).each(function (index, object) {
+                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonPopup gallery' onclick=''>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
                 });
+                mymap.addLayer(markers);
+                console.log("funziona tutto");
             }      
 
         }
@@ -134,11 +130,18 @@ var popups = [];
                 url: options.serverURL,
                 type: "POST",
                 data: {"action" : request_type, "lat" : params.lat, "lng" : params.lng, "title" : params.title, "img": params.img},
-                //dataType: "json",
+                dataType: "json",
             });
 
-            backToHome();
+            request.done(function(data) {
+                //window.location.reload();
+                backToHome();
+            });
 
+            request.fail(
+                function(jqXHR, textStatus) {
+                    alert( "Request failed: " + textStatus );
+                });
         }
 
     }
