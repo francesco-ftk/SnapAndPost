@@ -57,13 +57,37 @@ function saveImage() {
 
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
-    // base64 image code
     $img = $_POST['img'];
     $title = $_POST['title'];
+/*
+    list($type, $img) = explode(';', $img);
+    list(, $img)      = explode(',', $img);
+
+    $bin = base64_decode($img);
+
+// Load GD resource from binary data
+    $image = imageCreateFromString($bin);
+
+// Make sure that the GD library was able to load the image
+// This is important, because you should not miss corrupted or unsupported images
+    if (!$image) {
+        die('Base64 value is not a valid image');
+    }
+
+// Specify the location where you want to save the image
+    $img_file = 'https://snapandpost.altervista.org/zz/server/prova.png';
+
+// Save the GD resource as PNG in the best possible quality (no compression)
+// This will strip any metadata or invalid contents (including, the PHP backdoor)
+// To block any possible exploits, consider increasing the compression level
+    imagepng($image, $img_file, 0);
+*/
+
     $img = str_replace('data:image/png;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
+    // echo $img;
 // create an image file
-    $fp = fopen("./image/tmp.png", "w+");
+    $fp = fopen("../Immagini/tmp.png", "w+");
 // write the data in image file
     fwrite($fp, base64_decode($img));
 // close an open file pointer
@@ -74,11 +98,18 @@ function saveImage() {
     $img = str_replace(' ', '+', $img);
     $data = base64_decode($img);
     file_put_contents('/tmp/image.png', $data);*/
+/*
+    $path = '../Immagini/duomo.jpg';
+    //$type = pathinfo($path,PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+*/
 
     $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES(?,?,?,?)';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $query = $mysqli->prepare($query_string);
-    $query->bind_param("ddbs", $lat, $lng, $fp, $title);
+    $null = NULL;
+    $query->bind_param("ddbs", $lat, $lng, $null, $title);
+    $query->send_long_data(2, file_get_contents('../Immagini/tmp.png'));
     $query->execute();
 
     $id = $mysqli->insert_id;
