@@ -134,9 +134,9 @@ var popups = [];
                 url: options.serverURL,
                 type: "POST",
                 data: {"action" : request_type, "lat" : params.lat, "lng" : params.lng, "title" : params.title, "img": params.img},
-                dataType: "json",
+                //dataType: "json",
             });
-
+/*
             request.done(function() {
                 console.log("immagine salvata");
             });
@@ -145,7 +145,7 @@ var popups = [];
                 function(jqXHR, textStatus) {
                     alert( "Request failed: " + textStatus );
                 });
-
+*/
         }
 
     }
