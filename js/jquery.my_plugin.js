@@ -20,10 +20,6 @@ var popups = [];
             queryCoordinates();
             var $confirmButton = $('#confirm');
             $confirmButton.on('click', function(event){sendImage();});
-
-            //FIXME aggiungi event-listener sui bottoni galleria
-            /*var $galleryButton = $('.gallery');
-            $galleryButton.on('click', function(event){getGallery();});*/
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -115,12 +111,18 @@ var popups = [];
 
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
-                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonPopup gallery' onclick='getCoords()'>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
+                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
                 });
                 mymap.addLayer(markers);
                 console.log("funziona tutto");
-            }      
-
+                //FIXME aggiungi event-listener sui bottoni galleria
+                var $galleryButton = $('.gallery');
+                $galleryButton.each(function () {
+                    $(this).on('click', function (event) {
+                        getGallery();
+                    })
+                });
+            }
         }
 
         function sendImage(){
@@ -157,7 +159,7 @@ var popups = [];
                 url: options.serverURL,
                 type: "POST",
                 data: {"action" : request_type, "lat" : coords.lat, "lng" : coords.lng, "title": coords.title},
-                dataType: "json",
+                dataType: "json",  // img?
             });
 
             request.done(function(data) {
