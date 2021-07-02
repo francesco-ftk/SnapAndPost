@@ -5,9 +5,9 @@ var popups = [];
 
     $.fn.createMap = function(options){
 
-        var mymap = null;
+            var mymap = null;
 
-        console.log("JQUERY: " + $);
+            console.log("JQUERY: " + $);
 
         var defaults = {
 			serverURL : "example.com/server_page_url",
@@ -17,9 +17,13 @@ var popups = [];
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
-            //queryCoordinates();
+            queryCoordinates();
             var $confirmButton = $('#confirm');
             $confirmButton.on('click', function(event){sendImage();});
+
+            //FIXME aggiungi event-listener sui bottoni galleria
+            /*var $galleryButton = $('.gallery');
+            $galleryButton.on('click', function(event){getGallery();});*/
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -111,7 +115,7 @@ var popups = [];
 
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
-                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonPopup gallery' onclick=''>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
+                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>"+"<div class='buttonPopup gallery' onclick='getCoords()'>" + "</div>" + "<p>" + object['nome'] + "</p>"+"</div>").openPopup());
                 });
                 mymap.addLayer(markers);
                 console.log("funziona tutto");
@@ -144,6 +148,28 @@ var popups = [];
                 });
         }
 
+        //FIXME funzione da chiamare su onclick gallery.
+        function getGallery() {
+            console.log('getGallery');
+            request_type = "get";
+            var coords = getCoords();
+            var request = $.ajax({
+                url: options.serverURL,
+                type: "POST",
+                data: {"action" : request_type, "lat" : coords.lat, "lng" : coords.lng, "title": coords.title},
+                dataType: "json",
+            });
+
+            request.done(function(data) {
+                showGallery(data['lines'], data['title']);
+                //console.log('prese foto');
+            });
+
+            request.fail(
+                function(jqXHR, textStatus) {
+                    alert( "Request failed: " + textStatus );
+                });
+        }
     }
 
 })(jQuery);
@@ -165,4 +191,16 @@ function check(){
     }
 }
 
-
+//FIXME funzione che prende le coord del popup aperto (per galleria)
+function getCoords() {
+    console.log('getCoords');
+    var Array= markers.getLayers();
+    for(var i=0; i<Array.length; i++){
+        if(Array[i].isPopupOpen()){
+            var x= Array[i].getLatLng();
+            return {"lat": x.lat, "lng:": x.lng, "title": x.title};
+            //break;
+        }
+    }
+    //showGallery(x.lat, x.lng, x.title);
+}

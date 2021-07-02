@@ -18,12 +18,10 @@ switch($action) {
     case "save" :
         saveImage();
     break;
-    /*
+
     case "get" :
-        //echo($action);
         getImages();
     break;
-    */
 }
 
 function getCoordinates() {
@@ -99,11 +97,37 @@ function saveImage() {
     }
 }
 
-/*
+//TODO controllare se funziona e prende immagini
 function getImages() {
-    echo "<script>console.log('ciao');</script>";
+
+    $lat = $_POST['lat'];
+    $lng = $_POST['lng'];
+    $title = $_POST['title'];
+
+    $query_string = 'SELECT immagine FROM immagini WHERE nome=?, latitudine=? and longitudine=?';
+    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+    $query = $mysqli->prepare($query_string);
+    $query->bind_param("sdd", $title,$lat, $lng);
+    $query->execute();
+
+    /*$query->store_result();
+    $query->bind_result($image);
+    $query->fetch();
+    header("Content-Type: image/jpeg");
+    echo $image;*/
+
+    $result = $query->get_result();
+
+    $lines = array();
+    while($row = $result->fetch_assoc()) {
+        $line = array("img"=> $row["immagine"]);
+        array_push($lines, $line);
+    }
+
+    $response = array('lines' => $lines, 'title' => $title, 'type' => 'save');
+    echo json_encode($response);
 }
-*/
+
 
 ?>
 
