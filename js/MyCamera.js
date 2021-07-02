@@ -27,7 +27,6 @@ function openCamera(latitudine, longitudine, nome) {
     lng = longitudine;
     title = nome;
 
-    console.log("lat: " + lat + " lon: " + lng + " title: " + title);
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be
     // calculated based on the aspect ratio of the input stream.
@@ -144,9 +143,10 @@ function takepicture() {
         context.drawImage(video, 0, 0, width, height);
         video.style.display = 'none';
         canvas.style.display = 'block';
+        video.srcObject.getTracks().forEach(function(track) {
+            track.stop();
+        });
         //img = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
-        //window.location.href = img;
-        //console.log("ok");
         openEditor();
 
         // Inserisce frame catturato in canvas e photo
