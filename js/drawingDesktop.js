@@ -7,20 +7,14 @@ var puntoInizioDisegnoY;
 var posizioneCorrenteMouseX;
 var posizioneCorrenteMouseY;
 var mouseIsDown = false;
-var controls= null;
-var snapButton= null;
-var switchCamera= null;
-var confirm1= null;
 
-function openEditor(canvas){
-    snapButton= document.getElementById('snapButton');
+function openEditor(canvas, controls, snapButton, switchCamera, confirm1){
     snapButton.style.display= 'none';
-    switchCamera= document.getElementById('switchCamera');
     switchCamera.style.display= 'none';
-    controls= document.getElementById('controls');
     controls.style.display= 'block';
-    confirm1= document.getElementById('confirm');
     confirm1.style.display= 'block';
+    var rollBack = document.getElementById('rollBack');
+    rollBack.style.backgroundImage = "url('Immagini/delete.png')";
     context=canvas.getContext('2d');
 
     /*var controlsHeight = document.getElementById("controls").offsetHeight;
