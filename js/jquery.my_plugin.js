@@ -111,7 +111,7 @@ var popups = [];
 
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
-                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='showGallery()'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
+                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='getGallery()'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
                 });
                 mymap.addLayer(markers);
                 console.log("funziona tutto");
@@ -144,7 +144,7 @@ var popups = [];
         }
 
         //FIXME funzione da chiamare su onclick gallery.
-        function getGallery(lat, lng, title) {
+        /*function getGallery() {
             console.log('getGallery');
             request_type = "get";
             //var coords = getCoords();
@@ -164,9 +164,32 @@ var popups = [];
                 function(jqXHR, textStatus) {
                     alert( "Request failed: " + textStatus );
                 });
-        }
+        }*/
     }
 
+    $.fn.getGallery = function() {
+        this.on('click', function() {
+            console.log('FUNZIONE ONCLICK');
+            request_type = "get";
+            var coords = getCoords();
+            var request = $.ajax({
+                url: options.serverURL,
+                type: "POST",
+                data: {"action" : request_type, "lat" : coords.lat, "lng" : coords.lng, "title": coords.title},
+                dataType: "json",  // img?
+            });
+
+            request.done(function(data) {
+                renderCarousel(data['lines'], data['title']);
+                //console.log('prese foto');
+            });
+
+            request.fail(
+                function(jqXHR, textStatus) {
+                    alert( "Request failed: " + textStatus );
+                });
+        })
+    }
 })(jQuery);
 
 
@@ -187,14 +210,14 @@ function check(){
 }
 
 //FIXME funzione che prende le coord del popup aperto (per galleria)
-function showGallery() {
+function getCoords() {
     console.log('getCoords');
     var Array= markers.getLayers();
     for(var i=0; i<Array.length; i++){
         if(Array[i].isPopupOpen()){
             var x= Array[i].getLatLng();
-            //return {"lat": x.lat, "lng:": x.lng, "title": x.title};
-            break;
+            return {"lat": x.lat, "lng:": x.lng, "title": x.title};
+            //break;
         }
     }
     //getGallery(x.lat, x.lng, x.title);
