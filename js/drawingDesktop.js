@@ -8,13 +8,13 @@ var posizioneCorrenteMouseX;
 var posizioneCorrenteMouseY;
 var mouseIsDown = false;
 var controls= null;
-var startbutton= null;
+var snapButton= null;
 var switchCamera= null;
 var confirm1= null;
 
 function openEditor(canvas){
-    startbutton= document.getElementById('snapButton');
-    startbutton.style.display= 'none';
+    snapButton= document.getElementById('snapButton');
+    snapButton.style.display= 'none';
     switchCamera= document.getElementById('switchCamera');
     switchCamera.style.display= 'none';
     controls= document.getElementById('controls');
