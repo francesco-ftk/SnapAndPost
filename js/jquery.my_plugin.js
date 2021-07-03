@@ -1,5 +1,6 @@
 var markers = null;
 var popups = [];
+var galleries = [];
 
 (function($){
 
@@ -111,7 +112,8 @@ var popups = [];
 
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
-                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='getGallery()'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
+                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
+                    galleries.push({"lat": object['lat'], "lng": object['lon'], "title": object['nome']});
                 });
                 mymap.addLayer(markers);
                 console.log("funziona tutto");
@@ -167,28 +169,32 @@ var popups = [];
         }*/
     }
 
-    $.fn.getGallery = function() {
-        this.on('click', function() {
-            console.log('FUNZIONE ONCLICK');
-            request_type = "get";
-            var coords = getCoords();
-            var request = $.ajax({
-                url: options.serverURL,
-                type: "POST",
-                data: {"action" : request_type, "lat" : coords.lat, "lng" : coords.lng, "title": coords.title},
-                dataType: "json",  // img?
-            });
+    $.fn.getGallery = function(options) {
+        var defaults = {
+            serverURL : "example.com/server_page_url",
+        }
+        options = $.extend(defaults, options);
 
-            request.done(function(data) {
-                renderCarousel(data['lines'], data['title']);
-                //console.log('prese foto');
-            });
 
-            request.fail(
-                function(jqXHR, textStatus) {
-                    alert( "Request failed: " + textStatus );
-                });
-        })
+        console.log('FUNZIONE ONCLICK');
+        request_type = "get";
+        var coords = getCoords();
+        var request = $.ajax({
+            url: options.serverURL,
+            type: "POST",
+            data: {"action" : request_type, "lat" : coords.lat, "lng" : coords.lng, "title": coords.title},
+            dataType: "json",  // img?
+        });
+
+        request.done(function(data) {
+            renderCarousel(data['lines'], data['title']);
+            //console.log('prese foto');
+        });
+
+        request.fail(
+            function(jqXHR, textStatus) {
+                alert( "Request failed: " + textStatus );
+            });
     }
 })(jQuery);
 
@@ -216,8 +222,13 @@ function getCoords() {
     for(var i=0; i<Array.length; i++){
         if(Array[i].isPopupOpen()){
             var x= Array[i].getLatLng();
-            return {"lat": x.lat, "lng:": x.lng, "title": x.title};
-            //break;
+            for(var j=0; j<galleries.length; j++) {
+                if (x.lat == galleries[j].lat && x.lng == galleries[j].lng) {
+                    var title = galleries[j].title;
+                    return {"lat": x.lat, "lng:": x.lng, "title": title};
+                }
+                //break;
+            }
         }
     }
     //getGallery(x.lat, x.lng, x.title);
