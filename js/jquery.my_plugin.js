@@ -111,17 +111,10 @@ var popups = [];
 
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
-                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
+                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='showGallery()'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
                 });
                 mymap.addLayer(markers);
                 console.log("funziona tutto");
-                //FIXME aggiungi event-listener sui bottoni galleria
-                var $galleryButton = $('.gallery');
-                $galleryButton.each(function () {
-                    $(this).on('click', function (event) {
-                        getGallery();
-                    })
-                });
             }
         }
 
@@ -151,19 +144,19 @@ var popups = [];
         }
 
         //FIXME funzione da chiamare su onclick gallery.
-        function getGallery() {
+        function getGallery(lat, lng, title) {
             console.log('getGallery');
             request_type = "get";
-            var coords = getCoords();
+            //var coords = getCoords();
             var request = $.ajax({
                 url: options.serverURL,
                 type: "POST",
-                data: {"action" : request_type, "lat" : coords.lat, "lng" : coords.lng, "title": coords.title},
+                data: {"action" : request_type, "lat" : lat, "lng" : lng, "title": title},
                 dataType: "json",  // img?
             });
 
             request.done(function(data) {
-                showGallery(data['lines'], data['title']);
+                renderCarousel(data['lines'], data['title']);
                 //console.log('prese foto');
             });
 
@@ -194,15 +187,15 @@ function check(){
 }
 
 //FIXME funzione che prende le coord del popup aperto (per galleria)
-function getCoords() {
+function showGallery() {
     console.log('getCoords');
     var Array= markers.getLayers();
     for(var i=0; i<Array.length; i++){
         if(Array[i].isPopupOpen()){
             var x= Array[i].getLatLng();
-            return {"lat": x.lat, "lng:": x.lng, "title": x.title};
-            //break;
+            //return {"lat": x.lat, "lng:": x.lng, "title": x.title};
+            break;
         }
     }
-    //showGallery(x.lat, x.lng, x.title);
+    //getGallery(x.lat, x.lng, x.title);
 }

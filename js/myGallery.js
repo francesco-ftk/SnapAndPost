@@ -1,5 +1,5 @@
 //FIXME è chiamata da getGallery(), dovrebbe inserire le foto nel carosello e mostrarlo
-function showGallery(lat, lng, title) {
+function renderCarousel(imgs, title) {
     //console.log('showGallery');
     console.log(title);
 
