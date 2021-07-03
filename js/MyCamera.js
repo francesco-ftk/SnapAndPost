@@ -11,7 +11,7 @@ var streaming = false;
 
 var video = null;
 var canvas = null;
-var startbutton = null;
+var snapButton = null;
 var panel = null;
 var switchCamera= null;
 var confirm= null;
@@ -41,8 +41,8 @@ function openCamera(latitudine, longitudine, nome) {
     confirm= document.getElementById('confirm');
     confirm.style.display= 'none';
 
-    startbutton= document.getElementById('startbutton');
-    startbutton.style.display= 'block';
+    snapButton= document.getElementById('snapButton');
+    snapButton.style.display= 'block';
 
     switchCamera= document.getElementById('switchCamera');
     switchCamera.style.display= 'block';
@@ -106,7 +106,7 @@ function openCamera(latitudine, longitudine, nome) {
         }
     }, false);
 
-    startbutton.addEventListener('click', function(ev){
+    snapButton.addEventListener('click', function(ev){
         if (count===0){
             takepicture();
             count++;

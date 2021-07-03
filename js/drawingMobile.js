@@ -10,7 +10,7 @@ var confirm1 = null;
 
 
 function openEditor(canvas) {
-    startbutton = document.getElementById('startbutton');
+    startbutton = document.getElementById('snapButton');
     startbutton.style.display = 'none';
     switchCamera = document.getElementById('switchCamera');
     switchCamera.style.display = 'none';

@@ -1,4 +1,6 @@
 
+
+
 /* ---- START Regole Generali ---- */
 
 * {
@@ -7,6 +9,9 @@
 }
 
 /* ---- END Regole Generali ---- */
+
+
+
 
 
 /* ---- START Regole Navbar ---- */
@@ -18,7 +23,7 @@
     top: 0px;
     right: 0px;
     left: 0px;
-    background: rgb(0, 0, 0);
+    background: #111;  /* contro contrasto eccessivo */
 }
 
 .container{
@@ -30,13 +35,17 @@
 }
 
 .siteName{
-    color: white;
+    color: #eee; /* contro contrasto eccessivo */
     display: flex;
     align-items: center;
     height: 80px;
 }
 
 /* ---- END Regole Navbar ---- */
+
+
+
+
 
 /* ---- START Stile Mappa ---- */
 
@@ -68,7 +77,7 @@
     border: 1px solid rgb(49, 48, 48);
     border-radius: 10px;
     cursor: pointer;
-    background-color:  white;
+    background-color:  #eee;
     background-size: 42px 42px;
     background-repeat: no-repeat;
     background-position: 4px 3px;
@@ -95,6 +104,10 @@
 
 /* ---- END Stile Mappa ---- */
 
+
+
+
+
 /* ---- START Stile Fotocamera ---- */
 
 #panel{
@@ -118,8 +131,6 @@
 
 #video{
     display: none;
-    /*width:320px;
-    height:240px;*/
 }
 
 #canvas{
@@ -134,7 +145,7 @@
     left: 0;
     right: 0;
     background-color: #6a6868;
-    height: 10%;
+    height: 11%;
 }
 
 .container1{
@@ -144,37 +155,36 @@
     width: 100%;
     margin: 0px 20px;
     position: relative;
-    height: 100px;
+    height: 50px;
 }
 
-#startbutton{
+#snapButton{
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #eee;
     border-style: none;
+    cursor: pointer;
+}
+
+.controlButton {
+    height: 50px;
+    width: 50px;
+    border-radius: 10%;
+    background-color: #eee;
+    border-style: none;
+    cursor: pointer;
+    background-size: 42px 42px;
+    background-repeat: no-repeat;
+    background-position: 4px 3px;
 }
 
 #rollBack {
-    height: 50px;
-    width: 50px;
-    border-radius: 10%;
-    background-color: #ff0311;
-    font-size: 20px;
-    align-content: center;
-    color: black;
-    border-style: none;
+    background-image: url(../Immagini/cancel.png);
 }
 
 #switchCamera {
-    height: 50px;
-    width: 50px;
-    border-radius: 10%;
-    background-color: #d8ff00;
-    font-size: 20px;
-    align-content: center;
-    color: black;
-    border-style: none;
+    background-image: url(../Immagini/change.png);
 }
 
 .container2 {
@@ -182,42 +192,35 @@
     align-items: center;
 }
 
-/*@media screen and (max-width: 1250px){
+@media screen and (max-height: 510px){
 
-    #canvas{
-        width: 80%;
-        left: 10%;
+    .panelControls{
+        height: 14%;
     }
 
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-height: 430px){
 
-    #canvas{
-        width: 100%;
-        top: 3%;
-        left: 0;
+    .panelControls{
+        height: 17%;
     }
 
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-height: 350px){
 
-    #canvas{
-        top: 7%;
+    .panelControls{
+        height: 20%;
     }
 
 }
-
-@media screen and (max-width: 450px){
-
-    #canvas{
-        top: 19%;
-    }
-
-}*/
 
 /* ---- END Stile Fotocamera ---- */
+
+
+
+
 
 /* ---- START Stile Editor ---- */
 
@@ -248,20 +251,11 @@
 #buttonYellow { background-color: yellow;}
 #buttonBlack { background-color: black;}
 #buttonOrange { background-color: orange;}
-
 #buttonWhite { background-color: white;}
 #bottoneCancella { background-color: black; color: white; width: auto; font-size: 20px; text-align: center; height: 25px;}
 
 #confirm {
-    height: 50px;
-    width: 50px;
-    border-radius: 10%;
-    background-color: #03ff10;
-    font-size: 20px;
-    align-content: center;
-    color: black;
-    border-style: none;
-    display: none;
+    background-image: url(../Immagini/confirm.png);
     margin-left: 6px;
 }
 
