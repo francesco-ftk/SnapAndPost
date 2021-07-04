@@ -7,7 +7,7 @@ var snapButton = null;
 var panel = null;
 var switchCamera= null;
 var confirm= null;
-var controls= null;
+var container3= null;
 var count = 0;
 var lat;
 var lng;
@@ -22,8 +22,8 @@ function openCamera(latitudine, longitudine, nome) {
     canvas = document.getElementById('canvas');
     canvas.style.display= 'none';
 
-    controls= document.getElementById('controls');
-    controls.style.display= 'none';
+    container3= document.getElementById('container3');
+    container3.style.display= 'none';
 
     confirm= document.getElementById('confirm');
     confirm.style.display= 'none';
@@ -136,7 +136,7 @@ function takepicture() {
         video.style.display = 'none';
         canvas.style.display = 'block';
         img = canvas.toDataURL('image/png');
-        openEditor(canvas, controls, snapButton, switchCamera, confirm, img);
+        openEditor(canvas, container3, snapButton, switchCamera, confirm, img);
         video.srcObject.getTracks().forEach(function(track) {
             track.stop();
         });

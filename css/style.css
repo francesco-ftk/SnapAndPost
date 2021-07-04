@@ -129,6 +129,8 @@
     width:100%;
 }
 
+/* TODO dimensione canvas e video non come panelPhoto*/
+
 #video{
     display: none;
 }
@@ -155,7 +157,7 @@
     width: 100%;
     margin: 0px 20px;
     position: relative;
-    height: 50px;
+    height: 52px;
 }
 
 #snapButton{
@@ -229,21 +231,36 @@
     height: 25px;
     border: 1px solid #000;
     float: left;
-    margin-right: 3px;
-    padding: 3px;
+    margin-right: 1px;
+    padding: 1px;
+}
+
+#container3 {
+    display: flex;
+    align-items: center;
+    order: -1;
 }
 
 #controls {
     display: none;
-    order: -1;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 3;
 }
 
+#colors {
+    background-image: url(../Immagini/paint.png);
+}
+
+/*
 #controls p{
     font-size: 20px;
     font-weight: bold;
 }
 
 .clearer {clear: both;}
+*/
 
 #buttonGreen { background-color: green;}
 #buttonBlue { background-color: blue;}
@@ -252,13 +269,19 @@
 #buttonBlack { background-color: black;}
 #buttonOrange { background-color: orange;}
 #buttonWhite { background-color: white;}
-#bottoneCancella { background-color: black; color: white; width: auto; font-size: 20px; text-align: center; height: 25px;}
+
+#bottoneCancella {
+    background-image: url(../Immagini/rubber.png);
+}
 
 #confirm {
     background-image: url(../Immagini/confirm.png);
     margin-left: 6px;
 }
 
+.show {
+    display: block;
+}
 
 /* ---- END Stile Editor ---- */
 

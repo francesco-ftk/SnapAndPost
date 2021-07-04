@@ -5,10 +5,10 @@ var larghezzaLinea = 3;
 var drawingTouchList = [];
 
 
-function openEditor(canvas, controls, snapButton, switchCamera, confirm1) {
+function openEditor(canvas, container3, snapButton, switchCamera, confirm1) {
     snapButton.style.display = 'none';
     switchCamera.style.display = 'none';
-    controls.style.display = 'block';
+    container3.style.display = 'block';
     confirm1.style.display = 'block';
     var rollBack = document.getElementById('rollBack');
     rollBack.style.backgroundImage = "url('Immagini/delete.png')";
