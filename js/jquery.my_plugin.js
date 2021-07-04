@@ -144,29 +144,6 @@ var galleries = [];
                     alert( "Request failed: " + textStatus );
                 });
         }
-
-        //FIXME funzione da chiamare su onclick gallery.
-        /*function getGallery() {
-            console.log('getGallery');
-            request_type = "get";
-            //var coords = getCoords();
-            var request = $.ajax({
-                url: options.serverURL,
-                type: "POST",
-                data: {"action" : request_type, "lat" : lat, "lng" : lng, "title": title},
-                dataType: "json",  // img?
-            });
-
-            request.done(function(data) {
-                renderCarousel(data['lines'], data['title']);
-                //console.log('prese foto');
-            });
-
-            request.fail(
-                function(jqXHR, textStatus) {
-                    alert( "Request failed: " + textStatus );
-                });
-        }*/
     }
 
     $.fn.getGallery = function(options) {
