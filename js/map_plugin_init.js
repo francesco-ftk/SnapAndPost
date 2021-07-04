@@ -14,7 +14,6 @@ $(document).ready(function() {
     }
 
     jQuery("#mapid").createMap({serverURL : "server/actions.php"});
-    //jQuery(this).getGallery({serverURL : "server/actions.php"});
 });
 
 function loadjsfile(filename, filetype){
