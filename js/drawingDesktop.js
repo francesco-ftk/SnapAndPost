@@ -8,7 +8,7 @@ var posizioneCorrenteMouseX;
 var posizioneCorrenteMouseY;
 var mouseIsDown = false;
 
-function openEditor(canvas, controls, snapButton, switchCamera, confirm1){
+function openEditor(canvas, controls, snapButton, switchCamera, confirm1, img){
     snapButton.style.display= 'none';
     switchCamera.style.display= 'none';
     controls.style.display= 'block';
@@ -17,15 +17,10 @@ function openEditor(canvas, controls, snapButton, switchCamera, confirm1){
     rollBack.style.backgroundImage = "url('Immagini/delete.png')";
     context=canvas.getContext('2d');
 
-    /*var controlsHeight = document.getElementById("controls").offsetHeight;
-    canvas.width = window.innerWidth;  // vario altezza e larghezza del canvas con javascript
-    canvas.height = window.innerHeight - controlsHeight - 20;*/
-
     [].forEach.call(
         // Elementi su cui iterare e funzione da applicare su di essi
         document.querySelectorAll('.bottone'),
         function(el){
-            console.log(el);
             el.addEventListener('click', function(){
                 var id = this.id;
                 var colore = id.match(/[A-Z][a-z]+/g);
@@ -66,14 +61,15 @@ function selezionaColore(obj){
 }
 
 function cancella(){
-    var finestraConferma = confirm('Vuoi davvero cancellare?');
-    if(finestraConferma) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    }
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    var image = new Image();
+    image.onload = function() {
+        context.drawImage(image,0,0,canvas.width,canvas.height);
+    };
+    image.src = img;
 }
 
 function calcolaCordinate(e){
-    console.log(e.type);
 
     switch(e.type){
         case 'mousemove' :

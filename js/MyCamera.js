@@ -135,8 +135,8 @@ function takepicture() {
         context.drawImage(video, 0, 0, width, height);
         video.style.display = 'none';
         canvas.style.display = 'block';
-        //img = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream");
-        openEditor(canvas, controls, snapButton, switchCamera, confirm);
+        img = canvas.toDataURL('image/png');
+        openEditor(canvas, controls, snapButton, switchCamera, confirm, img);
         video.srcObject.getTracks().forEach(function(track) {
             track.stop();
         });

@@ -19,7 +19,6 @@ function openEditor(canvas, controls, snapButton, switchCamera, confirm1) {
         function (el) {
             el.addEventListener('click', function () {
                 var id = this.id;
-                console.log(el);
                 var colore = id.match(/[A-Z][a-z]+/g);
                 if (id === 'bottoneCancella') {
                     cancella();
@@ -50,12 +49,10 @@ function selezionaColore(obj) {
 }
 
 function calcolaCoordinate(e) {
-    console.log(e);
 
     switch (e.type) {
         case 'touchmove':
             var touches = e.changedTouches
-            console.log("mousemove");
             for (var i = 0; i < touches.length; i++) {
                 var instance;
                 for (var j = 0; j < drawingTouchList.length; j++) {
@@ -74,12 +71,6 @@ function calcolaCoordinate(e) {
         case 'touchstart':
             var touches = e.changedTouches
             for (var i = 0; i < touches.length; i++) {
-//                console.log("mousedown");
-//
-//                console.log("mouseout");
-//                posizioneCorrenteMouseX = touches[i].clientX;
-//                posizioneCorrenteMouseY = touches[i].clientY;
-
                 var identifier = touches[i].identifier;
                 var touchX = touches[i].pageX;
                 var touchY = touches[i].pageY;
@@ -94,15 +85,10 @@ function calcolaCoordinate(e) {
                 for (var y = 0; y < drawingTouchList.length; y++) {
                     if (drawingTouchList[y].identifier == touches[x].identifier) {
                         drawingTouchList.splice(x, 1);
-                        console.log("remove")
                     }
                 }
             }
             break;
-//        case 'mouseout':
-//            console.log("mouseout");
-//            mouseIsDown = false;
-//        break;
         default:
             console.log("no mouse event");
     }
@@ -121,10 +107,12 @@ function disegna(puntoInizioDisegnoX, puntoInizioDisegnoY, posizioneCorrenteMous
 }
 
 function cancella() {
-    var finestraConferma = confirm('Vuoi davvero cancellare?');
-    if (finestraConferma) {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    }
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    var image = new Image();
+    image.onload = function() {
+        context.drawImage(image,0,0,canvas.width,canvas.height);
+    };
+    image.src = img;
 }
 
 function DrawingTouch(identifier, puntoInizioDisegnoX, puntoInizioDisegnoY) {
