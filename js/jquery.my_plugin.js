@@ -110,7 +110,6 @@ var markers = null;
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
                     markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
-                    galleries.push({"lat": object['lat'], "lng": object['lon'], "title": object['nome']});
                 });
                 mymap.addLayer(markers);
                 console.log("funziona tutto");
