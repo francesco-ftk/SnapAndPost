@@ -1,6 +1,4 @@
 var markers = null;
-var popups = [];
-var galleries = [];
 
 (function($){
 
@@ -75,8 +73,7 @@ var galleries = [];
                     var pages = response.query.geosearch;
                     for (var place in pages) {
                         //console.log(pages[place].title);
-                        popups.push({"lat": pages[place].lat, "lng": pages[place].lon, "title": pages[place].title});
-                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>"+"<div class='buttonPopup camera' onclick='check()'>" + "</div>" + "<p>" + pages[place].title + "</p>"+"</div>").openPopup());  //" " + pages[place].lat + " " + pages[place].lon + +  " - " + pages[place].dist + "m" +
+                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>"+"<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "</p>"+"</div>").openPopup());  //" " + pages[place].lat + " " + pages[place].lon + +  " - " + pages[place].dist + "m" +
                     }
                     mymap.addLayer(markers);
 
@@ -124,9 +121,6 @@ var galleries = [];
             var params = getParams();
             console.log("saveImage");
             request_type = "save";
-            //var $canvas = $('#canvas');
-            //var edited = params.canvas.toDataURL('image/png');
-            //window.location.href = edited;
             var request = $.ajax({
                 url: options.serverURL,
                 type: "POST",
@@ -155,7 +149,7 @@ var galleries = [];
 
         console.log('FUNZIONE ONCLICK');
         request_type = "get";
-        var coords = getCoords();
+        var coords = getActivePopupInfo();
         var request = $.ajax({
             url: options.serverURL,
             type: "POST",
@@ -175,38 +169,16 @@ var galleries = [];
     }
 })(jQuery);
 
-
-function check(){
-    var Array= markers.getLayers();
-    for(var i=0; i<Array.length; i++){
-        if(Array[i].isPopupOpen()){
-            var x= Array[i].getLatLng();
-            for(var j=0; j<popups.length; j++) {
-                if(x.lat === popups[j].lat && x.lng === popups[j].lng) {
-                    var title=popups[j].title;
-                    break;
-                }
-            }
-            openCamera(x.lat, x.lng, title);
-        }
-    }
-}
-
-//FIXME funzione che prende le coord del popup aperto (per galleria)
-function getCoords() {
+function getActivePopupInfo() {
     console.log('getCoords');
     var Array= markers.getLayers();
     for(var i=0; i<Array.length; i++){
         if(Array[i].isPopupOpen()){
             var x= Array[i].getLatLng();
-            for(var j=0; j<galleries.length; j++) {
-                if (x.lat == galleries[j].lat && x.lng == galleries[j].lng) {
-                    var title = galleries[j].title;
-                    return {"lat": x.lat, "lng:": x.lng, "title": title};
-                }
-                //break;
-            }
+            var title = Array[i].getPopup().getContent();
+            title = title.split("<p>");
+            title = title[1].split("</p>");
+            return {"lat": x.lat, "lng": x.lng, "title": title[0]};
         }
     }
-    //getGallery(x.lat, x.lng, x.title);
 }

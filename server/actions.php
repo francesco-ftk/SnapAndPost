@@ -104,7 +104,7 @@ function getImages() {
     $lng = $_POST['lng'];
     $title = $_POST['title'];
 
-    $query_string = 'SELECT immagine FROM immagini WHERE nome=?, latitudine=? and longitudine=?';
+    $query_string = 'SELECT immagine FROM immagini WHERE nome=? and latitudine=? and longitudine=?';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $query = $mysqli->prepare($query_string);
     $query->bind_param("sdd", $title,$lat, $lng);

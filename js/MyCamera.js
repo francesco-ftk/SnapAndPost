@@ -14,10 +14,11 @@ var lng;
 var title;
 var img;
 
-function openCamera(latitudine, longitudine, nome) {
-    lat = latitudine;
-    lng = longitudine;
-    title = nome;
+function openCamera() {
+    var tmp = getActivePopupInfo();
+    lat = tmp.lat;
+    lng = tmp.lng;
+    title = tmp.title;
 
     canvas = document.getElementById('canvas');
     canvas.style.display= 'none';
@@ -161,7 +162,7 @@ function closeCamera(){
         count = 0;
         var rollBack = document.getElementById('rollBack');
         rollBack.style.backgroundImage = "url('Immagini/cancel.png')";
-        openCamera(lat, lng, title);
+        openCamera();
     }
 }
 
