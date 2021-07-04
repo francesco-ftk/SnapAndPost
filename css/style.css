@@ -182,7 +182,7 @@
 }
 
 #rollBack {
-    background-image: url(../Immagini/cancel.png);
+    background-image: url(../Immagini/back.png);
 }
 
 #switchCamera {
@@ -227,12 +227,11 @@
 /* ---- START Stile Editor ---- */
 
 .bottone {
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
     border: 1px solid #000;
     float: left;
-    margin-right: 1px;
-    padding: 1px;
+    margin-right: 3px;
 }
 
 #container3 {
@@ -241,26 +240,20 @@
     order: -1;
 }
 
-#controls {
+.dropdown {
     display: none;
     position: absolute;
-    top:0;
-    left:0;
-    z-index: 3;
+    top: -50px;
+    z-index: 1;
+    padding: 5px;
+    border-radius: 5%;
+    background-color: #6a6868;
+    border: 1px solid #000;
 }
 
 #colors {
-    background-image: url(../Immagini/paint.png);
+    background-image: url(../Immagini/matita.png);
 }
-
-/*
-#controls p{
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.clearer {clear: both;}
-*/
 
 #buttonGreen { background-color: green;}
 #buttonBlue { background-color: blue;}
@@ -271,7 +264,7 @@
 #buttonWhite { background-color: white;}
 
 #bottoneCancella {
-    background-image: url(../Immagini/rubber.png);
+    background-image: url(../Immagini/cancel.png);
 }
 
 #confirm {
@@ -281,6 +274,20 @@
 
 .show {
     display: block;
+}
+
+@media screen and (max-width: 440px){
+
+    .bottone{
+        width: 20px;
+        height: 20px;
+        margin-right: 2px;
+    }
+
+    .dropdown {
+        top: -43px;
+    }
+
 }
 
 /* ---- END Stile Editor ---- */

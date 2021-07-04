@@ -161,7 +161,7 @@ function closeCamera(){
     } else {
         count = 0;
         var rollBack = document.getElementById('rollBack');
-        rollBack.style.backgroundImage = "url('Immagini/cancel.png')";
+        rollBack.style.backgroundImage = "url('Immagini/back.png')";
         openCamera();
     }
 }

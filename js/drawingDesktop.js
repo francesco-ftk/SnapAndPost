@@ -24,16 +24,7 @@ function openEditor(canvas, container3, snapButton, switchCamera, confirm1, img)
             el.addEventListener('click', function(){
                 var id = this.id;
                 var colore = id.match(/[A-Z][a-z]+/g);
-
-                if (id == "bottoneCancella"){
-                    cancella();
-                } else {
-                    selezionaColore(
-                        {
-                            colore: colore[0].toLowerCase()  // json
-                        }
-                    )
-                }
+                selezionaColore({ colore: colore[0].toLowerCase() })
             });
         }
     );

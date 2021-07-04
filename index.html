@@ -32,53 +32,50 @@
     <script type="text/javascript" src="js/Dropdown.js"></script>
 </head>
 <body>
-<nav class="navbar">
-    <div class="container">
-        <h1 class="siteName">
-            Snap&Post
-        </h1>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="siteName">
+                Snap&Post
+            </h1>
+        </div>
+        </div>
+    </nav>
+
+    <div class="main">
+        <div id="mapid"></div>
     </div>
-    </div>
-</nav>
-
-<div class="main">
-    <div id="mapid"></div>
-</div>
 
 
-<div id="panel">
+    <div id="panel">
         <div id="panelPhoto">
             <video id="video">Video stream not available.</video>
             <canvas id="canvas" tabindex="0"></canvas>
         </div>
 
-    <div id="navbarControls" class="panelControls">  <!-- Fixme id navbarControls mai usato -->
-        <div class="container1">
-            <button id="switchCamera" class="controlButton" onclick=""></button>
-            <button id="snapButton"></button>
-            <div class="container2">
-                <button id="rollBack" class="controlButton" onclick="closeCamera()"></button>
-                <button id="confirm" class="controlButton"></button>
-            </div>
-            <div id="container3">
-                <button id="colors" class="controlButton" onclick="openDown()"></button>
-                <button id="bottoneCancella" class="controlButton"></button>
-            </div>
-            <div id="controls" class="dropdown">
-                <!--<p>Scegli il colore</p>-->
-                <div id="buttonGreen" class="bottone"></div>
-                <div id="buttonBlue" class="bottone"></div>
-                <div id="buttonRed" class="bottone"></div>
-                <div id="buttonYellow" class="bottone"></div>
-                <div id="buttonOrange" class="bottone"></div>
-                <div id="buttonBlack" class="bottone"></div>
-                <div id="buttonWhite" class="bottone"></div>
-                <!--<div id="bottoneCancella" class="bottone">Cancella tutto</div>-->
-                <!--<br class="clearer" />-->
+        <div class="panelControls">
+            <div class="container1">
+                <button id="switchCamera" class="controlButton" onclick=""></button>
+                <button id="snapButton"></button>
+                <div class="container2">
+                    <button id="rollBack" class="controlButton" onclick="closeCamera()"></button>
+                    <button id="confirm" class="controlButton"></button>
+                </div>
+                <div id="container3">
+                    <button id="colors" class="controlButton click" onclick="openDown()"></button>
+                    <button id="bottoneCancella" class="controlButton" onclick="cancella()"></button>
+                </div>
+                <div id="controls" class="dropdown">
+                    <div id="buttonGreen" class="bottone"></div>
+                    <div id="buttonBlue" class="bottone"></div>
+                    <div id="buttonRed" class="bottone"></div>
+                    <div id="buttonYellow" class="bottone"></div>
+                    <div id="buttonOrange" class="bottone"></div>
+                    <div id="buttonBlack" class="bottone"></div>
+                    <div id="buttonWhite" class="bottone"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
 </html>
