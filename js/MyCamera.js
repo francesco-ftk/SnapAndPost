@@ -51,7 +51,7 @@ function openCamera() {
 
     var constraints = {
         audio: false,
-        video: { "facingMode": {exact: "user"}}
+        video: { "facingMode": 'user'}
     }
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         constraints = flipCamera();
@@ -185,14 +185,14 @@ function flipCamera(){
     if(a==0){
         var constraints = {
             audio: false,
-            video: { "facingMode":  {exact: "environment"} }
+            video: { "facingMode":  'environment' }
         }
         a=1;
     }
     else {
         var constraints = {
             audio: false,
-            video: { "facingMode": {exact: "user"} }
+            video: { "facingMode": 'user' }
         }
         a=0;
     }
