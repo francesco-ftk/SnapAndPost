@@ -107,17 +107,19 @@ var markers = null;
         function addMonumentsMarker(data) {
             console.log("addMonumentsMarker");
             var coordinates = data["coordinates"];
-            var Array = markers.getLayers();
-            var popups = getPopups();
+            var Array2 = markers.getLayers();
+            var camerap = getCameraPopups();
             var replace = false;
+            var A = [];
 
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
                     replace = false;
-                    for(var i=0;i<popups.length;i++) {
-                        if(object['lat'] === popups[i].lat && object['lon']===popups[i].lng && object['nome']===popups[i].title) {
+                    for(var i=0;i<camerap.length;i++) {
+                        if(object['lat'] === camerap[i].lat && object['lon']===camerap[i].lng && object['nome']===camerap[i].title) {
                             replace = true;
-                            markers.removeLayer(Array[i]);
+                            A.push(Array2[i]);
+                            markers.removeLayer(A);
                             markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='flexContainerButtons'><div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div></div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
                             break;
                         }
@@ -197,16 +199,17 @@ function getActivePopupInfo() {
     }
 }
 
-function getPopups() {
-    console.log('getCoords');
-    var popups = [];
-    var Array = markers.getLayers();
-    for(var i=0; i<Array.length; i++){
-        var x= Array[i].getLatLng();
-        var title = Array[i].getPopup().getContent();
+function getCameraPopups() {
+    var cameraPopups = [];
+    var Array1 = markers.getLayers();
+    var x= null;
+    var title = null;
+    for(var i=0; i<Array1.length; i++){
+        x= Array1[i].getLatLng();
+        title = Array1[i].getPopup().getContent();
         title = title.split("<p>");
         title = title[1].split("</p>");
-        popups.push({"lat": x.lat, "lng": x.lng, "title": title[0]});
+        cameraPopups.push({"lat": x.lat, "lng": x.lng, "title": title[0]});
     }
-    return popups;
+    return cameraPopups;
 }
