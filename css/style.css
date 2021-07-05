@@ -157,7 +157,6 @@
     width: 100%;
     margin: 0px 20px;
     position: relative;
-    height: 52px;
 }
 
 #snapButton{
@@ -230,12 +229,12 @@
     width: 28px;
     height: 28px;
     border: 1px solid #000;
-    float: left;
     margin-right: 3px;
+    border-radius: 20%;
 }
 
 #container3 {
-    display: flex;
+    display: none;
     align-items: center;
     order: -1;
 }
@@ -265,6 +264,7 @@
 
 #bottoneCancella {
     background-image: url(../Immagini/cancel.png);
+    margin-left: 6px;
 }
 
 #confirm {
@@ -273,14 +273,15 @@
 }
 
 .show {
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 @media screen and (max-width: 440px){
 
     .bottone{
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
         margin-right: 2px;
     }
 
