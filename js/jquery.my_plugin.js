@@ -1,6 +1,4 @@
 var markers = null;
-//var popups = [];
-//var IDs = [];
 
 (function ($) {
 
@@ -82,9 +80,7 @@ var markers = null;
                     for (var place in pages) {
                         //console.log(pages[place].title);
                         markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "</p>" + "</div>").openPopup());  //" " + pages[place].lat + " " + pages[place].lon + +  " - " + pages[place].dist + "m" +
-                        //popups.push({"lat": pages[place].lat, "lng": pages[place].lon, "title": pages[place].title});
                     }
-                    //mymap.addLayer(markers);
                     queryCoordinates();
 
                 })
@@ -141,7 +137,6 @@ var markers = null;
                                 }
                             }
                             markers2.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='flexContainerButtons'><div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div></div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup())
-                            //Array[i].getPopup().setContent("<div class='popup'>" + "<div class='flexContainerButtons'><div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div></div>" + "<p>" + object['nome'] + "</p>" + "</div>");
                             break;
                         }
                     }
@@ -200,12 +195,11 @@ var markers = null;
                 url: options.serverURL,
                 type: "POST",
                 data: {"action": request_type, "lat": coords.lat, "lng": coords.lng, "title": coords.title},
-                dataType: "json",  // img?
+                dataType: "json",  // TODO img?
             });
 
             request.done(function (data) {
                 renderCarousel(data['lines'], data['title']);
-                //console.log('prese foto');
             });
 
             request.fail(
@@ -232,7 +226,6 @@ function getActivePopupInfo() {
 
 function getCameraPopups(Array) {
     var cameraPopups = [];
-    //var Array = markers.getLayers();
     var x = null;
     var title = null;
     for (var i = 0; i < Array.length; i++) {
