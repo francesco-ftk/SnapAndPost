@@ -280,13 +280,13 @@
 @media screen and (max-width: 440px){
 
     .bottone{
-        width: 22px;
-        height: 22px;
+        width: 24px;
+        height: 24px;
         margin-right: 2px;
     }
 
     .dropdown {
-        top: -43px;
+        top: -45px;
     }
 
 }
