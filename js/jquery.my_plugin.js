@@ -84,6 +84,7 @@ var markers = null;
         function queryCoordinates(){
             console.log("queryCoordinates")
             request_type = "load";
+
 				
             var request = $.ajax({
                 url: options.serverURL,
@@ -106,10 +107,24 @@ var markers = null;
         function addMonumentsMarker(data) {
             console.log("addMonumentsMarker");
             var coordinates = data["coordinates"];
+            var Array = markers.getLayers();
+            var popups = getPopups();
+            var replace = false;
 
             if (coordinates.length > 0) {
                 $(coordinates).each(function (index, object) {
-                    markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
+                    replace = false;
+                    for(var i=0;i<popups.length;i++) {
+                        if(object['lat'] === popups[i].lat && object['lon']===popups[i].lng && object['nome']===popups[i].title) {
+                            replace = true;
+                            markers.removeLayer(Array[i]);
+                            markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='flexContainerButtons'><div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div></div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
+                            break;
+                        }
+                    }
+                    if(!replace) {
+                        markers.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
+                    }
                 });
                 mymap.addLayer(markers);
                 console.log("funziona tutto");
@@ -180,4 +195,18 @@ function getActivePopupInfo() {
             return {"lat": x.lat, "lng": x.lng, "title": title[0]};
         }
     }
+}
+
+function getPopups() {
+    console.log('getCoords');
+    var popups = [];
+    var Array = markers.getLayers();
+    for(var i=0; i<Array.length; i++){
+        var x= Array[i].getLatLng();
+        var title = Array[i].getPopup().getContent();
+        title = title.split("<p>");
+        title = title[1].split("</p>");
+        popups.push({"lat": x.lat, "lng": x.lng, "title": title[0]});
+    }
+    return popups;
 }

@@ -97,6 +97,12 @@
     align-items: center;
 }
 
+.flexContainerButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .popup p{
     font-size: 0.9rem;
     text-align: center;
