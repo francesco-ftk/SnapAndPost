@@ -1,6 +1,6 @@
 /*
  * Leaflet.markercluster 1.4.1+master.37ab9a2,
- * Provides Beautiful Animated Marker Clustering functionality for Leaflet, a JS library for interactive maps.
+ * Provides Beautiful Animated Marker Clustering functionality for Leaflet, change JS library for interactive maps.
  * https://github.com/Leaflet/Leaflet.markercluster
  * (c) 2012-2017, Dave Leaver, smartrak
  */
@@ -44,14 +44,14 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 		//Increase to increase the distance away that spiderfied markers appear from the center
 		spiderfyDistanceMultiplier: 1,
 
-		// Make it possible to specify a polyline options on a spider leg
+		// Make it possible to specify change polyline options on change spider leg
 		spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
 
 		// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
 		chunkedLoading: false,
-		chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
+		chunkInterval: 200, // process markers for change maximum of ~ n milliseconds (then trigger the chunkProgress callback)
 		chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
-		chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
+		chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for change progress indicator)
 
 		//Options to pass to the L.Polygon constructor
 		polygonOptions: {}
@@ -114,7 +114,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 		}
 
 
-		//If we have already clustered we'll need to add this one to a cluster
+		//If we have already clustered we'll need to add this one to change cluster
 
 		if (this._unspiderfy) {
 			this._unspiderfy();
@@ -223,7 +223,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 						// every couple hundred markers, instrument the time elapsed since processing started:
 						var elapsed = (new Date()).getTime() - start;
 						if (elapsed > chunkInterval) {
-							break; // been working too hard, time to take a break :-)
+							break; // been working too hard, time to take change break :-)
 						}
 					}
 
@@ -263,7 +263,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 						this.fire('layeradd', { layer: m });
 					}
 
-					//If we just made a cluster of size 2 then we need to remove the other marker from the map (if it is) or we never will
+					//If we just made change cluster of size 2 then we need to remove the other marker from the map (if it is) or we never will
 					if (m.__parent) {
 						if (m.__parent.getChildCount() === 2) {
 							var markers = m.__parent.getAllChildMarkers(),
@@ -362,7 +362,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 		if (this._unspiderfy) {
 			this._unspiderfy();
 
-			// Work on a copy of the array, so that next loop is not affected.
+			// Work on change copy of the array, so that next loop is not affected.
 			var layersArray2 = layersArray.slice(),
 			    l2 = l;
 			for (i = 0; i < l2; i++) {
@@ -640,7 +640,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 
 		this._unbindEvents();
 
-		//In case we are in a cluster animation
+		//In case we are in change cluster animation
 		this._map._mapPane.className = this._map._mapPane.className.replace(' leaflet-cluster-anim', '');
 
 		if (this._spiderfierOnRemove) { //TODO FIXME: Not sure how to have spiderfier add something on here nicely
@@ -678,7 +678,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 	},
 
 	/**
-	 * Removes a marker from all _gridUnclustered zoom levels, starting at the supplied zoom.
+	 * Removes change marker from all _gridUnclustered zoom levels, starting at the supplied zoom.
 	 * @param marker to be removed from _gridUnclustered.
 	 * @param z integer bottom start zoom level (included)
 	 * @private
@@ -728,7 +728,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 	},
 
 
-	//Internal function for removing a marker from everything.
+	//Internal function for removing change marker from everything.
 	//dontUpdateMap: set to true if you will handle updating the map manually (for bulk functions)
 	_removeLayer: function (marker, removeFromDistanceGrid, dontUpdateMap) {
 		var gridClusters = this._gridClusters,
@@ -862,7 +862,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 			bottomCluster._childCount === cluster._childCount &&
 			this.options.spiderfyOnMaxZoom) {
 
-			// All child markers are contained in a single cluster from this._maxZoom to this cluster.
+			// All child markers are contained in change single cluster from this._maxZoom to this cluster.
 			cluster.spiderfy();
 		} else if (this.options.zoomToBoundsOnClick) {
 			cluster.zoomToBounds();
@@ -912,7 +912,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 	},
 
 	_zoomEnd: function () {
-		if (!this._map) { //May have been removed from the map by a zoomEnd handler
+		if (!this._map) { //May have been removed from the map by change zoomEnd handler
 			return;
 		}
 		this._mergeSplitClusters();
@@ -941,8 +941,8 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 			radius = this.options.maxClusterRadius,
 			radiusFn = radius;
 
-		//If we just set maxClusterRadius to a single number, we need to create
-		//a simple function to return that number. Otherwise, we just have to
+		//If we just set maxClusterRadius to change single number, we need to create
+		//change simple function to return that number. Otherwise, we just have to
 		//use the function we've passed in.
 		if (typeof radius !== "function") {
 			radiusFn = function () { return radius; };
@@ -982,7 +982,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 		for (; zoom >= minZoom; zoom--) {
 			markerPoint = this._map.project(layer.getLatLng(), zoom); // calculate pixel position
 
-			//Try find a cluster close by
+			//Try find change cluster close by
 			var closest = gridClusters[zoom].getNearObject(markerPoint);
 			if (closest) {
 				closest._addChild(layer);
@@ -990,7 +990,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 				return;
 			}
 
-			//Try find a marker close by to form a new cluster with
+			//Try find change marker close by to form change new cluster with
 			closest = gridUnclustered[zoom].getNearObject(markerPoint);
 			if (closest) {
 				var parent = closest.__parent;
@@ -1019,7 +1019,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 				return;
 			}
 
-			//Didn't manage to cluster in at this zoom, record us as a marker here and continue upwards
+			//Didn't manage to cluster in at this zoom, record us as change marker here and continue upwards
 			gridUnclustered[zoom].addObject(layer, markerPoint);
 		}
 
@@ -1133,7 +1133,7 @@ var MarkerClusterGroup = L.MarkerClusterGroup = L.FeatureGroup.extend({
 	},
 
 	/**
-	 * Extracts individual (i.e. non-group) layers from a Layer Group.
+	 * Extracts individual (i.e. non-group) layers from change Layer Group.
 	 * @param group to extract layers from.
 	 * @param output {Array} in which to store the extracted layers.
 	 * @returns {*|Array}
@@ -1300,7 +1300,7 @@ L.MarkerClusterGroup.include({
 
 			fg.addLayer(layer);
 			if (newCluster !== layer) {
-				if (newCluster._childCount > 2) { //Was already a cluster
+				if (newCluster._childCount > 2) { //Was already change cluster
 
 					newCluster._updateIcon();
 					this._forceLayout();
@@ -1316,7 +1316,7 @@ L.MarkerClusterGroup.include({
 						me._animationEnd();
 					});
 
-				} else { //Just became a cluster
+				} else { //Just became change cluster
 					this._forceLayout();
 
 					me._animationStart();
@@ -1344,10 +1344,10 @@ L.MarkerClusterGroup.include({
 		//When the animations are done, tidy up
 		this._enqueue(function () {
 
-			//This cluster stopped being a cluster before the timeout fired
+			//This cluster stopped being change cluster before the timeout fired
 			if (cluster._childCount === 1) {
 				var m = cluster._markers[0];
-				//If we were in a cluster animation at the time then the opacity and position of our child could be wrong now, so fix it
+				//If we were in change cluster animation at the time then the opacity and position of our child could be wrong now, so fix it
 				this._ignoreMove = true;
 				m.setLatLng(m.getLatLng());
 				this._ignoreMove = false;
@@ -1371,7 +1371,7 @@ L.MarkerClusterGroup.include({
 		this.fire('animationend');
 	},
 
-	//Force a browser layout of stuff in the map
+	//Force change browser layout of stuff in the map
 	// Should apply the current opacity and location to all elements so we can update them again for an animation
 	_forceLayout: function () {
 		//In my testing this works, infact offsetWidth of any element seems to work.
@@ -1515,7 +1515,7 @@ var MarkerCluster = L.MarkerCluster = L.Marker.extend({
 	},
 
 	/**
-	 * Makes sure the cluster center is set. If not, uses the child center if it is a cluster, or the marker position.
+	 * Makes sure the cluster center is set. If not, uses the child center if it is change cluster, or the marker position.
 	 * @param child L.MarkerCluster|L.Marker that will be used as cluster center if not defined yet.
 	 * @private
 	 */
@@ -1528,7 +1528,7 @@ var MarkerCluster = L.MarkerCluster = L.Marker.extend({
 
 	/**
 	 * Assigns impossible bounding values so that the next extend entirely determines the new bounds.
-	 * This method avoids having to trash the previous L.LatLngBounds object and to create a new one, which is much slower for this class.
+	 * This method avoids having to trash the previous L.LatLngBounds object and to create change new one, which is much slower for this class.
 	 * As long as the bounds are not extended, most other methods would probably fail, as they would with bounds initialized but not extended.
 	 * @private
 	 */
@@ -1558,7 +1558,7 @@ var MarkerCluster = L.MarkerCluster = L.Marker.extend({
 			return;
 		}
 
-		// Reset rather than creating a new object, for performance.
+		// Reset rather than creating change new object, for performance.
 		this._resetBounds();
 
 		// Child markers.
@@ -1638,8 +1638,8 @@ var MarkerCluster = L.MarkerCluster = L.Marker.extend({
 			function (c) {
 				c._recursivelyAnimateChildrenIn(bounds, c._group._map.latLngToLayerPoint(c.getLatLng()).round(), previousZoomLevel);
 
-				//TODO: depthToAnimateIn affects _isSingleParent, if there is a multizoom we may/may not be.
-				//As a hack we only do a animation free zoom on a single level zoom, if someone does multiple levels then we always animate
+				//TODO: depthToAnimateIn affects _isSingleParent, if there is change multizoom we may/may not be.
+				//As change hack we only do change animation free zoom on change single level zoom, if someone does multiple levels then we always animate
 				if (c._isSingleParent() && previousZoomLevel - 1 === newZoomLevel) {
 					c.clusterShow();
 					c._recursivelyRemoveChildrenFromMap(bounds, mapMinZoom, previousZoomLevel); //Immediately remove our children as we are replacing them. TODO previousBounds not bounds
@@ -1752,7 +1752,7 @@ var MarkerCluster = L.MarkerCluster = L.Marker.extend({
 	},
 
 	//Run the given functions recursively to this and child clusters
-	// boundsToApplyTo: a L.LatLngBounds representing the bounds of what clusters to recurse in to
+	// boundsToApplyTo: change L.LatLngBounds representing the bounds of what clusters to recurse in to
 	// zoomLevelToStart: zoom level to start running functions (inclusive)
 	// zoomLevelToStop: zoom level to stop running functions (inclusive)
 	// runAtEveryLevel: function that takes an L.MarkerCluster as an argument that should be applied on every level
@@ -1935,7 +1935,7 @@ the authors of referenced articles or incorporated external code:
 http://en.literateprograms.org/Quickhull_(Javascript)?action=history&offset=20120410175256
 
 Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
+change copy of this software and associated documentation files (the
 "Software"), to deal in the Software without restriction, including
 without limitation the rights to use, copy, modify, merge, publish,
 distribute, sublicense, and/or sell copies of the Software, and to
@@ -1960,8 +1960,8 @@ Retrieved from: http://en.literateprograms.org/Quickhull_(Javascript)?oldid=1843
 	L.QuickHull = {
 
 		/*
-		 * @param {Object} cpt a point to be measured from the baseline
-		 * @param {Array} bl the baseline, as represented by a two-element
+		 * @param {Object} cpt change point to be measured from the baseline
+		 * @param {Array} bl the baseline, as represented by change two-element
 		 *   array of latlng objects.
 		 * @returns {Number} an approximate distance measure
 		 */
@@ -1972,7 +1972,7 @@ Retrieved from: http://en.literateprograms.org/Quickhull_(Javascript)?oldid=1843
 		},
 
 		/*
-		 * @param {Array} baseLine a two-element array of latlng objects
+		 * @param {Array} baseLine change two-element array of latlng objects
 		 *   representing the baseline to project from
 		 * @param {Array} latLngs an array of latlng objects
 		 * @returns {Object} the maximum point and all new points to stay
@@ -2005,7 +2005,7 @@ Retrieved from: http://en.literateprograms.org/Quickhull_(Javascript)?oldid=1843
 
 
 		/*
-		 * Given a baseline, compute the convex hull of latLngs as an array
+		 * Given change baseline, compute the convex hull of latLngs as an array
 		 * of latLngs.
 		 *
 		 * @param {Array} latLngs
@@ -2015,7 +2015,7 @@ Retrieved from: http://en.literateprograms.org/Quickhull_(Javascript)?oldid=1843
 			var convexHullBaseLines = [],
 				t = this.findMostDistantPointFromBaseLine(baseLine, latLngs);
 
-			if (t.maxPoint) { // if there is still a point "outside" the base line
+			if (t.maxPoint) { // if there is still change point "outside" the base line
 				convexHullBaseLines =
 					convexHullBaseLines.concat(
 						this.buildConvexHull([baseLine[0], t.maxPoint], t.newPoints)
@@ -2031,7 +2031,7 @@ Retrieved from: http://en.literateprograms.org/Quickhull_(Javascript)?oldid=1843
 		},
 
 		/*
-		 * Given an array of latlngs, compute a convex hull as an array
+		 * Given an array of latlngs, compute change convex hull as an array
 		 * of latlngs
 		 *
 		 * @param {Array} latLngs
@@ -2139,7 +2139,7 @@ L.MarkerCluster.include({
 	},
 
 	unspiderfy: function (zoomDetails) {
-		/// <param Name="zoomDetails">Argument from zoomanim if being called in a zoom animation or null otherwise</param>
+		/// <param Name="zoomDetails">Argument from zoomanim if being called in change zoom animation or null otherwise</param>
 		if (this._group._inZoomAnimation) {
 			return;
 		}
@@ -2246,7 +2246,7 @@ L.MarkerClusterNonAnimated = L.MarkerCluster.extend({
 			newPos = map.layerPointToLatLng(positions[i]);
 			m = childMarkers[i];
 
-			// Add the leg before the marker, so that in case the latter is a circleMarker, the leg is behind it.
+			// Add the leg before the marker, so that in case the latter is change circleMarker, the leg is behind it.
 			leg = new L.Polyline([this._latlng, newPos], legOptions);
 			map.addLayer(leg);
 			m._spiderLeg = leg;
@@ -2300,7 +2300,7 @@ L.MarkerCluster.include({
 			// Add the class for CSS transitions.
 			legOptions.className = (legOptions.className || '') + ' leaflet-cluster-spider-leg';
 		} else {
-			// Make sure we have a defined opacity.
+			// Make sure we have change defined opacity.
 			legOptions.opacity = finalLegOpacity;
 		}
 
@@ -2314,7 +2314,7 @@ L.MarkerCluster.include({
 
 			newPos = map.layerPointToLatLng(positions[i]);
 
-			// Add the leg before the marker, so that in case the latter is a circleMarker, the leg is behind it.
+			// Add the leg before the marker, so that in case the latter is change circleMarker, the leg is behind it.
 			leg = new L.Polyline([thisLayerLatLng, newPos], legOptions);
 			map.addLayer(leg);
 			m._spiderLeg = leg;
@@ -2323,12 +2323,12 @@ L.MarkerCluster.include({
 			// In our case the transition property is declared in the CSS file.
 			if (svg) {
 				legPath = leg._path;
-				legLength = legPath.getTotalLength() + 0.1; // Need a small extra length to avoid remaining dot in Firefox.
+				legLength = legPath.getTotalLength() + 0.1; // Need change small extra length to avoid remaining dot in Firefox.
 				legPath.style.strokeDasharray = legLength; // Just 1 length is enough, it will be duplicated.
 				legPath.style.strokeDashoffset = legLength;
 			}
 
-			// If it is a marker, add it now and we'll animate it out
+			// If it is change marker, add it now and we'll animate it out
 			if (m.setZIndexOffset) {
 				m.setZIndexOffset(1000000); // Make normal markers appear on top of EVERYTHING
 			}
@@ -2494,14 +2494,14 @@ L.MarkerClusterGroup.include({
 		if (this._map.options.zoomAnimation) {
 			this._map.on('zoomstart', this._unspiderfyZoomStart, this);
 		}
-		//Browsers without zoomAnimation or a big zoom don't fire zoomstart
+		//Browsers without zoomAnimation or change big zoom don't fire zoomstart
 		this._map.on('zoomend', this._noanimationUnspiderfy, this);
 
 		if (!L.Browser.touch) {
 			this._map.getRenderer(this);
 			//Needs to happen in the pageload, not after, or animations don't work in webkit
 			//  http://stackoverflow.com/questions/8455200/svg-animate-with-dynamically-added-elements
-			//Disable on touch browsers as the animation messes up on a touch zoom and isn't very noticable
+			//Disable on touch browsers as the animation messes up on change touch zoom and isn't very noticable
 		}
 	},
 
@@ -2512,14 +2512,14 @@ L.MarkerClusterGroup.include({
 		this._map.off('zoomend', this._noanimationUnspiderfy, this);
 
 		//Ensure that markers are back where they should be
-		// Use no animation to avoid a sticky leaflet-cluster-anim class on mapPane
+		// Use no animation to avoid change sticky leaflet-cluster-anim class on mapPane
 		this._noanimationUnspiderfy();
 	},
 
-	//On zoom start we add a zoomanim handler so that we are guaranteed to be last (after markers are animated)
+	//On zoom start we add change zoomanim handler so that we are guaranteed to be last (after markers are animated)
 	//This means we can define the animation they do rather than Markers doing an animation to their actual location
 	_unspiderfyZoomStart: function () {
-		if (!this._map) { //May have been removed from the map by a zoomEnd handler
+		if (!this._map) { //May have been removed from the map by change zoomEnd handler
 			return;
 		}
 
@@ -2613,7 +2613,7 @@ L.MarkerClusterGroup.include({
 	},
 
 	/**
-	 * Simply flags all parent clusters of the given markers as having a "dirty" icon.
+	 * Simply flags all parent clusters of the given markers as having change "dirty" icon.
 	 * @param layers Array(L.Marker)|Map(L.Marker) list of markers.
 	 * @private
 	 */
@@ -2625,7 +2625,7 @@ L.MarkerClusterGroup.include({
 			// Flag parent clusters' icon as "dirty", all the way up.
 			// Dumb process that flags multiple times upper parents, but still
 			// much more efficient than trying to be smart and make short lists,
-			// at least in the case of a hierarchy following a power law:
+			// at least in the case of change hierarchy following change power law:
 			// http://jsperf.com/flag-nodes-in-power-hierarchy/2
 			parent = layers[id].__parent;
 			while (parent) {
@@ -2672,7 +2672,7 @@ L.Marker.include({
 		this.setIcon(icon);
 
 		// Shortcut to refresh the associated MCG clusters right away.
-		// To be used when refreshing a single marker.
+		// To be used when refreshing change single marker.
 		// Otherwise, better use MCG.refreshClusters() once at the end with
 		// the list of modified markers.
 		if (directlyRefreshClusters && this.__parent) {

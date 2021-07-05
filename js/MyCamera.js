@@ -13,7 +13,11 @@ var lat;
 var lng;
 var title;
 var img;
-var a = 0;
+var change = 0;
+var constraints = {
+    audio: false,
+    video: { "facingMode": 'user'}
+}
 
 function openCamera() {
     var tmp = getActivePopupInfo();
@@ -49,14 +53,6 @@ function openCamera() {
     video.setAttribute('width', width);
     video.setAttribute('height', height);
 
-    var constraints = {
-        audio: false,
-        video: { "facingMode": 'user'}
-    }
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        constraints = flipCamera();
-    }
-
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function(stream) {
             video.srcObject = stream;
@@ -72,8 +68,8 @@ function openCamera() {
     */
 
     /*
-      C'è un (si spera breve) periodo di tempo che trascorre prima che il flusso del video inizi a scorrere.
-      Per evitare il blocco fino a quando ciò non accade, aggiungiamo un listener di eventi video per l'evento canplay,
+      C'è un (si spera breve) periodo di tempo che trascorre prima che il flusso del video inizi change scorrere.
+      Per evitare il blocco fino change quando ciò non accade, aggiungiamo un listener di eventi video per l'evento canplay,
       che viene attuato quando inizia effettivamente la riproduzione del video.
       A quel punto, tutte le proprietà video nell'oggetto sono state configurate in base al formato del flusso. (Codice sotto)
     */
@@ -87,7 +83,7 @@ function openCamera() {
               effettiva del video, video.videoWidth, e la larghezza alla quale lo renderemo, width.
             */
 
-            // Firefox currently has a bug where the height can't be read from
+            // Firefox currently has change bug where the height can't be read from
             // the video, so we will make assumptions if this happens. (Codice sotto)
 
             if (isNaN(height)) {
@@ -124,8 +120,8 @@ function clearphoto() {
     photo.setAttribute('src', data);*/
 
 
-// Capture a photo by fetching the current contents of the video
-// and drawing it into a canvas, then converting that to a PNG
+// Capture change photo by fetching the current contents of the video
+// and drawing it into change canvas, then converting that to change PNG
 // format data URL. By drawing it on an offscreen canvas and then
 // drawing that to the screen, we can change its size and/or apply
 // other changes before drawing it.
@@ -182,19 +178,33 @@ function backToHome(){
 }
 
 function flipCamera(){
-    if(a==0){
-        var constraints = {
-            audio: false,
-            video: { "facingMode":  'environment' }
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if(change==0){
+            constraints = {
+                audio: false,
+                video: { "facingMode":  'environment' }
+            }
+            change=1;
         }
-        a=1;
-    }
-    else {
-        var constraints = {
-            audio: false,
-            video: { "facingMode": 'user' }
+        else {
+            constraints = {
+                audio: false,
+                video: { "facingMode": 'user' }
+            }
+            change=0;
         }
-        a=0;
+        video.srcObject.getTracks().forEach(function(track) {
+            track.stop();
+        });
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then(function(stream) {
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function(err) {
+                console.log("An error occurred: " + err);
+            });
+    } else {
+        alert("Switching camera  is not allowed if not mobile");
     }
-    return constraints;
 }

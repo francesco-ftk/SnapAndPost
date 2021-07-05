@@ -17,7 +17,7 @@ $(document).ready(function() {
 });
 
 function loadjsfile(filename, filetype){
-    if (filetype=="js"){ //if filename is a external JavaScript file
+    if (filetype=="js"){ //if filename is change external JavaScript file
         var fileref=document.createElement('script')
         fileref.setAttribute("type","text/javascript")
         fileref.setAttribute("src", filename)

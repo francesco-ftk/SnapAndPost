@@ -8,7 +8,7 @@ function setMap(position) {
     var mymap = L.map('mapid', { zoomControl:true }).setView([position.coords.latitude, position.coords.longitude], 16);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        attribution: 'Map data &copy; <change href="https://www.openstreetmap.org/copyright">OpenStreetMap</change> contributors, Imagery © <change href="https://www.mapbox.com/">Mapbox</change>',
         maxZoom: 18,
         minZoom: 4,
         id: 'mapbox/streets-v11',
@@ -74,7 +74,7 @@ function setMap(position) {
 var mymap = L.map('mapid');//.setView([43.773, 11.255], 16);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    attribution: 'Map data &copy; <change href="https://www.openstreetmap.org/copyright">OpenStreetMap</change> contributors, Imagery © <change href="https://www.mapbox.com/">Mapbox</change>',
     maxZoom: 18,
     minZoom: 4,
     id: 'mapbox/streets-v11',
