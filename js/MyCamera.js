@@ -172,10 +172,12 @@ function getParams() {
 }
 
 
+/*
 function backToHome(){
     panel.style.display= 'none';
     count = 0;
 }
+*/
 
 function flipCamera(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

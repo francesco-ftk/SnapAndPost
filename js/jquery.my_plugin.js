@@ -155,6 +155,8 @@ var markers = null;
             var params = getParams();
             console.log("saveImage");
             request_type = "save";
+            var $cover = $('#cover');
+            $cover.css("display", "flex");
             var request = $.ajax({
                 url: options.serverURL,
                 type: "POST",
@@ -169,8 +171,7 @@ var markers = null;
             });
 
             request.done(function (data) {
-                //window.location.reload();
-                backToHome();
+                window.location.reload();
             });
 
             request.fail(
