@@ -13,6 +13,7 @@ var lat;
 var lng;
 var title;
 var img;
+var a = 0;
 
 function openCamera() {
     var tmp = getActivePopupInfo();
@@ -50,7 +51,10 @@ function openCamera() {
 
     var constraints = {
         audio: false,
-        video: { "facingMode": "environment" }
+        video: { "facingMode": {exact: "user"}}
+    }
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        constraints = flipCamera();
     }
 
     navigator.mediaDevices.getUserMedia(constraints)
@@ -177,53 +181,20 @@ function backToHome(){
     count = 0;
 }
 
-
-/*
-
-TODO CODICE PER SWITCH CAMERA
-
-
-function findVideo(){
-
-    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-        console.log("enumerateDevices() not supported.");
-        return;
-    }
-
-    var count=0;
-
-    // List cameras and microphones.
-
-    navigator.mediaDevices.enumerateDevices()
-        .then(function(devices){
-            devices.forEach(function(device){
-                if(device.kind=="videoinput"){
-                    count++;
-                }
-            })
-        })
-        .catch(function(err) {
-            console.log(err.name + ": " + err.message);
-        });
-
-    console.log('count: ' + count);
-
-    if(count>1){
+function flipCamera(){
+    if(a==0){
         var constraints = {
             audio: false,
-            video: { "facingMode": "environment" }
+            video: { "facingMode":  {exact: "environment"} }
         }
-    } else {
+        a=1;
+    }
+    else {
         var constraints = {
             audio: false,
-            video: true
+            video: { "facingMode": {exact: "user"} }
         }
+        a=0;
     }
-
     return constraints;
 }
-*/
-/*
-function saveImage() {
-
-}*/
