@@ -72,6 +72,7 @@
 
 .buttonPopup{
     padding: 5px;
+    margin: 3px;
     width: 40px;
     height: 40px;
     border: 1px solid rgb(49, 48, 48);
@@ -95,6 +96,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 200px;
 }
 
 .flexContainerButtons {
@@ -104,8 +106,12 @@
 }
 
 .popup p{
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-align: center;
+}
+
+.leaflet-popup-content p {
+    margin: 10px 0;
 }
 
 /* ---- END Stile Mappa ---- */
