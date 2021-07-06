@@ -343,8 +343,6 @@
     background: #111;
     position:relative;
     border-radius: 50%;
-    animation:loadingAnimation1 3s infinite;
-    -webkit-animation:loadingAnimation1 3s infinite; /* Safari and Chrome */
 }
 
 .first{

@@ -125,7 +125,7 @@ var markers = null;
                 $(coordinates).each(function (index, object) {
                     replace = false;
                     for (var i = 0; i < popups.length; i++) {
-                        if (object['lat'] == popups[i].lat && object['lon'] == popups[i].lng && object['nome'] == popups[i].title) {
+                        if (object['lat'].toFixed(3) == popups[i].lat.toFixed(3) && object['lon'].toFixed(3) == popups[i].lng.toFixed(3) && object['nome'] == popups[i].title) {
                             replace = true;
                             for(var j=0; j<Array.length;j++) {
                                 var title = Array[j].getPopup().getContent();
