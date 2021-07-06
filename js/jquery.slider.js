@@ -96,19 +96,8 @@ function closeGallery() {
     var coverSlider = document.getElementById('coverSlider');
     var wrapper = document.getElementById('wrapper');
     coverSlider.removeChild(wrapper);
-    //var slider = document.getElementById('slider');
-    //coverSlider.removeChild(slider);
-    //slider.parentNode.parentNode.removeChild(slider);
     var newList = document.createElement('ul');
     newList.setAttribute("id", "slider");
     coverSlider.appendChild(newList);
-    /*var slider = document.getElementById('slider');
-    while(slider.firstChild) {
-        slider.removeChild(slider.firstChild);
-    }*/
-    /*var listElements = document.getElementsByClassName('sliderElement');
-    for (var i = 0; i < listElements.length; i++) {
-        listElements[i].parentNode.removeChild(listElements[i]);
-    }*/
     coverSlider.style.display = "none";
 }

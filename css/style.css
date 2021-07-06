@@ -138,11 +138,9 @@
     justify-content: center;
     background-color: #c1bbbb;
     position: fixed;
-    height: 90%;
+    height: 89%;
     width:100%;
 }
-
-/* TODO dimensione canvas e video non come panelPhoto*/
 
 #video{
     display: none;

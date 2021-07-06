@@ -20,10 +20,30 @@ var constraints = {
 }
 
 function openCamera() {
-    var tmp = getActivePopupInfo();
-    lat = tmp.lat;
-    lng = tmp.lng;
-    title = tmp.title;
+    title = getActivePopupInfo();
+
+    var url = "https://en.wikipedia.org/w/api.php";
+
+    var params = {
+        action: "query",
+        prop: "coordinates",
+        titles: title,
+        format: "json"
+    };
+
+    url = url + "?origin=*";
+    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+
+    fetch(url)
+        .then(function(response){return response.json();})
+        .then(function(response) {
+            var pages = response.query.pages;
+            for (var page in pages) {
+                lat= pages[page].coordinates[0].lat;
+                lng = pages[page].coordinates[0].lon;
+            }
+        })
+        .catch(function(error){console.log(error);});
 
     canvas = document.getElementById('canvas');
     canvas.style.display= 'none';
@@ -114,12 +134,6 @@ function clearphoto() {
     context.fillStyle = "#AAA";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Colora canvas e photo di grigio (codice sopra)
-
-    /*var data = canvas.toDataURL('image/png');
-    photo.setAttribute('src', data);*/
-
-
 // Capture change photo by fetching the current contents of the video
 // and drawing it into change canvas, then converting that to change PNG
 // format data URL. By drawing it on an offscreen canvas and then
@@ -170,14 +184,6 @@ function getParams() {
     img = canvas.toDataURL('image/png');
     return {"lat": lat, "lng": lng, "title": title, "img": img};
 }
-
-
-/*
-function backToHome(){
-    panel.style.display= 'none';
-    count = 0;
-}
-*/
 
 function flipCamera(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

@@ -198,7 +198,30 @@ var markers = null;
         function queryGallery() {
             console.log('FUNZIONE ONCLICK');
             request_type = "get";
-            var coords = getActivePopupInfo();
+            var title = getActivePopupInfo();
+
+            var url = "https://en.wikipedia.org/w/api.php";
+
+            var params = {
+                action: "query",
+                prop: "coordinates",
+                titles: title,
+                format: "json"
+            };
+
+            url = url + "?origin=*";
+            Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];});
+
+            fetch(url)
+                .then(function(response){return response.json();})
+                .then(function(response) {
+                    var pages = response.query.pages;
+                    for (var page in pages) {
+                         var lat= pages[page].coordinates[0].lat;
+                         var lng = pages[page].coordinates[0].lon;
+                    }
+                })
+                .catch(function(error){console.log(error);});
 
             var $cover = $('#cover');
             var $alert = $('#alert2');
@@ -208,7 +231,7 @@ var markers = null;
             var request = $.ajax({
                 url: options.serverURL,
                 type: "POST",
-                data: {"action": request_type, "lat": coords.lat, "lng": coords.lng, "title": coords.title},
+                data: {"action": request_type, "lat": lat, "lng": lng, "title": title},
                 dataType: "json",
             });
 
@@ -234,14 +257,13 @@ var markers = null;
 
 function getActivePopupInfo() {
     console.log('getCoords');
-    var Array = markers.getLayers();
+    var Array = markers.getLayers();  // ritorna valori diversi
     for (var i = 0; i < Array.length; i++) {
         if (Array[i].isPopupOpen()) {
-            var x = Array[i].getLatLng();
             var title = Array[i].getPopup().getContent();
             title = title.split("<p>");
             title = title[1].split("</p>");
-            return {"lat": x.lat, "lng": x.lng, "title": title[0]};
+            return title[0];
         }
     }
 }
