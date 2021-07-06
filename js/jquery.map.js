@@ -199,20 +199,22 @@ var markers = null;
                 url: options.serverURL,
                 type: "POST",
                 data: {"action": request_type, "lat": coords.lat, "lng": coords.lng, "title": coords.title},
-                dataType: "json",  // TODO img?
+                dataType: "json",
             });
 
             request.done(function (data) {
                 var images = data["images"];
-                $photo=$('#photo');
-                $photo.attr('src', "data:image/png;base64," + images[0].img);
-                $photo.css("display", "block");
-                /*$('ul').slider(data,{
+                for(var i=0; i<images.length; i++){
+                    images[i].img= "data:image/png;base64," + images[i].img;
+                }
+                //$photo=$('#photo');
+                //$photo.attr('src', "data:image/png;base64," + images[0].img);
+                //$photo.css("display", "block");
+                $('ul').slider(images, data["title"], {
                     speed: 500,
                     pause: 4000,
                     transition: "slide"
-                });*/
-                //renderCarousel(data['lines'], data['title']);
+                });
             });
 
             request.fail(

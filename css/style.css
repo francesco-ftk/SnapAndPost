@@ -434,6 +434,31 @@
 
 /* ---- END Stile Loading Page ---- */
 
+
+
+
+/* ---- START Stile Slider ---- */
+
+#coverSlider{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #c1bbbb;
+    align-items: center;
+    justify-content: center;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+/* ---- END Stile Slider ---- */
+
+/*
 #photo {
     display: none;
     z-index: 1000;
@@ -441,3 +466,4 @@
     top: 0;
     right: 0;
 }
+*/

@@ -131,7 +131,7 @@ function getImages() {
         array_push($images, $img);
     }
 
-    $response = array('images' => $images, 'type' => 'get');
+    $response = array('images' => $images, 'title' => $title, 'type' => 'get');
 
     // encodo l'array in JSON
     echo json_encode($response);
