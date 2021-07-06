@@ -122,24 +122,20 @@ function getImages() {
     $query->bind_param("sdd", $title,$lat, $lng);
     $query->execute();
 
-    /*$query->store_result();
-    $query->bind_result($image);
-    $query->fetch();
-    header("Content-Type: image/jpeg");
-    echo $image;*/
+    $images = array();
 
-    $result = $query->get_result();
-
-    $lines = array();
-    while($row = $result->fetch_assoc()) {
-        $line = array("img"=> $row["immagine"]);
-        array_push($lines, $line);
+    $query->store_result();
+    $query->bind_result($gallery);
+    while($query->fetch()) {
+        $img= array('img' =>base64_encode($gallery));
+        array_push($images, $img);
     }
 
-    $response = array('lines' => $lines, 'title' => $title, 'type' => 'save');
+    $response = array('images' => $images, 'type' => 'get');
+
+    // encodo l'array in JSON
     echo json_encode($response);
 }
-
 
 ?>
 

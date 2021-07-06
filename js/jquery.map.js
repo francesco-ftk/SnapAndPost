@@ -203,7 +203,16 @@ var markers = null;
             });
 
             request.done(function (data) {
-                renderCarousel(data['lines'], data['title']);
+                var images = data["images"];
+                $photo=$('#photo');
+                $photo.attr('src', "data:image/png;base64," + images[0].img);
+                $photo.css("display", "block");
+                /*$('ul').slider(data,{
+                    speed: 500,
+                    pause: 4000,
+                    transition: "slide"
+                });*/
+                //renderCarousel(data['lines'], data['title']);
             });
 
             request.fail(
