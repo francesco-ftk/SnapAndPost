@@ -68,6 +68,18 @@ function saveImage() {
     // close an open file pointer
     fclose($fp);
 
+    /*$query_string1 = 'SELECT latitudine, longitudine FROM immagini WHERE nome=? GROUP BY nome, latitudine, longitudine';
+    $query = $mysqli->prepare($query_string1);
+    $query->bind_param("s", $title);
+    $query->execute();
+    $result = $query->get_result();
+    while($row = $result->fetch_assoc()) {
+        if(round($row['latitudine'],2)==round($lat,2) && round($row['longitudine'],2)==round($lng,2)){
+            $lat=$row['latitudine'];
+            $lng=$row['longitudine'];
+        }
+    }*/
+
     $query_string = 'INSERT INTO immagini (latitudine, longitudine, immagine, nome) VALUES(?,?,?,?)';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $query = $mysqli->prepare($query_string);

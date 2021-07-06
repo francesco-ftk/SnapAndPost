@@ -125,7 +125,7 @@ var markers = null;
                 $(coordinates).each(function (index, object) {
                     replace = false;
                     for (var i = 0; i < popups.length; i++) {
-                        if (object['lat'].toFixed(3) == popups[i].lat.toFixed(3) && object['lon'].toFixed(3) == popups[i].lng.toFixed(3) && object['nome'] == popups[i].title) {
+                        if (/*Math.round(object['lat']*1000) == Math.round(popups[i].lat*1000) && Math.round(object['lon']*1000) == Math.round(popups[i].lng*1000) &&*/ object['nome'] == popups[i].title) {
                             replace = true;
                             for(var j=0; j<Array.length;j++) {
                                 var title = Array[j].getPopup().getContent();
@@ -148,6 +148,9 @@ var markers = null;
                 markers = markers2;
                 mymap.addLayer(markers2);
                 console.log("funziona tutto");
+            }
+            else {
+                mymap.addLayer(markers);
             }
         }
 
