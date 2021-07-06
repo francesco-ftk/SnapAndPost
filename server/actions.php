@@ -109,17 +109,17 @@ function saveImage() {
     }
 }
 
-//TODO controllare se funziona e prende immagini
+// TODO controllare se funziona e prende immagini
 function getImages() {
 
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
     $title = $_POST['title'];
 
-    $query_string = 'SELECT immagine FROM immagini WHERE nome=? and latitudine=? and longitudine=?';
+    $query_string = 'SELECT immagine FROM immagini WHERE nome=?';  //  and latitudine=? and longitudine=?
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $query = $mysqli->prepare($query_string);
-    $query->bind_param("sdd", $title,$lat, $lng);
+    $query->bind_param("s", $title);
     $query->execute();
 
     $images = array();

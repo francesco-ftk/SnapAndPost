@@ -158,8 +158,12 @@ var markers = null;
             var params = getParams();
             console.log("saveImage");
             request_type = "save";
+
             var $cover = $('#cover');
+            var $alert = $('#alert1');
             $cover.css("display", "flex");
+            $alert.css("display", "block");
+
             var request = $.ajax({
                 url: options.serverURL,
                 type: "POST",
@@ -195,6 +199,12 @@ var markers = null;
             console.log('FUNZIONE ONCLICK');
             request_type = "get";
             var coords = getActivePopupInfo();
+
+            var $cover = $('#cover');
+            var $alert = $('#alert2');
+            $cover.css("display", "flex");
+            $alert.css("display", "block");
+
             var request = $.ajax({
                 url: options.serverURL,
                 type: "POST",

@@ -24,7 +24,7 @@
             $title= title;
             for(var i=0; i<images.length; i++){
                 $src= images[i].img;
-                $this.prepend("<li><img src="+$src+" alt="+ $title +" height='100px'></li>");
+                $this.prepend("<li><img src="+$src+" alt='"+ $title +"'></li>");
             }
 
             if(options.transition == "slide"){
@@ -48,6 +48,11 @@
             }
 
             function slide(){
+
+                var $cover = $('#cover');
+                var $alert = $('#alert2');
+                $alert.css("display", "none");
+                $cover.css("display", "none");
 
                 $coverSlider= $('#coverSlider');
                 $coverSlider.css("display", "flex");
