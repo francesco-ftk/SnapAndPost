@@ -217,14 +217,11 @@ var markers = null;
                 for(var i=0; i<images.length; i++){
                     images[i].img= "data:image/png;base64," + images[i].img;
                 }
-                //$photo=$('#photo');
-                //$photo.attr('src', "data:image/png;base64," + images[0].img);
-                //$photo.css("display", "block");
                 $('ul').slider(images, data["title"], {
-                    speed: 500,
+                    speed: 1000,
                     pause: 4000,
-                    transition: "slide"
-                });
+                    transition: "fade"
+                })
             });
 
             request.fail(

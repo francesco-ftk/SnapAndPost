@@ -1,82 +1,114 @@
-(function($){
+var id = null;
 
-    $.fn.slider = function(images, title, options){
+(function ($) {
+
+    $.fn.slider = function (images, title, options) {
 
         var defaults = {
             speed: 1000,
-            pause: 2000,
-            transition: "slide"
+            pause: 4000,
+            transition: "fade"
         }
 
         options = $.extend(defaults, options);
 
-        if (options.pause <= options.speed){
+        if (options.pause <= options.speed) {
             options.pause = options.speed + 100;
         }
 
-        return this.each(function(){
+        return this.each(function () {
             console.log("Carosello");
 
             var $this = $(this);
 
-            $this.wrap('<div class="slider-wrap"></div>');
+            $this.wrap('<div class="slider-wrap" id="wrapper"></div>');
 
-            $title= title;
-            for(var i=0; i<images.length; i++){
-                $src= images[i].img;
-                $this.prepend("<li><img src="+$src+" alt='"+ $title +"'></li>");
+            $title = title;
+            for (var i = 0; i < images.length; i++) {
+                $src = images[i].img;
+                /*$src.width()*/
+                $this.append("<li class='sliderElement'><img src=" + $src + " alt='" + $title + "'></li>");
             }
 
-            if(options.transition == "slide"){
-
-                $this.css({
-                    width: '9999px',
-                    position: 'relative'
+            if (options.transition == "fade") {
+                $this.children().css({
+                    /*width: $this.find('img').width(),*/
+                    position: 'absolute',
+                    left: 0,
+                    top: 0
                 });
 
-                $this.children().css({
-                    float: 'left',
-                    listStyleType: 'none'
+                $this.css({
+                    position: 'relative',
                 });
 
                 $this.parent().css({
-                    width: $this.children(0).width(),
+                    width: $this.width(),
                     overflow: 'hidden'
                 });
 
-                slide();
-            }
-
-            function slide(){
+                for (var i = $this.children().length, y = 0; i > 0; i--, y++) {
+                    $this.children().eq(y).css('zIndex', i + 99999)
+                }
 
                 var $cover = $('#cover');
                 var $alert = $('#alert2');
                 $alert.css("display", "none");
                 $cover.css("display", "none");
 
-                $coverSlider= $('#coverSlider');
+                $coverSlider = $('#coverSlider');
                 $coverSlider.css("display", "flex");
 
-                setInterval(function(){
-                    $this.animate(
-                        {left: '-' + $this.parent().width()},
-                        options.speed,
-                        function(){
-                            $this.css('left', 0)
-                                .children(":first")
-                                .appendTo($this);
-                            $this.parent().css({
-                                width: $this.children(0).width()
-                            });
-                        }
-                    )
-                }, options.pause)
-
+                fade();
             }
 
+            function fade() {
+                id = setInterval(function () {
+                    var firstElement = $this.children().first();
 
+                    if ($this.children().length > 1) {
+                        firstElement.animate(
+                            {opacity: 0},
+                            options.speed,
+                            function () {
+                                var self = $(this);
+                                self.css({
+                                    zIndex: $this.children().last().css('zIndex') - 1,
+                                    opacity: 1
+                                });
+                                $this.append(self);
+                            }
+                        );
+                    }
+
+
+                }, options.pause);
+            }
         });
 
     }
 
 })(jQuery);
+
+
+function closeGallery() {
+    clearInterval(id);
+    var coverSlider = document.getElementById('coverSlider');
+    var wrapper = document.getElementById('wrapper');
+    coverSlider.removeChild(wrapper);
+    //var slider = document.getElementById('slider');
+    //coverSlider.removeChild(slider);
+    //slider.parentNode.parentNode.removeChild(slider);
+    var newList = document.createElement('ul');
+    newList.setAttribute("id", "slider");
+    coverSlider.appendChild(newList);
+    /*var slider = document.getElementById('slider');
+    while(slider.firstChild) {
+        slider.removeChild(slider.firstChild);
+    }*/
+    /*var listElements = document.getElementsByClassName('sliderElement');
+    for (var i = 0; i < listElements.length; i++) {
+        listElements[i].parentNode.removeChild(listElements[i]);
+    }*/
+    coverSlider.style.display = "none";
+}
