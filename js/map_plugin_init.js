@@ -5,11 +5,11 @@ $(document).ready(function() {
 
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         // Codice da eseguire nel caso di un dispositivo mobile
-        console.log("mobile")
+        console.log("mobile");
         loadjsfile("js/drawingMobile.js", "js");
     } else {
         // Codice da eseguire nel caso di un dispositivo tradizionale
-        console.log("desktop")
+        console.log("desktop");
         loadjsfile("js/drawingDesktop.js", "js");
     }
 

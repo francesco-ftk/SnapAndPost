@@ -30,6 +30,8 @@ var id = null;
                 $this.append("<li class='sliderElement'><img src=" + $src + " alt='" + $title + "'></li>");
             }
 
+            $('#title').html($title);
+
             if (options.transition == "fade") {
                 $this.children().css({
                     /*width: $this.find('img').width(),*/

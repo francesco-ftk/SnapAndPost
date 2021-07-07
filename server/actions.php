@@ -58,7 +58,7 @@ function saveImage() {
     $img = $_POST['img'];
     $title = $_POST['title'];
 
-    $img = str_replace('data:image/png;base64,', '', $img);
+    $img = str_replace('data:image/jpeg;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
 
     // create an image file

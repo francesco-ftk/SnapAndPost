@@ -9,7 +9,7 @@ var markers = null;
         console.log("JQUERY: " + $);
 
         var defaults = {
-            serverURL: "example.com/server_page_url",
+            serverURL: "server/actions.php",
         }
         options = $.extend(defaults, options);
         console.log("OPTIONS: " + defaults['serverURL']);
@@ -190,7 +190,7 @@ var markers = null;
 
     $.fn.getGallery = function (options) {
         var defaults = {
-            serverURL: "example.com/server_page_url",
+            serverURL: "server/actions.php",
         }
         options = $.extend(defaults, options);
         queryGallery();
@@ -238,7 +238,7 @@ var markers = null;
             request.done(function (data) {
                 var images = data["images"];
                 for(var i=0; i<images.length; i++){
-                    images[i].img= "data:image/png;base64," + images[i].img;
+                    images[i].img= "data:image/jpeg;base64," + images[i].img;
                 }
                 $('ul').slider(images, data["title"], {
                     speed: 1000,

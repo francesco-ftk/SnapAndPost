@@ -181,7 +181,7 @@ function closeCamera(){
 }
 
 function getParams() {
-    img = canvas.toDataURL('image/png');
+    img = canvas.toDataURL('image/jpeg');
     return {"lat": lat, "lng": lng, "title": title, "img": img};
 }
 
