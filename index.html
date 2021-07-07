@@ -9,7 +9,8 @@
     <meta charset="UTF-8">
     <meta name="author" content="Francesco Fantechi, Francesco Bettazzi">
     <meta name="keywords" content="Snap, Post, Photo, Map, Points of Interest, Monuments, POI, Editing, Share">
-    <meta name="description" content="Snap a photo of points of interest nearby you, edit and share to make everyone aware of your special moments. Log in to get started right away!">
+    <meta name="description"
+          content="Snap a photo of points of interest nearby you, edit and share to make everyone aware of your special moments. Log in to get started right away!">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- LEAFLET -->
@@ -39,67 +40,67 @@
 
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <h1 class="siteName">
-                Snap&Post
-            </h1>
-        </div>
-    </nav>
+<nav class="navbar">
+    <div class="container">
+        <h1 class="siteName">
+            Snap&Post
+        </h1>
+    </div>
+</nav>
 
-    <div class="main">
-        <div id="mapid"></div>
+<div class="main">
+    <div id="mapid"></div>
+</div>
+
+
+<div id="panel">
+    <div id="panelPhoto">
+        <video id="video">Video stream not available.</video>
+        <canvas id="canvas" tabindex="0"></canvas>
     </div>
 
-
-    <div id="panel">
-        <div id="panelPhoto">
-            <video id="video">Video stream not available.</video>
-            <canvas id="canvas" tabindex="0"></canvas>
-        </div>
-
-        <div class="panelControls">
-            <div class="container1">
-                <button id="switchCamera" class="controlButton" onclick="flipCamera()"></button>
-                <button id="snapButton"></button>
-                <div class="container2">
-                    <button id="rollBack" class="controlButton" onclick="closeCamera()"></button>
-                    <button id="confirm" class="controlButton"></button>
-                </div>
-                <div id="container3">
-                    <button id="colors" class="controlButton click" onclick="openDown()"></button>
-                    <button id="bottoneCancella" class="controlButton" onclick="cancella()"></button>
-                </div>
-                <div id="controls" class="dropdown">
-                    <div id="buttonGreen" class="bottone"></div>
-                    <div id="buttonBlue" class="bottone"></div>
-                    <div id="buttonRed" class="bottone"></div>
-                    <div id="buttonYellow" class="bottone"></div>
-                    <div id="buttonOrange" class="bottone"></div>
-                    <div id="buttonBlack" class="bottone"></div>
-                    <div id="buttonWhite" class="bottone"></div>
-                </div>
+    <div class="panelControls">
+        <div class="container1">
+            <button id="switchCamera" class="controlButton" onclick="flipCamera()"></button>
+            <button id="snapButton"></button>
+            <div class="container2">
+                <button id="rollBack" class="controlButton" onclick="closeCamera()"></button>
+                <button id="confirm" class="controlButton"></button>
+            </div>
+            <div id="container3">
+                <button id="colors" class="controlButton click" onclick="openDown()"></button>
+                <button id="bottoneCancella" class="controlButton" onclick="cancella()"></button>
+            </div>
+            <div id="controls" class="dropdown">
+                <div id="buttonGreen" class="bottone"></div>
+                <div id="buttonBlue" class="bottone"></div>
+                <div id="buttonRed" class="bottone"></div>
+                <div id="buttonYellow" class="bottone"></div>
+                <div id="buttonOrange" class="bottone"></div>
+                <div id="buttonBlack" class="bottone"></div>
+                <div id="buttonWhite" class="bottone"></div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="cover">
-        <p id="alert1" class="alert"> Saving photo, please wait </p>
-        <p id="alert2" class="alert"> Loading gallery, please wait </p>
-        <div class="container4">
-            <div class="loading first"></div>
-            <div class="loading second"></div>
-            <div class="loading third"></div>
-        </div>
+<div id="cover">
+    <p id="alert1" class="alert"> Saving photo, please wait </p>
+    <p id="alert2" class="alert"> Loading gallery, please wait </p>
+    <div class="container4">
+        <div class="loading first"></div>
+        <div class="loading second"></div>
+        <div class="loading third"></div>
     </div>
+</div>
 
-    <div id="coverSlider">
-        <div class="container5">
-            <button id="closeGallery" class="controlButton" onclick="closeGallery()"></button>
-            <h3 id="title"></h3>
-        </div>
-        <ul id="slider"></ul>
+<div id="coverSlider">
+    <div class="container5">
+        <button id="closeGallery" class="controlButton" onclick="closeGallery()"></button>
+        <h3 id="title"></h3>
     </div>
+    <ul id="slider"></ul>
+</div>
 
 </body>
 </html>

@@ -6,7 +6,7 @@ var id = null;
 
         var defaults = {
             speed: 1000,
-            pause: 4000,
+            pause: 3500,
             transition: "fade"
         }
 
@@ -17,16 +17,12 @@ var id = null;
         }
 
         return this.each(function () {
-            console.log("Carosello");
-
             var $this = $(this);
-
             $this.wrap('<div class="slider-wrap" id="wrapper"></div>');
-
             $title = title;
+
             for (var i = 0; i < images.length; i++) {
                 $src = images[i].img;
-                /*$src.width()*/
                 $this.append("<li class='sliderElement'><img src=" + $src + " alt='" + $title + "'></li>");
             }
 
@@ -34,7 +30,6 @@ var id = null;
 
             if (options.transition == "fade") {
                 $this.children().css({
-                    /*width: $this.find('img').width(),*/
                     position: 'absolute',
                     left: 0,
                     top: 0
@@ -82,12 +77,9 @@ var id = null;
                             }
                         );
                     }
-
-
                 }, options.pause);
             }
         });
-
     }
 
 })(jQuery);

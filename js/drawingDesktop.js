@@ -1,5 +1,5 @@
 var canvas = null;
-var context = null;  // contenitore per interfaccia di disegno canvas
+var context = null;
 var coloreSelezionato = "black";
 var larghezzaLinea = 3;
 var puntoInizioDisegnoX;
@@ -8,80 +8,80 @@ var posizioneCorrenteMouseX;
 var posizioneCorrenteMouseY;
 var mouseIsDown = false;
 
-function openEditor(canvas, container3, snapButton, switchCamera, confirm1, img){
-    snapButton.style.display= 'none';
-    switchCamera.style.display= 'none';
-    container3.style.display= 'flex';
-    confirm1.style.display= 'block';
+function openEditor(canvas, container3, snapButton, switchCamera, confirm1) {
+    snapButton.style.display = 'none';
+    switchCamera.style.display = 'none';
+    container3.style.display = 'flex';
+    confirm1.style.display = 'block';
     var rollBack = document.getElementById('rollBack');
     rollBack.style.backgroundImage = "url('Immagini/delete.png')";
-    context=canvas.getContext('2d');
+
+    context = canvas.getContext('2d');
 
     [].forEach.call(
-        // Elementi su cui iterare e funzione da applicare su di essi
         document.querySelectorAll('.bottone'),
-        function(el){
-            el.addEventListener('click', function(){
+        function (el) {
+            el.addEventListener('click', function () {
                 var id = this.id;
                 var colore = id.match(/[A-Z][a-z]+/g);
-                selezionaColore({ colore: colore[0].toLowerCase() })
+                selezionaColore({colore: colore[0].toLowerCase()})
             });
         }
     );
 
-    canvas.addEventListener('mousemove', function(e){
+    canvas.addEventListener('mousemove', function (e) {
         calcolaCordinate(e);
     });
 
-    canvas.addEventListener('mousedown', function(e){
+    canvas.addEventListener('mousedown', function (e) {
         calcolaCordinate(e);
     });
 
-    canvas.addEventListener('mouseup', function(e){
+    canvas.addEventListener('mouseup', function (e) {
         calcolaCordinate(e);
     });
 
-    canvas.addEventListener('mouseout', function(e){
+    canvas.addEventListener('mouseout', function (e) {
         calcolaCordinate(e);
     });
 
 }
 
-function selezionaColore(obj){
-    coloreSelezionato =obj.colore;
+function selezionaColore(obj) {
+    coloreSelezionato = obj.colore;
 }
 
-function cancella(){
+function cancella() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     var image = new Image();
-    image.onload = function() {
-        context.drawImage(image,0,0,canvas.width,canvas.height);
+    image.onload = function () {
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
     };
     image.src = img;
 }
 
-function calcolaCordinate(e){
+function calcolaCordinate(e) {
 
-    switch(e.type){
+    switch (e.type) {
         case 'mousemove' :
-            if(mouseIsDown){
-                posizioneCorrenteMouseX =  e.clientX - canvas.offsetLeft;
-                posizioneCorrenteMouseY =  e.clientY - canvas.offsetTop;
+            if (mouseIsDown) {
+                posizioneCorrenteMouseX = e.clientX - canvas.offsetLeft;
+                posizioneCorrenteMouseY = e.clientY - canvas.offsetTop;
                 disegna();
                 puntoInizioDisegnoX = posizioneCorrenteMouseX;
                 puntoInizioDisegnoY = posizioneCorrenteMouseY;
             }
             break;
         case 'mousedown' :
-            mouseIsDown= true;
+            mouseIsDown = true;
             puntoInizioDisegnoX = e.clientX - canvas.offsetLeft;
             puntoInizioDisegnoY = e.clientY - canvas.offsetTop;
             break;
         case 'mouseup' :
-            mouseIsDown= false;
+            mouseIsDown = false;
             break;
         case 'mouseout' :
-            mouseIsDown= false;
+            mouseIsDown = false;
             break;
     }
     e.preventDefault();

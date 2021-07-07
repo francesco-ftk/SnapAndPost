@@ -12,6 +12,7 @@ function openEditor(canvas, container3, snapButton, switchCamera, confirm1) {
     confirm1.style.display = 'block';
     var rollBack = document.getElementById('rollBack');
     rollBack.style.backgroundImage = "url('Immagini/delete.png')";
+
     context = canvas.getContext('2d');
 
     [].forEach.call(
@@ -54,9 +55,9 @@ function calcolaCoordinate(e) {
                 for (var j = 0; j < drawingTouchList.length; j++) {
                     if (drawingTouchList[j].identifier == touches[i].identifier) {
                         instance = drawingTouchList[j];
-                        instance.updateCurrentPosition(touches[i].pageX, touches[i].pageY);
+                        instance.updateCurrentPosition(touches[i].pageX - canvas.offsetLeft, touches[i].pageY - canvas.offsetTop);
                         instance.disegna();
-                        instance.setPreviousPosition(touches[i].pageX, touches[i].pageY);
+                        instance.setPreviousPosition(touches[i].pageX - canvas.offsetLeft, touches[i].pageY - canvas.offsetTop);
                     }
                 }
             }
@@ -68,8 +69,8 @@ function calcolaCoordinate(e) {
             var touches = e.changedTouches
             for (var i = 0; i < touches.length; i++) {
                 var identifier = touches[i].identifier;
-                var touchX = touches[i].pageX;
-                var touchY = touches[i].pageY;
+                var touchX = touches[i].pageX - canvas.offsetLeft;
+                var touchY = touches[i].pageY - canvas.offsetTop;
 
                 var instance = new DrawingTouch(identifier, touchX, touchY);
                 drawingTouchList.push(instance);
@@ -105,8 +106,8 @@ function disegna(puntoInizioDisegnoX, puntoInizioDisegnoY, posizioneCorrenteMous
 function cancella() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     var image = new Image();
-    image.onload = function() {
-        context.drawImage(image,0,0,canvas.width,canvas.height);
+    image.onload = function () {
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
     };
     image.src = img;
 }

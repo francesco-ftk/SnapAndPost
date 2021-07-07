@@ -1,4 +1,4 @@
-/* Database immagini */
+/* CREATE TABLE immagini DB MySQL*/
 
 DROP TABLE IF EXISTS immagini CASCADE;
 
@@ -10,9 +10,3 @@ CREATE TABLE immagini (
   nome VARCHAR(200) NOT NULL,
   PRIMARY KEY(id)
  )ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
-/*
-. ' `nome` varchar(50) NOT NULL default "",'
-. ' `size` varchar(25) NOT NULL default "",'
-. ' `type` varchar(25) NOT NULL default "",'
- */
