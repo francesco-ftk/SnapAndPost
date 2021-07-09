@@ -1,20 +1,24 @@
-var id = null;
-
 (function ($) {
 
     $.fn.slider = function (images, title, options) {
 
         var defaults = {
-            speed: 1000,
-            pause: 3000,
+            speed: 300,
             transition: "fade"
         }
 
-        options = $.extend(defaults, options);
+        $right = $('#right');
+        $left = $('#left');
 
-        if (options.pause <= options.speed) {
-            options.pause = options.speed + 100;
-        }
+        $right.on('click',function (event) {
+            fadeRight();
+        });
+
+        $left.on('click',function (event) {
+            fadeLeft();
+        });
+
+        options = $.extend(defaults, options);
 
         return this.each(function () {
             var $this = $(this);
@@ -41,7 +45,8 @@ var id = null;
 
                 $this.parent().css({
                     width: $this.width(),
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    order: 1
                 });
 
                 for (var i = $this.children().length, y = 0; i > 0; i--, y++) {
@@ -56,42 +61,75 @@ var id = null;
                 $coverSlider = $('#coverSlider');
                 $coverSlider.css("display", "flex");
 
-                fade();
+                if ($this.children().length > 1) {
+                    $right.css("display", "block");
+                    $left.css("display", "block");
+                } else {
+                    $right.css("display", "none");
+                    $left.css("display", "none");
+                }
+
             }
 
-            function fade() {
-                id = setInterval(function () {
-                    var firstElement = $this.children().first();
-
-                    if ($this.children().length > 1) {
-                        firstElement.animate(
-                            {opacity: 0},
-                            options.speed,
-                            function () {
-                                var self = $(this);
-                                self.css({
-                                    zIndex: $this.children().last().css('zIndex') - 1,
-                                    opacity: 1
-                                });
-                                $this.append(self);
-                            }
-                        );
-                    }
-                }, options.pause);
-            }
         });
+
+        function fadeRight() {
+            $this= $('#slider');
+            var firstElement = $this.children().first();
+
+            var a=0;
+
+            firstElement.animate(
+                {opacity: 0},
+                options.speed,
+                function () {
+                    if(a==0){
+                        var self = $(this);
+                        self.css({
+                            zIndex: $this.children().last().css('zIndex') - 1,
+                            opacity: 1
+                        });
+                        $this.append(self);
+                        a++;
+                    }
+                }
+            );
+        }
+
+        function fadeLeft() {
+            $this= $('#slider');
+            var lastElement = $this.children().last();
+
+            lastElement.css({
+                zIndex: parseInt($this.children().first().css('zIndex')) + 1,
+                opacity: 0
+            });
+
+            var a = 0;
+
+            lastElement.animate(
+                {opacity: 1},
+                options.speed,
+                function () {
+                    if(a==0){
+                        var self = $(this);
+                        $this.prepend(self);
+                    }
+                }
+            );
+        }
     }
 
 })(jQuery);
 
 
 function closeGallery() {
-    clearInterval(id);
     var coverSlider = document.getElementById('coverSlider');
+    var container = document.getElementById('container6');
     var wrapper = document.getElementById('wrapper');
-    coverSlider.removeChild(wrapper);
+    container.removeChild(wrapper);
     var newList = document.createElement('ul');
     newList.setAttribute("id", "slider");
-    coverSlider.appendChild(newList);
+    container.appendChild(newList);
     coverSlider.style.display = "none";
 }

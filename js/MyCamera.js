@@ -23,7 +23,6 @@ var constraints = {
 function openCamera() {
     title = getActivePopupInfo();
 
-
     var url = "https://en.wikipedia.org/w/api.php";
     var params = {
         action: "query",
@@ -78,6 +77,8 @@ function openCamera() {
     height = video.videoHeight / (video.videoWidth / width);
     video.setAttribute('width', width);
     video.setAttribute('height', height);
+
+    document.getElementById('titleCamera').innerHTML = title;
 
     navigator.mediaDevices.getUserMedia(constraints)
         .then(function (stream) {

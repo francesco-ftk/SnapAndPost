@@ -56,7 +56,7 @@ var markers = null;
                 action: "query",
                 list: "geosearch",
                 gscoord: position.coords.latitude + '|' + position.coords.longitude,
-                gsradius: 2000,
+                gsradius: 5000,
                 gslimit: "100",
                 format: "json"
             };
@@ -202,8 +202,7 @@ var markers = null;
                     images[i].img = "data:image/jpeg;base64," + images[i].img;
                 }
                 $('ul').slider(images, data["title"], {
-                    speed: 1000,
-                    pause: 3000,
+                    speed: 300,
                     transition: "fade"
                 })
             });
