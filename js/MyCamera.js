@@ -156,7 +156,7 @@ function takepicture() {
         context.drawImage(video, 0, 0, width, height);
         video.style.display = 'none';
         canvas.style.display = 'block';
-        img = canvas.toDataURL('image/jpeg');
+        img = canvas.toDataURL('image/jpeg', 1);
 
         openEditor(canvas, container3, snapButton, switchCamera, confirm);
         video.srcObject.getTracks().forEach(function (track) {
@@ -188,7 +188,7 @@ function closeCamera() {
 }
 
 function getParams() {
-    img = canvas.toDataURL('image/jpeg');
+    img = canvas.toDataURL('image/jpeg', 1);
     return {"lat": lat, "lng": lng, "title": title, "img": img};
 }
 

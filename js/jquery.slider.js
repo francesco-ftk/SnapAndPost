@@ -6,7 +6,7 @@ var id = null;
 
         var defaults = {
             speed: 1000,
-            pause: 3500,
+            pause: 3000,
             transition: "fade"
         }
 
