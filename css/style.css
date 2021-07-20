@@ -1,4 +1,3 @@
-
 /* ---- START Regole Generali ---- */
 
 * {
@@ -8,28 +7,25 @@
 }
 
 html {
-   height:  100vh;
+    height: 100vh;
 }
 
 /* ---- END Regole Generali ---- */
 
 
-
-
-
 /* ---- START Regole Navbar ---- */
 
-.navbar{
+.navbar {
     display: flex;
     align-items: center;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    background: #111;  /* contro contrasto eccessivo */
+    background: #111; /* contro contrasto eccessivo */
 }
 
-.container{
+.container {
     display: flex;
     align-items: center;
     width: 100%;
@@ -37,7 +33,7 @@ html {
     position: relative;
 }
 
-.siteName{
+.siteName {
     color: #eee; /* contro contrasto eccessivo */
     display: flex;
     align-items: center;
@@ -48,12 +44,9 @@ html {
 /* ---- END Regole Navbar ---- */
 
 
-
-
-
 /* ---- START Stile Mappa ---- */
 
-.main{
+.main {
     position: absolute;
     top: 0;
     left: 0;
@@ -74,7 +67,7 @@ html {
     margin-left: 15px;
 }
 
-.buttonPopup{
+.buttonPopup {
     padding: 5px;
     margin: 3px;
     width: 40px;
@@ -82,7 +75,7 @@ html {
     border: 1px solid rgb(49, 48, 48);
     border-radius: 10px;
     cursor: pointer;
-    background-color:  white;
+    background-color: white;
     background-size: 42px 42px;
     background-repeat: no-repeat;
     background-position: 4px 3px;
@@ -96,7 +89,7 @@ html {
     background-image: url(../Immagini/galleria.png);
 }
 
-.popup{
+.popup {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,7 +102,7 @@ html {
     align-items: center;
 }
 
-.popup p{
+.popup p {
     font-size: 1rem;
     text-align: center;
 }
@@ -121,12 +114,9 @@ html {
 /* ---- END Stile Mappa ---- */
 
 
-
-
-
 /* ---- START Stile Fotocamera ---- */
 
-#panel{
+#panel {
     display: none;
     position: absolute;
     top: 0;
@@ -135,25 +125,25 @@ html {
     height: 100%;
 }
 
-#panelPhoto{
+#panelPhoto {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #eee;
     position: fixed;
-    height: 89%;
-    width:100%;
+    height: 87%;
+    width: 100%;
 }
 
-#video{
+#video {
     display: none;
 }
 
-#canvas{
+#canvas {
     display: none;
 }
 
-.panelControls{ /* TODO */
+.panelControls {
     display: flex;
     align-items: center;
     position: fixed;
@@ -161,27 +151,27 @@ html {
     left: 0;
     right: 0;
     background-color: #111;
-    height: 11%;  /* TODO */
+    height: 13%;
     flex-direction: column;
 }
 
-#containertitle{
+#containertitle {
     display: flex;
     align-content: center;
     justify-content: center;
-    margin-bottom: 5px;
-    width: 90%;
+    margin: 0px auto 5px auto;
+    width: 96%;
 }
 
-#titleCamera{  /* TODO */
+#titleCamera {
     text-align: center;
-    max-width: 90%;
+    max-width: 96%;
     margin: 0 auto;
-    font-size: 0.9rem; /* TODO */
+    font-size: 0.9rem;
     color: #eee;
 }
 
-.container1{
+.container1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -190,7 +180,7 @@ html {
     position: relative;
 }
 
-#snapButton{
+#snapButton {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -227,34 +217,56 @@ html {
     order: 1;
 }
 
-@media screen and (max-height: 510px){  /* TODO */
+@media screen and (max-height: 590px) {
 
-    .panelControls{
-        height: 14%;
+    .panelControls {
+        height: 15%;
     }
 
 }
 
-@media screen and (max-height: 430px){  /* TODO */
+@media screen and (max-height: 505px) {
 
-    .panelControls{
+    .panelControls {
         height: 17%;
     }
 
 }
 
-@media screen and (max-height: 350px){  /* TODO */
+@media screen and (max-height: 450px) {
 
-    .panelControls{
-        height: 20%;
+    .panelControls {
+        height: 19%;
     }
 
 }
 
+@media screen and (max-height: 400px) {
+
+    .panelControls {
+        height: 22%;
+    }
+
+}
+
+@media screen and (max-height: 345px) {
+
+    .panelControls {
+        height: 26%;
+    }
+
+}
+
+@media screen and (max-height: 290px) {
+
+    .panelControls {
+        height: 30%;
+    }
+
+}
+
+
 /* ---- END Stile Fotocamera ---- */
-
-
-
 
 
 /* ---- START Stile Editor ---- */
@@ -265,7 +277,7 @@ html {
     order: -1;
 }
 
-.bottone {  /* TODO */
+.bottone { /* TODO */
     width: 28px;
     height: 28px;
     border: 1px solid #000;
@@ -276,7 +288,7 @@ html {
 .dropdown {
     display: none;
     position: absolute;
-    top: -50px;  /* TODO */
+    top: -50px; /* TODO */
     z-index: 1;
     padding: 5px;
     border-radius: 5%;
@@ -288,13 +300,33 @@ html {
     background-image: url(../Immagini/matita.png);
 }
 
-#buttonGreen { background-color: green;}
-#buttonBlue { background-color: blue;}
-#buttonRed { background-color: red;}
-#buttonYellow { background-color: yellow;}
-#buttonBlack { background-color: black;}
-#buttonOrange { background-color: orange;}
-#buttonWhite { background-color: white;}
+#buttonGreen {
+    background-color: green;
+}
+
+#buttonBlue {
+    background-color: blue;
+}
+
+#buttonRed {
+    background-color: red;
+}
+
+#buttonYellow {
+    background-color: yellow;
+}
+
+#buttonBlack {
+    background-color: black;
+}
+
+#buttonOrange {
+    background-color: orange;
+}
+
+#buttonWhite {
+    background-color: white;
+}
 
 #bottoneCancella {
     background-image: url(../Immagini/cancel.png);
@@ -311,9 +343,9 @@ html {
     align-items: center;
 }
 
-@media screen and (max-width: 440px){
+@media screen and (max-width: 440px) {
 
-    .bottone{
+    .bottone {
         width: 25px;
         height: 25px;
         margin-right: 2px;
@@ -326,8 +358,6 @@ html {
 }
 
 /* ---- END Stile Editor ---- */
-
-
 
 
 /* ---- START Stile Loading Page ---- */
@@ -345,7 +375,7 @@ html {
     justify-content: center;
 }
 
-.alert{
+.alert {
     color: #111;
     font-size: 1rem;
     text-align: center;
@@ -366,108 +396,187 @@ html {
 }
 
 .loading {
-    width:12px;
-    height:12px;
+    width: 12px;
+    height: 12px;
     background: #111;
-    position:relative;
+    position: relative;
     border-radius: 50%;
 }
 
-.first{
-    animation:loadingAnimation1 3s infinite;
-    -webkit-animation:loadingAnimation1 3s infinite; /* Safari and Chrome */
+.first {
+    animation: loadingAnimation1 3s infinite;
+    -webkit-animation: loadingAnimation1 3s infinite; /* Safari and Chrome */
     top: 0;
     left: -15px;
 }
 
-.second{
-    animation:loadingAnimation2 3s infinite;
-    -webkit-animation:loadingAnimation2 3s infinite; /* Safari and Chrome */
+.second {
+    animation: loadingAnimation2 3s infinite;
+    -webkit-animation: loadingAnimation2 3s infinite; /* Safari and Chrome */
     top: 0;
     left: 0;
 }
 
-.third{
-    animation:loadingAnimation3 3s infinite;
-    -webkit-animation:loadingAnimation3 3s infinite; /* Safari and Chrome */
+.third {
+    animation: loadingAnimation3 3s infinite;
+    -webkit-animation: loadingAnimation3 3s infinite; /* Safari and Chrome */
     top: 0;
     left: 15px;
 }
 
-@keyframes loadingAnimation1
-{
-    0% {opacity: 1 }
-    16.6% {opacity: 0.7 }
-    33.2% {opacity: 0.5 }
-    49.8% {opacity: 0.5 }
-    66.4% {opacity: 0.5 }
-    83% { opacity: 0.7 ;}
-    100% {opacity: 1;}
+@keyframes loadingAnimation1 {
+    0% {
+        opacity: 1
+    }
+    16.6% {
+        opacity: 0.7
+    }
+    33.2% {
+        opacity: 0.5
+    }
+    49.8% {
+        opacity: 0.5
+    }
+    66.4% {
+        opacity: 0.5
+    }
+    83% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 @-webkit-keyframes loadingAnimation1 /* Safari and Chrome */
 {
-    0% {opacity: 1; }
-    16.6% {opacity: 0.7; }
-    33.2% {opacity: 0.5; }
-    49.8% {opacity: 0.5; }
-    66.4% {opacity: 0.5; }
-    83% { opacity: 0.7;}
-    100% {opacity: 1;}
+    0% {
+        opacity: 1;
+    }
+    16.6% {
+        opacity: 0.7;
+    }
+    33.2% {
+        opacity: 0.5;
+    }
+    49.8% {
+        opacity: 0.5;
+    }
+    66.4% {
+        opacity: 0.5;
+    }
+    83% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-@keyframes loadingAnimation2
-{
-    0% {opacity: 0.5; }
-    16.6% {opacity: 0.7; }
-    33.2% {opacity: 1; }
-    49.8% {opacity: 0.7; }
-    66.4% {opacity: 0.5; }
-    83% { opacity: 0.5 ;}
-    100% {opacity: 0.5;}
+@keyframes loadingAnimation2 {
+    0% {
+        opacity: 0.5;
+    }
+    16.6% {
+        opacity: 0.7;
+    }
+    33.2% {
+        opacity: 1;
+    }
+    49.8% {
+        opacity: 0.7;
+    }
+    66.4% {
+        opacity: 0.5;
+    }
+    83% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
 @-webkit-keyframes loadingAnimation2 /* Safari and Chrome */
 {
-    0% {opacity: 0.5; }
-    16.6% {opacity: 0.7; }
-    33.2% {opacity: 1; }
-    49.8% {opacity: 0.7; }
-    66.4% {opacity: 0.5; }
-    83% { opacity: 0.5 ;}
-    100% {opacity: 0.5;}
+    0% {
+        opacity: 0.5;
+    }
+    16.6% {
+        opacity: 0.7;
+    }
+    33.2% {
+        opacity: 1;
+    }
+    49.8% {
+        opacity: 0.7;
+    }
+    66.4% {
+        opacity: 0.5;
+    }
+    83% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
-@keyframes loadingAnimation3
-{
-    0% {opacity: 0.5; }
-    16.6% {opacity: 0.5; }
-    33.2% {opacity: 0.5; }
-    49.8% {opacity: 0.7; }
-    66.4% {opacity: 1; }
-    83% { opacity: 0.7 ;}
-    100% {opacity: 0.5;}
+@keyframes loadingAnimation3 {
+    0% {
+        opacity: 0.5;
+    }
+    16.6% {
+        opacity: 0.5;
+    }
+    33.2% {
+        opacity: 0.5;
+    }
+    49.8% {
+        opacity: 0.7;
+    }
+    66.4% {
+        opacity: 1;
+    }
+    83% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
 @-webkit-keyframes loadingAnimation3 /* Safari and Chrome */
 {
-    0% {opacity: 0.5; }
-    16.6% {opacity: 0.5; }
-    33.2% {opacity: 0.5; }
-    49.8% {opacity: 0.7; }
-    66.4% {opacity: 1; }
-    83% { opacity: 0.7 ;}
-    100% {opacity: 0.5;}
+    0% {
+        opacity: 0.5;
+    }
+    16.6% {
+        opacity: 0.5;
+    }
+    33.2% {
+        opacity: 0.5;
+    }
+    49.8% {
+        opacity: 0.7;
+    }
+    66.4% {
+        opacity: 1;
+    }
+    83% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0.5;
+    }
 }
 
 /* ---- END Stile Loading Page ---- */
 
 
-
-
 /* ---- START Stile Slider ---- */
 
-#coverSlider{
+#coverSlider {
     display: none;
     position: fixed;
     top: 0;
@@ -527,62 +636,73 @@ img {
 #container6 {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 90vw;
+    justify-content: center;
+    width: 100vw;
 }
 
 #right {
-    width: 22px;
-    height: 22px;
+    width: 25px;
+    height: 25px;
     border-radius: 10%;
     background-color: #eee;
     border-style: none;
     cursor: pointer;
-    background-size: 19px 19px; /* TODO */
+    background-size: 21px 21px;
     background-repeat: no-repeat;
-    background-position: 1.5px; /* TODO */
+    background-position: 3px 2px;
     background-image: url(../Immagini/right.png);
-    margin-left: 3px;
     order: 2;
     display: none;
 }
 
 #left {
-    width: 22px;
-    height: 22px;
+    width: 25px;
+    height: 25px;
     border-radius: 10%;
     background-color: #eee;
     border-style: none;
     cursor: pointer;
-    background-size: 19px 19px;
+    background-size: 21px 21px;
     background-repeat: no-repeat;
-    background-position: -1.5px;
-    margin-right: 3px;
+    background-position: 0px 2px;
     background-image: url(../Immagini/left.png);
     order: 0;
     display: none;
 }
 
 
-@media screen and (min-width: 550px){
+@media screen and (min-width: 550px) {
 
- #left {
-    height: 50px;
-    width: 50px;
-    background-size: 42px 42px;
-    background-position: 4px 3px;
-    margin-right: 10px;
- }
+    #left {
+        height: 40px;
+        width: 40px;
+        background-size: 30px 30px;
+        background-position: 2px 4px;
+    }
 
- #right {
-    height: 50px;
-    width: 50px;
-    background-size: 42px 42px;
-    background-position: 4px 3px;
-    margin-left: 10px;
- }
+    #right {
+        height: 40px;
+        width: 40px;
+        background-size: 30px 30px;
+        background-position: 7px 4.5px;
+    }
 
 }
 
+@media screen and (max-height: 360px) {
+
+    #slider {
+        height: 70vh;
+    }
+
+    .sliderElement {
+        height: 70vh;
+    }
+
+    img {
+        max-height: 70vh;
+    }
+
+}
 
 /* ---- END Stile Slider ---- */
