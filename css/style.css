@@ -638,36 +638,41 @@ img {
     align-items: center;
     justify-content: center;
     width: 100vw;
+    position: relative;
 }
 
 #right {
-    width: 25px;
-    height: 25px;
-    border-radius: 10%;
+    width: 32px;
+    height: 32px;
+    border-radius: 15%;
     background-color: #eee;
     border-style: none;
     cursor: pointer;
-    background-size: 21px 21px;
+    background-size: 30px 30px;
     background-repeat: no-repeat;
-    background-position: 3px 2px;
+    background-position: 3px 0.5px;
     background-image: url(../Immagini/right.png);
-    order: 2;
     display: none;
+    position: absolute;
+    right: 2vw;
+    z-index: 1000000;
 }
 
 #left {
-    width: 25px;
-    height: 25px;
-    border-radius: 10%;
+    width: 32px;
+    height: 32px;
+    border-radius: 15%;
     background-color: #eee;
     border-style: none;
     cursor: pointer;
-    background-size: 21px 21px;
+    background-size: 30px 30px;
     background-repeat: no-repeat;
-    background-position: 0px 2px;
+    background-position: 0px 0.5px;
     background-image: url(../Immagini/left.png);
-    order: 0;
     display: none;
+    position: absolute;
+    left: 2vw;
+    z-index: 1000000;
 }
 
 
