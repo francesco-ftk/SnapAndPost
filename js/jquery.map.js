@@ -36,7 +36,7 @@ var markers = null;
                     }, 4000);
                 });
 
-            }, 10000);
+            }, 8000);
             var $confirmButton = $('#confirm');
             $confirmButton.on('click', function (event) {
                 sendImage();
@@ -271,7 +271,7 @@ var markers = null;
                     images[i].img = "data:image/jpeg;base64," + images[i].img;
                 }
                 $('ul').slider(images, data["title"], {
-                    speed: 300,
+                    speed: 100,
                     transition: "fade"
                 })
             });
