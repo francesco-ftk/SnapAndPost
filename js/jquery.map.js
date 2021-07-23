@@ -1,10 +1,18 @@
+var mymap = null;
+var myPos = null;
+var myCircle = null;
+var radius = 2000;
+var refresh_id = null;
+var myIcon = L.icon({
+    iconUrl: 'Immagini/marker.png',
+    iconSize: [50, 50],
+    iconAnchor: [26, 45]
+});
 var markers = null;
 
 (function ($) {
 
     $.fn.createMap = function (options) {
-
-        var mymap = null;
 
         var defaults = {
             serverURL: "server/actions.php",
@@ -14,7 +22,21 @@ var markers = null;
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
+            setTimeout(function () {
+                refresh_id = setInterval(function () {
+                    navigator.geolocation.getCurrentPosition(refresh);
+                }, 4000);
 
+                mymap.on('popupopen', function(ev) {
+                    clearInterval(refresh_id);
+                });
+                mymap.on('popupclose', function(ev) {
+                    refresh_id = setInterval(function () {
+                        navigator.geolocation.getCurrentPosition(refresh);
+                    }, 4000);
+                });
+
+            }, 10000);
             var $confirmButton = $('#confirm');
             $confirmButton.on('click', function (event) {
                 sendImage();
@@ -36,19 +58,13 @@ var markers = null;
                 accessToken: 'pk.eyJ1IjoiYmFuem8iLCJhIjoiY2twODZkZXFjMDV5ODJ5b2dtc3lyYm5qMyJ9.c-pRfXAUsbjdQJ7FpUjZuQ'
             }).addTo(mymap);
 
-            var myIcon = L.icon({
-                iconUrl: 'Immagini/marker.png',
-                iconSize: [50, 50],
-                iconAnchor: [26, 45]
-            });
+            myPos = L.marker([position.coords.latitude, position.coords.longitude], {icon: myIcon}).addTo(mymap);
 
-            var marker = L.marker([position.coords.latitude, position.coords.longitude], {icon: myIcon}).addTo(mymap);
-
-            var circle = L.circle([position.coords.latitude, position.coords.longitude], {
+            myCircle = L.circle([position.coords.latitude, position.coords.longitude], {
                 color: 'red',
                 fillColor: '#de3737',
                 fillOpacity: 0.5,
-                radius: 200
+                radius: 200  //radius
             }).addTo(mymap);
 
             var url = "https://en.wikipedia.org/w/api.php";
@@ -56,7 +72,7 @@ var markers = null;
                 action: "query",
                 list: "geosearch",
                 gscoord: position.coords.latitude + '|' + position.coords.longitude,
-                gsradius: 5000,
+                gsradius: radius,
                 gslimit: "100",
                 format: "json"
             };
@@ -171,6 +187,59 @@ var markers = null;
                     alert("Request failed: " + textStatus);
                 });
         }
+
+        function refresh(position) {
+            var latlng = myPos.getLatLng();
+            var newCoords = [position.coords.latitude, position.coords.longitude];
+            if(getDistanceFromLatLonInKm(latlng[0], latlng[1], newCoords[0], newCoords[1]) > 0.01) {
+                var x = 0;
+                mymap.eachLayer(function(layer) {
+                    if(x!=0)
+                        mymap.removeLayer(layer);
+                    x=1;
+                });
+
+                myPos = L.marker(newCoords, {icon: myIcon}).addTo(mymap);
+                myCircle = L.circle(newCoords, {
+                    color: 'red',
+                    fillColor: '#de3737',
+                    fillOpacity: 0.5,
+                    radius: 200
+                }).addTo(mymap);
+
+                var url = "https://en.wikipedia.org/w/api.php";
+                var params = {
+                    action: "query",
+                    list: "geosearch",
+                    gscoord: position.coords.latitude + '|' + position.coords.longitude,
+                    gsradius: radius,
+                    gslimit: "100",
+                    format: "json"
+                };
+                url = url + "?origin=*";
+                Object.keys(params).forEach(function (key) {
+                    url += "&" + key + "=" + params[key];
+                });
+
+                markers = L.markerClusterGroup();
+                console.log(markers.getLayers().length);
+                fetch(url)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (response) {
+                        var pages = response.query.geosearch;
+                        for (var place in pages) {
+                            markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "</p>" + "</div>").openPopup());
+                        }
+                        queryCoordinates();
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
     }
 
     $.fn.getGallery = function (options) {
@@ -202,7 +271,7 @@ var markers = null;
                     images[i].img = "data:image/jpeg;base64," + images[i].img;
                 }
                 $('ul').slider(images, data["title"], {
-                    speed: 100,
+                    speed: 300,
                     transition: "fade"
                 })
             });
@@ -215,16 +284,23 @@ var markers = null;
     }
 })(jQuery);
 
-function getActivePopupInfo() {
-    var Array = markers.getLayers();
-    for (var i = 0; i < Array.length; i++) {
-        if (Array[i].isPopupOpen()) {
-            var title = Array[i].getPopup().getContent();
-            title = title.split("<p>");
-            title = title[1].split("</p>");
-            return title[0];
+function getActivePopupInfo(m = null) {
+    if (m == null) {
+        var Array = markers.getLayers();
+        for (var i = 0; i < Array.length; i++) {
+            if (Array[i].isPopupOpen()) {
+                var title = Array[i].getPopup().getContent();
+                title = title.split("<p>");
+                title = title[1].split("</p>");
+                break;
+            }
         }
+    } else {
+        var title = m.getPopup().getContent();
+        title = title.split("<p>");
+        title = title[1].split("</p>");
     }
+    return title[0];
 }
 
 function getCameraPopups(Array) {
@@ -239,4 +315,37 @@ function getCameraPopups(Array) {
         cameraPopups.push({"lat": x.lat, "lng": x.lng, "title": title[0]});
     }
     return cameraPopups;
+}
+
+function isOnlyGallery(m) {
+    var title = m.getPopup().getContent();
+    title = title.split("<div class='buttonPopup camera' onclick='openCamera()'>");
+    return title.length == 1;
+}
+
+function isOnlyCamera(m) {
+    var title = m.getPopup().getContent();
+    title = title.split("<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>");
+    return title.length == 1;
+}
+
+
+/* DISTANCE BETWEEN COORDS */
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
 }
