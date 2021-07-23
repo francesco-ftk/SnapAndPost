@@ -191,7 +191,7 @@ var markers = null;
         function refresh(position) {
             var latlng = myPos.getLatLng();
             var newCoords = [position.coords.latitude, position.coords.longitude];
-            if(getDistanceFromLatLonInKm(latlng[0], latlng[1], newCoords[0], newCoords[1]) > 0.01) {
+            if(getDistanceFromLatLonInKm(latlng[0], latlng[1], newCoords[0], newCoords[1]) > 0.03) {
                 var x = 0;
                 mymap.eachLayer(function(layer) {
                     if(x!=0)
