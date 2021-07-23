@@ -3,7 +3,7 @@
     $.fn.slider = function (images, title, options) {
 
         var defaults = {
-            speed: 300,
+            speed: 100,
             transition: "fade"
         }
 
