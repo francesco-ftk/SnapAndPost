@@ -317,19 +317,6 @@ function getCameraPopups(Array) {
     return cameraPopups;
 }
 
-function isOnlyGallery(m) {
-    var title = m.getPopup().getContent();
-    title = title.split("<div class='buttonPopup camera' onclick='openCamera()'>");
-    return title.length == 1;
-}
-
-function isOnlyCamera(m) {
-    var title = m.getPopup().getContent();
-    title = title.split("<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>");
-    return title.length == 1;
-}
-
-
 /* DISTANCE BETWEEN COORDS */
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
