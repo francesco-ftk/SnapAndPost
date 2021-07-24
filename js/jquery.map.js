@@ -28,7 +28,7 @@ var newCoords = null;
                 startRefresh = true;
                 refresh_id = setInterval(function () {
                     navigator.geolocation.getCurrentPosition(refresh);
-                }, 6000);
+                }, 4000);
 
                 mymap.on('popupopen', function(ev) {
                     clearInterval(refresh_id);
@@ -36,10 +36,10 @@ var newCoords = null;
                 mymap.on('popupclose', function(ev) {
                     refresh_id = setInterval(function () {
                         navigator.geolocation.getCurrentPosition(refresh);
-                    }, 6000);
+                    }, 4000);
                 });
 
-            }, 8000);
+            }, 3000);
             var $confirmButton = $('#confirm');
             $confirmButton.on('click', function (event) {
                 sendImage();
@@ -52,7 +52,7 @@ var newCoords = null;
             mymap = L.map('mapid', {zoomControl: true}).setView([position.coords.latitude, position.coords.longitude], 16);
 
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-                attribution: 'Map data &copy; <change href="https://www.openstreetmap.org/copyright">OpenStreetMap</change> contributors, Imagery Â© <change href="https://www.mapbox.com/">Mapbox</change>',
+                attribution: 'Map data &copy; <change href="https://www.openstreetmap.org/copyright">OpenStreetMap</change> contributors, Imagery © <change href="https://www.mapbox.com/">Mapbox</change>',
                 maxZoom: 18,
                 minZoom: 4,
                 id: 'mapbox/streets-v11',
@@ -169,8 +169,11 @@ var newCoords = null;
                     color: 'red',
                     fillColor: '#de3737',
                     fillOpacity: 0.5,
-                    radius: 200
+                    radius: 200 //radius
                 }).addTo(mymap);
+                refresh_id = setInterval(function () {
+                    navigator.geolocation.getCurrentPosition(refresh);
+                }, 4000);
             }
             mymap.addLayer(markers);
         }
@@ -210,7 +213,8 @@ var newCoords = null;
         function refresh(position) {
             var latlng = myPos.getLatLng();
             newCoords = [position.coords.latitude, position.coords.longitude];
-            if(getDistanceFromLatLonInKm(latlng.lat, latlng.lng, newCoords[0], newCoords[1]) > 0.02) {
+            if(getDistanceFromLatLonInKm(latlng.lat, latlng.lng, newCoords[0], newCoords[1]) > 0.01) {
+                clearInterval(refresh_id);
                 var url = "https://en.wikipedia.org/w/api.php";
                 var params = {
                     action: "query",
