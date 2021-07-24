@@ -618,9 +618,19 @@ img {
 #title {
     text-align: left;
     max-width: 60%;
-    font-size: 1rem;
-    margin-left: 30px;
+    font-size: 1.2rem;
+    margin-left: 0px;
     color: #eee;
+}
+
+@media screen and (max-width: 500px) {
+
+    #title {
+        font-size: 1rem;
+        margin-left: 30px;
+
+    }
+
 }
 
 .container5 {
