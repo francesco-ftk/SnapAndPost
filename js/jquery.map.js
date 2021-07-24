@@ -9,6 +9,8 @@ var myIcon = L.icon({
     iconAnchor: [26, 45]
 });
 var markers = null;
+var startRefresh = false;
+var newCoords = null;
 
 (function ($) {
 
@@ -23,9 +25,10 @@ var markers = null;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(setMap);
             setTimeout(function () {
+                startRefresh = true;
                 refresh_id = setInterval(function () {
                     navigator.geolocation.getCurrentPosition(refresh);
-                }, 4000);
+                }, 6000);
 
                 mymap.on('popupopen', function(ev) {
                     clearInterval(refresh_id);
@@ -33,7 +36,7 @@ var markers = null;
                 mymap.on('popupclose', function(ev) {
                     refresh_id = setInterval(function () {
                         navigator.geolocation.getCurrentPosition(refresh);
-                    }, 4000);
+                    }, 6000);
                 });
 
             }, 8000);
@@ -49,7 +52,7 @@ var markers = null;
             mymap = L.map('mapid', {zoomControl: true}).setView([position.coords.latitude, position.coords.longitude], 16);
 
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-                attribution: 'Map data &copy; <change href="https://www.openstreetmap.org/copyright">OpenStreetMap</change> contributors, Imagery © <change href="https://www.mapbox.com/">Mapbox</change>',
+                attribution: 'Map data &copy; <change href="https://www.openstreetmap.org/copyright">OpenStreetMap</change> contributors, Imagery Â© <change href="https://www.mapbox.com/">Mapbox</change>',
                 maxZoom: 18,
                 minZoom: 4,
                 id: 'mapbox/streets-v11',
@@ -153,6 +156,22 @@ var markers = null;
                 markers2.addLayers(Array);
                 markers = markers2;
             }
+            if(startRefresh){
+                var x = 0;
+                mymap.eachLayer(function(layer) {
+                    if(x!=0)
+                        mymap.removeLayer(layer);
+                    x=1;
+                });
+
+                myPos = L.marker(newCoords, {icon: myIcon}).addTo(mymap);
+                myCircle = L.circle(newCoords, {
+                    color: 'red',
+                    fillColor: '#de3737',
+                    fillOpacity: 0.5,
+                    radius: 200
+                }).addTo(mymap);
+            }
             mymap.addLayer(markers);
         }
 
@@ -190,23 +209,8 @@ var markers = null;
 
         function refresh(position) {
             var latlng = myPos.getLatLng();
-            var newCoords = [position.coords.latitude, position.coords.longitude];
-            if(getDistanceFromLatLonInKm(latlng.lat, latlng.lng, newCoords[0], newCoords[1]) > 0.03) {
-                var x = 0;
-                mymap.eachLayer(function(layer) {
-                    if(x!=0)
-                        mymap.removeLayer(layer);
-                    x=1;
-                });
-
-                myPos = L.marker(newCoords, {icon: myIcon}).addTo(mymap);
-                myCircle = L.circle(newCoords, {
-                    color: 'red',
-                    fillColor: '#de3737',
-                    fillOpacity: 0.5,
-                    radius: 200
-                }).addTo(mymap);
-
+            newCoords = [position.coords.latitude, position.coords.longitude];
+            if(getDistanceFromLatLonInKm(latlng.lat, latlng.lng, newCoords[0], newCoords[1]) > 0.02) {
                 var url = "https://en.wikipedia.org/w/api.php";
                 var params = {
                     action: "query",
@@ -232,6 +236,7 @@ var markers = null;
                         for (var place in pages) {
                             markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "</p>" + "</div>").openPopup());
                         }
+
                         queryCoordinates();
 
                     })
