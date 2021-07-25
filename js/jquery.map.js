@@ -12,6 +12,7 @@ var markers = null;
 var startRefresh = false;
 var newCoords = null;
 var popen= false;
+var interval = 4000;
 
 (function ($) {
 
@@ -29,7 +30,7 @@ var popen= false;
                 startRefresh = true;
                 refresh_id = setInterval(function () {
                     navigator.geolocation.getCurrentPosition(refresh);
-                }, 4000);
+                }, interval);
 
                 mymap.on('popupopen', function(ev) {
                     popen = true;
@@ -39,7 +40,7 @@ var popen= false;
                     popen = false;
                     refresh_id = setInterval(function () {
                         navigator.geolocation.getCurrentPosition(refresh);
-                    }, 4000);
+                    }, interval);
                 });
 
             }, 2000);
@@ -184,13 +185,13 @@ var popen= false;
                 if(!popen){
                     refresh_id = setInterval(function () {
                         navigator.geolocation.getCurrentPosition(refresh);
-                    }, 5000);
+                    }, interval);
                     mymap.off('popupclose');
                     mymap.on('popupclose', function(ev) {
                         popen = false;
                         refresh_id = setInterval(function () {
                             navigator.geolocation.getCurrentPosition(refresh);
-                        }, 4000);
+                        }, interval);
                     });
                 }
                 else {
@@ -199,7 +200,7 @@ var popen= false;
                         popen = false;
                         refresh_id = setInterval(function () {
                             navigator.geolocation.getCurrentPosition(refresh);
-                        }, 4000);
+                        }, interval);
                     });
                 }
             }
