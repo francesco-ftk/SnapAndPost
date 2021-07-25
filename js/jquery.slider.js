@@ -10,11 +10,11 @@
         $right = $('#right');
         $left = $('#left');
 
-        $right.on('click',function (event) {
+        $right.on('click', function (event) {
             fadeRight();
         });
 
-        $left.on('click',function (event) {
+        $left.on('click', function (event) {
             fadeLeft();
         });
 
@@ -74,16 +74,16 @@
         });
 
         function fadeRight() {
-            $this= $('#slider');
+            $this = $('#slider');
             var firstElement = $this.children().first();
 
-            var a=0;
+            var a = 0;
 
             firstElement.animate(
                 {opacity: 0},
                 options.speed,
                 function () {
-                    if(a==0){
+                    if (a == 0) {
                         var self = $(this);
                         self.css({
                             zIndex: $this.children().last().css('zIndex') - 1,
@@ -97,7 +97,7 @@
         }
 
         function fadeLeft() {
-            $this= $('#slider');
+            $this = $('#slider');
             var lastElement = $this.children().last();
 
             lastElement.css({
@@ -111,7 +111,7 @@
                 {opacity: 1},
                 options.speed,
                 function () {
-                    if(a==0){
+                    if (a == 0) {
                         var self = $(this);
                         $this.prepend(self);
                     }

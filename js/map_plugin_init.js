@@ -10,9 +10,9 @@ $(document).ready(function () {
 
     jQuery("#mapid").createMap({serverURL: "server/actions.php"});
 
-    jQuery(window).on('resize', function(){
-        if($('#coverSlider').css("display")=='flex'){
-            $slider=$('#slider');
+    jQuery(window).on('resize', function () {
+        if ($('#coverSlider').css("display") == 'flex') {
+            $slider = $('#slider');
             $container6 = $('#container6');
             $container6.css("width", "100vw");
             $slider.parent().css({

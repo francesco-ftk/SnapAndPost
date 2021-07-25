@@ -11,7 +11,7 @@ var myIcon = L.icon({
 var markers = null;
 var startRefresh = false;
 var newCoords = null;
-var popen= false;
+var popen = false;
 var interval = 4000;
 
 (function ($) {
@@ -32,11 +32,11 @@ var interval = 4000;
                     navigator.geolocation.getCurrentPosition(refresh);
                 }, interval);
 
-                mymap.on('popupopen', function(ev) {
+                mymap.on('popupopen', function (ev) {
                     popen = true;
                     clearInterval(refresh_id);
                 });
-                mymap.on('popupclose', function(ev) {
+                mymap.on('popupclose', function (ev) {
                     popen = false;
                     refresh_id = setInterval(function () {
                         navigator.geolocation.getCurrentPosition(refresh);
@@ -162,12 +162,12 @@ var interval = 4000;
             }
 
 
-            if(startRefresh){
+            if (startRefresh) {
                 var x = 0;
-                mymap.eachLayer(function(layer) {
-                    if(x!=0)
+                mymap.eachLayer(function (layer) {
+                    if (x != 0)
                         mymap.removeLayer(layer);
-                    x=1;
+                    x = 1;
                 });
 
                 myPos = L.marker(newCoords, {icon: myIcon}).addTo(mymap);
@@ -181,22 +181,21 @@ var interval = 4000;
 
             mymap.addLayer(markers);
 
-            if(startRefresh){
-                if(!popen){
+            if (startRefresh) {
+                if (!popen) {
                     refresh_id = setInterval(function () {
                         navigator.geolocation.getCurrentPosition(refresh);
                     }, interval);
                     mymap.off('popupclose');
-                    mymap.on('popupclose', function(ev) {
+                    mymap.on('popupclose', function (ev) {
                         popen = false;
                         refresh_id = setInterval(function () {
                             navigator.geolocation.getCurrentPosition(refresh);
                         }, interval);
                     });
-                }
-                else {
+                } else {
                     mymap.off('popupclose');
-                    mymap.on('popupclose', function(ev) {
+                    mymap.on('popupclose', function (ev) {
                         popen = false;
                         refresh_id = setInterval(function () {
                             navigator.geolocation.getCurrentPosition(refresh);
@@ -242,9 +241,9 @@ var interval = 4000;
         function refresh(position) {
             var latlng = myPos.getLatLng();
             newCoords = [position.coords.latitude, position.coords.longitude];
-            if(getDistanceFromLatLonInKm(latlng.lat, latlng.lng, newCoords[0], newCoords[1]) > 0.01) {
+            if (getDistanceFromLatLonInKm(latlng.lat, latlng.lng, newCoords[0], newCoords[1]) > 0.01) {
                 mymap.off('popupclose');
-                mymap.on('popupclose', function(ev) {
+                mymap.on('popupclose', function (ev) {
                     popen = false;
                 });
                 clearInterval(refresh_id);
