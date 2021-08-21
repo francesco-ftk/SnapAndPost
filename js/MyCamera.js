@@ -17,7 +17,7 @@ var img;
 var change = 0;
 var constraints = {
     audio: false,
-    video: {"facingMode": 'user'}
+    video: {"facingMode": 'environment'}
 }
 
 function openCamera() {
@@ -195,18 +195,18 @@ function getParams() {
 
 function flipCamera() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        if (change == 0) {
+        if (change == 1) {
             constraints = {
                 audio: false,
                 video: {"facingMode": 'environment'}
             }
-            change = 1;
+            change = 0;
         } else {
             constraints = {
                 audio: false,
                 video: {"facingMode": 'user'}
             }
-            change = 0;
+            change = 1;
         }
         video.srcObject.getTracks().forEach(function (track) {
             track.stop();

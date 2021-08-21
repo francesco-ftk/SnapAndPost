@@ -60,17 +60,20 @@
     </div>
 
     <div class="panelControls">
-        <div id="containertitle"> <h3 id="titleCamera"></h3> </div>
+        <div id="containerTitle"><h2 id="titleCamera">Camera Title</h2></div>
         <div class="container1">
-            <button id="switchCamera" class="controlButton" onclick="flipCamera()"></button>
-            <button id="snapButton"></button>
+            <button id="switchCamera" class="controlButton" onclick="flipCamera()" aria-label="switch button"></button>
+            <button id="snapButton" aria-label="snap button"></button>
             <div class="container2">
-                <button id="rollBack" class="controlButton" onclick="closeCamera()"></button>
-                <button id="confirm" class="controlButton"></button>
+                <button id="rollBack" class="controlButton" onclick="closeCamera()"
+                        aria-label="rollback button"></button>
+                <button id="confirm" class="controlButton" aria-label="confirm button"></button>
             </div>
             <div id="container3">
-                <button id="colors" class="controlButton click" onclick="openDown()"></button>
-                <button id="bottoneCancella" class="controlButton" onclick="cancella()"></button>
+                <button id="colors" class="controlButton click" onclick="openDown()"
+                        aria-label="choose color button"></button>
+                <button id="bottoneCancella" class="controlButton" onclick="cancella()"
+                        aria-label="erase button"></button>
             </div>
             <div id="controls" class="dropdown">
                 <div id="buttonGreen" class="bottone"></div>
@@ -97,12 +100,12 @@
 
 <div id="coverSlider">
     <div class="container5">
-        <button id="closeGallery" class="controlButton" onclick="closeGallery()"></button>
-        <h3 id="title"></h3>
+        <button id="closeGallery" class="controlButton" onclick="closeGallery()" aria-label="close button"></button>
+        <h2 id="title">Gallery Title</h2>
     </div>
     <div id="container6">
-        <button id="left"></button>
-        <button id="right"></button>
+        <button id="left" aria-label="left button"></button>
+        <button id="right" aria-label="right button"></button>
         <ul id="slider"></ul>
     </div>
 </div>

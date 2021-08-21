@@ -155,7 +155,7 @@ html {
     flex-direction: column;
 }
 
-#containertitle {
+#containerTitle {
     display: flex;
     align-content: center;
     justify-content: center;
@@ -277,7 +277,7 @@ html {
     order: -1;
 }
 
-.bottone { /* TODO */
+.bottone {
     width: 28px;
     height: 28px;
     border: 1px solid #000;
@@ -288,11 +288,11 @@ html {
 .dropdown {
     display: none;
     position: absolute;
-    top: -50px; /* TODO */
+    top: -50px;
     z-index: 1;
     padding: 5px;
     border-radius: 5%;
-    background-color: #aaa;
+    background-color: #AAA;
     border: 1px solid #000;
 }
 
@@ -619,7 +619,7 @@ img {
     text-align: left;
     max-width: 60%;
     font-size: 1.2rem;
-    margin-left: 0px;
+    margin-left: 0;
     color: #eee;
 }
 
@@ -677,7 +677,7 @@ img {
     cursor: pointer;
     background-size: 30px 30px;
     background-repeat: no-repeat;
-    background-position: 0px 0.5px;
+    background-position: 0 0.5px;
     background-image: url(../Immagini/left.png);
     display: none;
     position: absolute;
