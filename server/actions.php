@@ -86,7 +86,7 @@ function getImages()
 {
     $title = $_POST['title'];
 
-    $query_string = 'SELECT id, immagine FROM immagini WHERE nome=? ORDER BY id';
+    $query_string = 'SELECT id, immagine FROM immagini WHERE nome=? ORDER BY id, immagine';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $query = $mysqli->prepare($query_string);
     $query->bind_param("s", $title);
@@ -95,7 +95,7 @@ function getImages()
     $images = array();
 
     $query->store_result();
-    $query->bind_result($gallery);
+    $query->bind_result($my_ids, $gallery);
 
     while ($query->fetch()) {
         $img = array('img' => base64_encode($gallery));
