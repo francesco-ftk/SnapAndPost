@@ -86,7 +86,7 @@ function getImages()
 {
     $title = $_POST['title'];
 
-    $query_string = 'SELECT id, immagine FROM immagini WHERE nome=? ORDER BY id, immagine';
+    $query_string = 'SELECT id, immagine FROM immagini WHERE nome=? ORDER BY id desc, immagine';
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
     $query = $mysqli->prepare($query_string);
     $query->bind_param("s", $title);

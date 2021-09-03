@@ -1,6 +1,6 @@
 var mymap = null;
 var myPos = null;
-// var myCircle = null;
+var myCircle = null;
 var radius = 200;
 var refresh_id = null;
 var myIcon = L.icon({
@@ -67,14 +67,12 @@ var interval = 4000;
 
             myPos = L.marker([position.coords.latitude, position.coords.longitude], {icon: myIcon}, alt="You are here").addTo(mymap);
 
-            /*
             myCircle = L.circle([position.coords.latitude, position.coords.longitude], {
                 color: 'red',
                 fillColor: '#de3737',
                 fillOpacity: 0.5,
                 radius: radius
             }).addTo(mymap);
-            */
 
             var url = "https://en.wikipedia.org/w/api.php";
             var params = {
@@ -97,7 +95,7 @@ var interval = 4000;
                 .then(function (response) {
                     var pages = response.query.geosearch;
                     for (var place in pages) {
-                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "<br>within 200m, camera allowed.</p>" +  "</div>").openPopup());
+                        markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "</p>" +  "</div>").openPopup());
                     }
                     queryCoordinates();
 
@@ -145,18 +143,18 @@ var interval = 4000;
                             for (var j = 0; j < Array.length; j++) {
                                 var title = Array[j].getPopup().getContent();
                                 title = title.split("<p>");
-                                title = title[1].split("<br>");
+                                title = title[1].split("</p>");
                                 if (title[0] == object['nome']) {
                                     Array.splice(j, 1);
                                     break;
                                 }
                             }
-                            markers2.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='flexContainerButtons'><div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div></div>" + "<p>" + object['nome'] + "<br>within 200m, camera allowed.</p>" + "</div>").openPopup())
+                            markers2.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='flexContainerButtons'><div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div></div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup())
                             break;
                         }
                     }
                     if (!replace) {
-                        markers2.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<p>" + object['nome'] + "<br>outside 200m, camera not allowed.</p>" + "</div>").openPopup());
+                        markers2.addLayer(L.marker([object['lat'], object['lon']]).bindPopup("<div class='popup'>" + "<div class='buttonPopup gallery' onclick='jQuery(this).getGallery({serverURL : \"server/actions.php\"});'>" + "</div>" + "<p>" + object['nome'] + "</p>" + "</div>").openPopup());
                     }
                 });
                 markers2.addLayers(Array);
@@ -174,14 +172,12 @@ var interval = 4000;
 
                 myPos = L.marker(newCoords, {icon: myIcon}, alt="You are here").addTo(mymap);
 
-                /*
                 myCircle = L.circle(newCoords, {
                     color: 'red',
                     fillColor: '#de3737',
                     fillOpacity: 0.5,
                     radius: radius
                 }).addTo(mymap);
-                */
             }
 
             mymap.addLayer(markers);
@@ -275,7 +271,7 @@ var interval = 4000;
                     .then(function (response) {
                         var pages = response.query.geosearch;
                         for (var place in pages) {
-                            markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "<br>within 200m, camera allowed.</p>" + "</div>").openPopup());
+                            markers.addLayer(L.marker([pages[place].lat, pages[place].lon]).bindPopup("<div class='popup'>" + "<div class='buttonPopup camera' onclick='openCamera()'>" + "</div>" + "<p>" + pages[place].title + "</p>" + "</div>").openPopup());
                         }
 
                         queryCoordinates();
@@ -337,14 +333,14 @@ function getActivePopupInfo(m = null) {
             if (Array[i].isPopupOpen()) {
                 var title = Array[i].getPopup().getContent();
                 title = title.split("<p>");
-                title = title[1].split("<br>");
+                title = title[1].split("</p>");
                 break;
             }
         }
     } else {
         var title = m.getPopup().getContent();
         title = title.split("<p>");
-        title = title[1].split("<br>");
+        title = title[1].split("</p>");
     }
     return title[0];
 }
@@ -357,7 +353,7 @@ function getCameraPopups(Array) {
         x = Array[i].getLatLng();
         title = Array[i].getPopup().getContent();
         title = title.split("<p>");
-        title = title[1].split("<br>");
+        title = title[1].split("</p>");
         cameraPopups.push({"lat": x.lat, "lng": x.lng, "title": title[0]});
     }
     return cameraPopups;
